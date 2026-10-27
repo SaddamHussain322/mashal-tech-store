@@ -3,192 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech | Official App Store & Marketplace</title>
+    <title>Mashal Tech | Software & Game Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --text-primary: #c9d1d9;
-            --text-heading: #ffffff;
-            --accent-color: #58a6ff;
-            --accent-hover: #1f6feb;
-            --success-color: #238636;
+            --bg-main: #090d16;
+            --bg-card: #111827;
+            --bg-card-hover: #1f2937;
+            --border-card: #1f2937;
+            --border-accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --accent-teal: #06b6d4;
+            --text-title: #f9fafb;
+            --text-body: #9ca3af;
+            --text-muted: #6b7280;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background-color: var(--bg-main);
+            color: var(--text-body);
             line-height: 1.6;
-            padding: 20px;
+            padding-bottom: 60px;
+            min-height: 100vh;
         }
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 40px;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: var(--text-heading);
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: #8b949e;
-        }
-
-        .container {
+        /* Top Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .brand-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-title);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-left: 24px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Banner */
+        .hero {
+            max-width: 1200px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-title);
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-body);
+            max-width: 650px;
             margin: 0 auto;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--text-heading);
-            margin-bottom: 20px;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 10px;
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-title);
+            font-weight: 700;
+        }
+
+        /* Product Cards Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
         }
 
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 28px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            border-color: var(--border-accent);
+            box-shadow: 0 12px 30px var(--accent-glow);
         }
 
-        .card h3 {
-            color: var(--text-heading);
-            font-size: 1.25rem;
-            margin-bottom: 10px;
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
         }
 
-        .badge {
-            display: inline-block;
-            background-color: #1f6feb33;
-            color: var(--accent-color);
-            font-size: 0.75rem;
-            padding: 3px 8px;
+        .app-icon {
+            width: 52px;
+            height: 52px;
             border-radius: 12px;
-            margin-bottom: 12px;
+            background: #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 1px solid var(--border-card);
+        }
+
+        .app-meta h3 {
+            font-size: 1.25rem;
+            color: var(--text-title);
+            font-weight: 700;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-card);
+            color: var(--accent-teal);
+            font-size: 0.75rem;
             font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
         }
 
         .card p {
             font-size: 0.95rem;
-            color: #8b949e;
-            margin-bottom: 20px;
+            color: var(--text-body);
+            margin-bottom: 24px;
             flex-grow: 1;
         }
 
+        .card-actions {
+            display: flex;
+            gap: 12px;
+        }
+
         .btn {
-            display: inline-block;
+            flex: 1;
             text-align: center;
-            background-color: var(--success-color);
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 6px;
+            padding: 10px 16px;
+            border-radius: 10px;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: background-color 0.2s;
+            text-decoration: none;
+            transition: all 0.2s;
         }
 
-        .btn:hover {
-            background-color: #2ea043;
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
         }
 
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--border-card);
+            color: var(--text-title);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-card-hover);
+        }
+
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 30px;
-            border-top: 1px solid var(--border-color);
-            color: #8b949e;
+            max-width: 1200px;
+            margin: 60px auto 0;
+            padding: 40px 20px 0;
+            border-top: 1px solid var(--border-card);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        footer p {
             font-size: 0.9rem;
-            margin-top: 40px;
+            color: var(--text-muted);
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .contact-info a {
+            color: var(--text-body);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary);
         }
     </style>
 </head>
 <body>
 
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="brand-logo">
+            <div class="logo-icon">M</div>
+            <span class="brand-name">Mashal Tech</span>
+        </a>
+        <div class="nav-links">
+            <a href="#software">Enterprise Apps</a>
+            <a href="#games">Games</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="hero-badge">🚀 Custom Software & Interactive Apps</span>
+        <h1>Building Powerful ERPs &<br><span>Engaging Digital Experiences</span></h1>
+        <p>Explore software solutions, business automation tools, and top-down tactical games built for performance and growth.</p>
+    </section>
+
     <div class="container">
-        <header>
-            <h1>Mashal Tech Marketplace</h1>
-            <p>Enterprise Software Solutions, Custom Business ERPs & Mobile Action Games</p>
-        </header>
+        <!-- Software Section -->
+        <div class="section-header" id="software">
+            <h2>Enterprise Software & ERP Solutions</h2>
+        </div>
 
-        <!-- Desktop Applications & ERPs -->
-        <h2 class="section-title">Desktop & Enterprise Software</h2>
         <div class="grid">
+            <!-- App 1: CustomerBookGUI -->
             <div class="card">
                 <div>
-                    <span class="badge">C# .NET 10</span>
-                    <h3>CustomerBookGUI</h3>
-                    <p>Comprehensive enterprise management desktop application featuring advanced customer tracking, petty cash ledgers, closing records, and party sticker generation.</p>
+                    <div class="card-header">
+                        <div class="app-icon">📊</div>
+                        <div class="app-meta">
+                            <h3>CustomerBookGUI</h3>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">C# .NET 10</span>
+                        <span class="tag">Desktop ERP</span>
+                        <span class="tag">PostgreSQL</span>
+                    </div>
+                    <p>Enterprise customer ledger management app with petty cash tracking, closing logs, and party sticker generation.</p>
                 </div>
-                <a href="#" class="btn">Download App</a>
+                <div class="card-actions">
+                    <a href="#" class="btn btn-primary">Download App</a>
+                    <a href="#" class="btn btn-secondary">Details</a>
+                </div>
             </div>
 
+            <!-- App 2: Baadshah Tyre ERP -->
             <div class="card">
                 <div>
-                    <span class="badge">FBR Compliant ERP</span>
-                    <h3>Baadshah Tyre ERP</h3>
-                    <p>Automated sales invoicing system for Baadshah Tyre Corporation with QR code generation, HS code integration, FBR tax calculations (Sec 3(1A) & 236H), and PDF audit reports.</p>
+                    <div class="card-header">
+                        <div class="app-icon">🧾</div>
+                        <div class="app-meta">
+                            <h3>Baadshah Tyre ERP</h3>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">FBR Compliant</span>
+                        <span class="tag">QR Invoicing</span>
+                        <span class="tag">Sec 3(1A) & 236H</span>
+                    </div>
+                    <p>Automated sales invoicing & tax engine featuring HS code suggestions, inventory management, and PDF audit reports.</p>
                 </div>
-                <a href="#" class="btn">Download ERP</a>
+                <div class="card-actions">
+                    <a href="#" class="btn btn-primary">Download ERP</a>
+                    <a href="#" class="btn btn-secondary">Details</a>
+                </div>
             </div>
 
+            <!-- App 3: Al-Ahmad Javid TTC -->
             <div class="card">
                 <div>
-                    <span class="badge">Full-Stack ERP</span>
-                    <h3>Al-Ahmad Javid TTC</h3>
-                    <p>Overseas recruitment management platform featuring candidate tracking, visa workflows, flight schedule lookups, foreign employer demand management, and standalone execution.</p>
+                    <div class="card-header">
+                        <div class="app-icon">🌐</div>
+                        <div class="app-meta">
+                            <h3>Al-Ahmad Javid TTC</h3>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">Full-Stack ERP</span>
+                        <span class="tag">Recruitment Workflow</span>
+                    </div>
+                    <p>Overseas recruitment portal with candidate tracking, visa stages, flight lookup, and foreign employer demand tools.</p>
                 </div>
-                <a href="#" class="btn">View System</a>
+                <div class="card-actions">
+                    <a href="#" class="btn btn-primary">View System</a>
+                    <a href="#" class="btn btn-secondary">Details</a>
+                </div>
             </div>
         </div>
 
-        <!-- Mobile & Game Development -->
-        <h2 class="section-title">Games & Mobile Experiences</h2>
+        <!-- Games Section -->
+        <div class="section-header" id="games">
+            <h2>Games & Mobile Experiences</h2>
+        </div>
+
         <div class="grid">
+            <!-- Game 1: Tactical Shooter -->
             <div class="card">
                 <div>
-                    <span class="badge">Unity 2D / Mobile</span>
-                    <h3>Tactical 2D Action Game</h3>
-                    <p>An immersive top-down tactical shooter blending stealth elements and stylized combat aesthetics inspired by Space Marshals 3 and tactical gameplay mechanics.</p>
+                    <div class="card-header">
+                        <div class="app-icon">🎮</div>
+                        <div class="app-meta">
+                            <h3>Tactical 2D Shooter</h3>
+                        </div>
+                    </div>
+                    <div class="tech-tags">
+                        <span class="tag">Unity 2D</span>
+                        <span class="tag">Mobile Action</span>
+                        <span class="tag">Top-Down</span>
+                    </div>
+                    <p>Tactical top-down action shooter combining stealth mechanics, stylized graphics, and intense combat missions.</p>
                 </div>
-                <a href="#" class="btn">Play / Download</a>
+                <div class="card-actions">
+                    <a href="#" class="btn btn-primary">Play Game</a>
+                    <a href="#" class="btn btn-secondary">Trailer</a>
+                </div>
             </div>
         </div>
 
-        <footer>
-            <p>&copy; 2026 Mashal Tech. Developed in Pakistan. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
+        <!-- Footer -->
+        <footer id="contact">
+            <p>&copy; 2026 Mashal Tech. All rights reserved.</p>
+            <div class="contact-info">
+                <span>📧 6saddamhussain9@gmail.com</span>
+                <span>📞 0370-0818276</span>
+            </div>
         </footer>
     </div>
 

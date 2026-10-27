@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Software & Systems</title>
+    <title>Mashal Tech — Software & Game Repository</title>
     <style>
         :root {
-            --bg: #f8fafc;
+            --bg: #f3f4f6;
             --surface: #ffffff;
-            --surface-border: #e2e8f0;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --accent: #0f172a;
-            --accent-hover: #334155;
-            --tag-bg: #f1f5f9;
-            --tag-text: #475569;
+            --border: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --tag-bg: #eff6ff;
+            --tag-text: #1d4ed8;
         }
 
         * {
@@ -28,275 +28,400 @@
             background-color: var(--bg);
             color: var(--text-main);
             line-height: 1.5;
-            padding: 48px 20px;
+            padding: 20px;
         }
 
-        .wrapper {
-            max-width: 840px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        header {
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--surface-border);
-            padding-bottom: 24px;
-        }
-
-        .top-bar {
+        /* Top Header & Search Bar */
+        .top-nav {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .identity {
-            font-size: 0.95rem;
-            font-weight: 600;
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-icon {
+            background: var(--accent);
+            color: white;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 14px 10px 38px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+            background: #f9fafb;
+        }
+
+        .search-box input:focus {
+            background: #fff;
+            border-color: var(--accent);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
             color: var(--text-muted);
-            letter-spacing: -0.2px;
+            font-size: 0.9rem;
         }
 
-        .status-pill {
-            display: inline-flex;
+        /* Categories Bar */
+        .categories-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 20px;
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .cat-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
             align-items: center;
             gap: 6px;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #15803d;
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 4px 10px;
-            border-radius: 9999px;
+            transition: color 0.15s;
         }
 
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #22c55e;
-            border-radius: 50%;
+        .cat-item:hover, .cat-item.active {
+            color: var(--accent);
         }
 
-        h1 {
-            font-size: 1.85rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            margin-bottom: 6px;
+        /* Main Content Grid */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
         }
 
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        @media (max-width: 900px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .section-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            font-weight: 600;
-            margin-bottom: 16px;
-            margin-top: 32px;
-        }
-
-        .project-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .project-card {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
+        .section-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 24px;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
-            transition: box-shadow 0.15s ease, border-color 0.15s ease;
+            padding: 20px;
+            margin-bottom: 24px;
         }
 
-        .project-card:hover {
-            border-color: #cbd5e1;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
-        }
-
-        .project-header {
+        .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 10px;
+            align-items: center;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 16px;
         }
 
-        .project-title {
+        .section-header h2 {
             font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .view-all {
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Product List Items */
+        .product-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            gap: 15px;
+        }
+
+        .product-row:last-child {
+            border-bottom: none;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            flex: 1;
+        }
+
+        .product-thumb {
+            width: 44px;
+            height: 44px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .product-details h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .product-details p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-meta-tags {
+            display: flex;
+            gap: 8px;
+            font-size: 0.75rem;
+        }
+
+        .tag-badge {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .tag-cat {
+            color: var(--text-muted);
+        }
+
+        .product-stats {
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            min-width: 90px;
+        }
+
+        .product-stats .size {
+            font-weight: 600;
+            color: var(--text-main);
+            display: block;
+        }
+
+        /* Sidebar Side List */
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-thumb {
+            width: 36px;
+            height: 36px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .sidebar-info h4 {
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-main);
         }
 
-        .tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            background-color: var(--tag-bg);
-            color: var(--tag-text);
+        .sidebar-info span {
             font-size: 0.75rem;
-            font-weight: 500;
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        .project-desc {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        .project-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--surface-border);
-            padding-top: 16px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .meta-info {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .btn {
-            background-color: var(--accent);
-            color: white;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 7px 14px;
-            border-radius: 6px;
-            transition: background-color 0.15s;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
+            display: block;
         }
 
         footer {
-            margin-top: 56px;
-            border-top: 1px solid var(--surface-border);
-            padding-top: 24px;
+            text-align: center;
+            padding: 24px;
             font-size: 0.85rem;
             color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <header>
-            <div class="top-bar">
-                <span class="identity">Mashal Tech // Index</span>
-                <div class="status-pill">
-                    <div class="status-dot"></div>
-                    Operational
-                </div>
+    <div class="container">
+        <!-- Top Navigation with Search -->
+        <div class="top-nav">
+            <a href="#" class="brand">
+                <div class="brand-icon">M</div>
+                Mashal Tech
+            </a>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search software, ERP systems, or games...">
             </div>
-            <h1>Software & Systems Releases</h1>
-            <p class="subtitle">Enterprise software, customized ERP systems, and standalone builds by Mashal Tech.</p>
-        </header>
-
-        <div class="section-title">Enterprise & Desktop Applications</div>
-        <div class="project-list">
-            
-            <!-- CustomerBookGUI -->
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">CustomerBookGUI</div>
-                    <div class="tags">
-                        <span class="tag">C# .NET 10</span>
-                        <span class="tag">Desktop</span>
-                    </div>
-                </div>
-                <div class="project-desc">
-                    Enterprise customer tracking application equipped with petty cash ledger balancing, transaction closing logs, and custom party sticker generation modules.
-                </div>
-                <div class="project-footer">
-                    <span class="meta-info">Target: Windows (x64) • v1.0</span>
-                    <a href="#" class="btn">Download Executable</a>
-                </div>
-            </div>
-
-            <!-- Baadshah Tyre ERP -->
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Baadshah Tyre ERP</div>
-                    <div class="tags">
-                        <span class="tag">FBR Compliant</span>
-                        <span class="tag">Invoicing</span>
-                    </div>
-                </div>
-                <div class="project-desc">
-                    Specialized invoicing and tax calculation engine tailored for Baadshah Tyre Corporation. Features automated QR code generation, HS code matching, and Section 3(1A) / 236H tax computation.
-                </div>
-                <div class="project-footer">
-                    <span class="meta-info">Enterprise Build • PDF Audit Ready</span>
-                    <a href="#" class="btn">Download System</a>
-                </div>
-            </div>
-
-            <!-- Al-Ahmad Javid TTC -->
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Al-Ahmad Javid TTC Portal</div>
-                    <div class="tags">
-                        <span class="tag">Full-Stack ERP</span>
-                        <span class="tag">Standalone</span>
-                    </div>
-                </div>
-                <div class="project-desc">
-                    Overseas recruitment management platform designed to track candidate pipelines, visa processing milestones, foreign employer demand quotas, and flight schedule integrations.
-                </div>
-                <div class="project-footer">
-                    <span class="meta-info">Standalone Package • v2.1</span>
-                    <a href="#" class="btn">Access Build</a>
-                </div>
-            </div>
-
         </div>
 
-        <div class="section-title">Games & Experiments</div>
-        <div class="project-list">
+        <!-- Categories Bar -->
+        <div class="categories-bar">
+            <a href="#" class="cat-item active">💻 Desktop Apps</a>
+            <a href="#" class="cat-item">🧾 FBR ERPs</a>
+            <a href="#" class="cat-item">🌐 Full-Stack Portals</a>
+            <a href="#" class="cat-item">🎮 Unity Games</a>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-layout">
             
-            <!-- Tactical Game -->
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Tactical 2D Shooter</div>
-                    <div class="tags">
-                        <span class="tag">Unity 2D</span>
-                        <span class="tag">Action</span>
+            <!-- Left Column: Windows & Desktop Software -->
+            <div>
+                <div class="section-box">
+                    <div class="section-header">
+                        <h2>Desktop Software & Enterprise ERPs</h2>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+
+                    <!-- Item 1 -->
+                    <div class="product-row">
+                        <div class="product-info">
+                            <div class="product-thumb">📊</div>
+                            <div class="product-details">
+                                <h3>CustomerBookGUI</h3>
+                                <p>Enterprise customer tracking app with petty cash ledgers & closing records.</p>
+                                <div class="product-meta-tags">
+                                    <span class="tag-badge">C# .NET 10</span>
+                                    <span class="tag-cat">Windows (x64)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <span class="size">14.2 MB</span>
+                            <span>v1.0 Stable</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="product-row">
+                        <div class="product-info">
+                            <div class="product-thumb">🧾</div>
+                            <div class="product-details">
+                                <h3>Baadshah Tyre ERP</h3>
+                                <p>FBR-compliant invoicing system with QR codes and tax calculations.</p>
+                                <div class="product-meta-tags">
+                                    <span class="tag-badge">Python ERP</span>
+                                    <span class="tag-cat">Audit Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <span class="size">28.5 MB</span>
+                            <span>Sec 3(1A)</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="product-row">
+                        <div class="product-info">
+                            <div class="product-thumb">🌐</div>
+                            <div class="product-details">
+                                <h3>Al-Ahmad Javid TTC Portal</h3>
+                                <p>Overseas recruitment management platform for candidate and visa workflows.</p>
+                                <div class="product-meta-tags">
+                                    <span class="tag-badge">Full-Stack</span>
+                                    <span class="tag-cat">Standalone</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <span class="size">45.0 MB</span>
+                            <span>v2.1 Build</span>
+                        </div>
                     </div>
                 </div>
-                <div class="project-desc">
-                    Top-down tactical action project focusing on stealth mechanics, grid movement, and tactical combat inspired by mobile strategy titles.
-                </div>
-                <div class="project-footer">
-                    <span class="meta-info">Alpha Build • Mobile / PC</span>
-                    <a href="#" class="btn">Play Build</a>
+            </div>
+
+            <!-- Right Column: Games & Experimental Builds -->
+            <div>
+                <div class="section-box">
+                    <div class="section-header">
+                        <h2>Games & Mobile Builds</h2>
+                    </div>
+
+                    <!-- Game Item -->
+                    <div class="sidebar-item">
+                        <div class="sidebar-thumb">🎮</div>
+                        <div class="sidebar-info" style="flex: 1;">
+                            <h4>Tactical 2D Shooter</h4>
+                            <span>Unity 2D • Alpha Build</span>
+                        </div>
+                        <div style="font-size: 0.8rem; font-weight: 600; color: var(--accent);">120 MB</div>
+                    </div>
+
+                    <div style="margin-top: 15px; font-size: 0.82rem; color: var(--text-muted); background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid var(--border);">
+                        💡 All software packages are compiled and maintained directly under Mashal Tech infrastructure.
+                    </div>
                 </div>
             </div>
 
         </div>
 
         <footer>
-            <span>© 2026 Mashal Tech, Pakistan.</span>
-            <span>Contact: 6saddamhussain9@gmail.com</span>
+            <p>&copy; 2026 Mashal Tech Repository. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
         </footer>
     </div>
 

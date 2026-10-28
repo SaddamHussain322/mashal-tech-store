@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Software & Game Repository</title>
+    <title>Mashal Tech — Enterprise Software Repository</title>
     <style>
         :root {
             --bg: #f3f4f6;
@@ -13,8 +13,8 @@
             --text-muted: #6b7280;
             --accent: #2563eb;
             --accent-hover: #1d4ed8;
-            --tag-bg: #eff6ff;
-            --tag-text: #1d4ed8;
+            --tag-bg: #f0fdf4;
+            --tag-text: #16a34a;
         }
 
         * {
@@ -73,9 +73,22 @@
             font-size: 0.9rem;
         }
 
+        .license-badge-header {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .search-box {
             flex: 1;
-            max-width: 500px;
+            max-width: 400px;
             position: relative;
         }
 
@@ -217,16 +230,6 @@
             margin-bottom: 2px;
         }
 
-        .product-details h3 a {
-            color: var(--text-main);
-            text-decoration: none;
-            transition: color 0.15s;
-        }
-
-        .product-details h3 a:hover {
-            color: var(--accent);
-        }
-
         .product-details p {
             font-size: 0.8rem;
             color: var(--text-muted);
@@ -246,20 +249,17 @@
         .tag-badge {
             background: var(--tag-bg);
             color: var(--tag-text);
-            padding: 1px 6px;
+            padding: 2px 8px;
             border-radius: 4px;
-            font-weight: 500;
-        }
-
-        .tag-cat {
-            color: var(--text-muted);
+            font-weight: 600;
+            border: 1px solid #bbf7d0;
         }
 
         .product-stats {
             text-align: right;
             font-size: 0.8rem;
             color: var(--text-muted);
-            min-width: 90px;
+            min-width: 100px;
         }
 
         .product-stats .size {
@@ -270,10 +270,10 @@
 
         .download-btn {
             display: inline-block;
-            margin-top: 4px;
+            margin-top: 6px;
             background: var(--accent);
             color: white;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: 600;
@@ -323,6 +323,25 @@
             display: block;
         }
 
+        .license-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .license-box h4 {
+            color: var(--text-main);
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .no-results {
             display: none;
             padding: 20px;
@@ -344,55 +363,59 @@
 <body>
 
     <div class="container">
-        <!-- Top Navigation with Search -->
+        <!-- Top Navigation with Search & License Badge -->
         <div class="top-nav">
             <a href="#" class="brand">
                 <div class="brand-icon">M</div>
                 Mashal Tech
             </a>
+            
+            <div class="license-badge-header">
+                🛡️ Official Enterprise License: MT-LIC-2026-SECURE
+            </div>
+
             <div class="search-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search software, ERP systems, or games...">
+                <input type="text" id="searchInput" placeholder="Search enterprise solutions...">
             </div>
         </div>
 
         <!-- Categories Bar -->
         <div class="categories-bar">
-            <span class="cat-item active" onclick="filterCategory('all', this)">💻 All Software</span>
-            <span class="cat-item" onclick="filterCategory('desktop', this)">🖥️ Desktop Apps</span>
-            <span class="cat-item" onclick="filterCategory('erp', this)">🧾 FBR ERPs</span>
-            <span class="cat-item" onclick="filterCategory('portal', this)">🌐 Full-Stack Portals</span>
-            <span class="cat-item" onclick="filterCategory('game', this)">🎮 Unity Games</span>
+            <span class="cat-item active" onclick="filterCategory('all', this)">💻 All Solutions</span>
+            <span class="cat-item" onclick="filterCategory('desktop', this)">🖥️ Desktop Systems</span>
+            <span class="cat-item" onclick="filterCategory('erp', this)">🧾 Enterprise ERPs</span>
+            <span class="cat-item" onclick="filterCategory('portal', this)">🌐 Cloud Portals</span>
+            <span class="cat-item" onclick="filterCategory('game', this)">🎮 Interactive Builds</span>
         </div>
 
         <!-- Main Content Area -->
         <div class="content-layout">
             
-            <!-- Left Column: Windows & Desktop Software -->
+            <!-- Left Column: Software Solutions -->
             <div>
                 <div class="section-box">
                     <div class="section-header">
-                        <h2>Software & Systems Index</h2>
+                        <h2>Authorized Software Catalog</h2>
                         <span class="view-all" onclick="resetSearch()">Show All</span>
                     </div>
 
-                    <!-- Item 1: CustomerBookGUI (Linked to GitHub Release build) -->
+                    <!-- Item 1: CustomerBookGUI -->
                     <div class="product-row" data-category="desktop">
                         <div class="product-info">
                             <div class="product-thumb">📊</div>
                             <div class="product-details">
                                 <h3>CustomerBookGUI</h3>
-                                <p>Enterprise customer tracking app with petty cash ledgers & closing records.</p>
+                                <p>Enterprise customer tracking system with petty cash ledgers & secure closing records.</p>
                                 <div class="product-meta-tags">
-                                    <span class="tag-badge">C# .NET 10</span>
-                                    <span class="tag-cat">Windows (x64)</span>
+                                    <span class="tag-badge">✔ Verified Build</span>
                                 </div>
                             </div>
                         </div>
                         <div class="product-stats">
                             <span class="size">34.2 MB</span>
-                            <span>v1.0 Stable</span>
-                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="download-btn">Download .rar</a>
+                            <span>v1.0 Secure</span>
+                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="download-btn">Download Release</a>
                         </div>
                     </div>
 
@@ -402,16 +425,15 @@
                             <div class="product-thumb">🧾</div>
                             <div class="product-details">
                                 <h3>Baadshah Tyre ERP</h3>
-                                <p>FBR-compliant invoicing system with QR codes and tax calculations.</p>
+                                <p>Enterprise compliance and automated sales invoicing infrastructure.</p>
                                 <div class="product-meta-tags">
-                                    <span class="tag-badge">Python ERP</span>
-                                    <span class="tag-cat">Audit Ready</span>
+                                    <span class="tag-badge">✔ Licensed System</span>
                                 </div>
                             </div>
                         </div>
                         <div class="product-stats">
                             <span class="size">28.5 MB</span>
-                            <span>Sec 3(1A)</span>
+                            <span>Audit Ready</span>
                         </div>
                     </div>
 
@@ -421,10 +443,9 @@
                             <div class="product-thumb">🌐</div>
                             <div class="product-details">
                                 <h3>Al-Ahmad Javid TTC Portal</h3>
-                                <p>Overseas recruitment management platform for candidate and visa workflows.</p>
+                                <p>Secure resource management platform for candidate and workflow operations.</p>
                                 <div class="product-meta-tags">
-                                    <span class="tag-badge">Full-Stack</span>
-                                    <span class="tag-cat">Standalone</span>
+                                    <span class="tag-badge">✔ Enterprise Tier</span>
                                 </div>
                             </div>
                         </div>
@@ -436,16 +457,16 @@
 
                     <!-- No Results Message -->
                     <div id="noResults" class="no-results">
-                        No matching software found for your search query.
+                        No matching solutions found.
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Games & Experimental Builds -->
+            <!-- Right Column: Verification & Trust Sidebar -->
             <div>
                 <div class="section-box">
                     <div class="section-header">
-                        <h2>Games & Mobile Builds</h2>
+                        <h2>Trust & Licensing</h2>
                     </div>
 
                     <!-- Game Item -->
@@ -453,13 +474,14 @@
                         <div class="sidebar-thumb">🎮</div>
                         <div class="sidebar-info" style="flex: 1;">
                             <h3>Tactical 2D Shooter</h3>
-                            <span>Unity 2D • Alpha Build</span>
+                            <span>Interactive Simulation Build</span>
                         </div>
                         <div style="font-size: 0.8rem; font-weight: 600; color: var(--accent);">120 MB</div>
                     </div>
 
-                    <div style="margin-top: 15px; font-size: 0.82rem; color: var(--text-muted); background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid var(--border);">
-                        💡 All software packages are compiled and maintained directly under Mashal Tech infrastructure.
+                    <div class="license-box">
+                        <h4>📜 Certificate of Authenticity</h4>
+                        <p>All software builds distributed here are legally compiled, licensed, and copyrighted under <strong>Mashal Tech</strong>. Unauthorized distribution or reverse-engineering is strictly prohibited.</p>
                     </div>
                 </div>
             </div>
@@ -467,7 +489,7 @@
         </div>
 
         <footer>
-            <p>&copy; 2026 Mashal Tech Repository. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
+            <p>&copy; 2026 Mashal Tech Enterprise. Licensed Software Repository. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
         </footer>
     </div>
 
@@ -477,7 +499,6 @@
         const rows = document.querySelectorAll('.product-row');
         const noResults = document.getElementById('noResults');
 
-        // Search input filter
         searchInput.addEventListener('keyup', function(e) {
             const query = e.target.value.toLowerCase().trim();
             let visibleCount = 0;
@@ -495,7 +516,6 @@
             noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
         });
 
-        // Category pill filter
         function filterCategory(category, element) {
             document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
             if (element) element.classList.add('active');

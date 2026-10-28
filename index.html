@@ -217,6 +217,16 @@
             margin-bottom: 2px;
         }
 
+        .product-details h3 a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .product-details h3 a:hover {
+            color: var(--accent);
+        }
+
         .product-details p {
             font-size: 0.8rem;
             color: var(--text-muted);
@@ -256,6 +266,23 @@
             font-weight: 600;
             color: var(--text-main);
             display: block;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 4px;
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.15s;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-hover);
         }
 
         /* Sidebar Side List */
@@ -349,7 +376,7 @@
                         <span class="view-all" onclick="resetSearch()">Show All</span>
                     </div>
 
-                    <!-- Item 1 -->
+                    <!-- Item 1: CustomerBookGUI (Linked to GitHub Release build) -->
                     <div class="product-row" data-category="desktop">
                         <div class="product-info">
                             <div class="product-thumb">📊</div>
@@ -363,8 +390,9 @@
                             </div>
                         </div>
                         <div class="product-stats">
-                            <span class="size">14.2 MB</span>
+                            <span class="size">34.2 MB</span>
                             <span>v1.0 Stable</span>
+                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="download-btn">Download .rar</a>
                         </div>
                     </div>
 

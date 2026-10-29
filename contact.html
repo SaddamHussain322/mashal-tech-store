@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mashal Tech — Contact Development Team</title>
+    <style>
+        :root {
+            --bg: #f3f4f6;
+            --surface: #ffffff;
+            --border: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 16px 24px; }
+        
+        .container {
+            width: 100%;
+            max-width: 1550px;
+            margin: 0 auto;
+        }
+
+        /* Platform & Navigation Tabs */
+        .platform-tabs { display: flex; gap: 12px; margin-bottom: 20px; }
+        .platform-btn {
+            flex: 1; padding: 14px 20px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; font-size: 1rem; font-weight: 700; color: var(--text-muted);
+            text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: all 0.2s ease;
+        }
+        .platform-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); }
+
+        .top-nav {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px;
+        }
+        .brand { font-size: 1.3rem; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .brand-icon { background: var(--accent); color: white; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; }
+
+        /* Contact Layout */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+        }
+        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+
+        .section-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .section-header h2 { font-size: 1.2rem; font-weight: 700; }
+
+        .info-item {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .info-item strong { display: block; color: var(--text-main); margin-bottom: 4px; font-size: 1rem; }
+        .info-item span { color: var(--text-muted); }
+
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
+        .form-control {
+            width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; background: #f9fafb; outline: none;
+        }
+        .form-control:focus { background: #fff; border-color: var(--accent); }
+
+        .submit-btn {
+            background: var(--accent); color: white; border: none; padding: 12px 24px;
+            border-radius: 6px; font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%;
+            transition: background 0.15s;
+        }
+        .submit-btn:hover { background: var(--accent-hover); }
+
+        footer { text-align: center; padding: 24px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Platform & Contact Switcher Tabs -->
+        <div class="platform-tabs">
+            <a href="index.html" class="platform-btn">💻 PC Software</a>
+            <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
+            <a href="contact.html" class="platform-btn active">📞 Contact & Quote</a>
+        </div>
+
+        <!-- Top Header -->
+        <div class="top-nav">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">M</div>
+                Mashal Tech Support Hub
+            </a>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                Official Response Time: <strong>Within 24 Hours</strong>
+            </div>
+        </div>
+
+        <!-- Contact Page Grid -->
+        <div class="contact-grid">
+            
+            <!-- Left Column: Direct Contact Info -->
+            <div>
+                <div class="section-box">
+                    <div class="section-header">
+                        <h2>Direct Developer Info</h2>
+                    </div>
+
+                    <div class="info-item">
+                        <span>📧</span>
+                        <strong>Official Email</strong>
+                        <span>6saddamhussain9@gmail.com</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span>📞</span>
+                        <strong>Phone / WhatsApp</strong>
+                        <span>0370-0818276</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span>🏢</span>
+                        <strong>Operational Base</strong>
+                        <span>Mardan & Peshawar, Pakistan</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span>🛡️</span>
+                        <strong>Enterprise License</strong>
+                        <span>MT-LIC-2026-SECURE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Custom Quote & Inquiry Form -->
+            <div>
+                <div class="section-box">
+                    <div class="section-header">
+                        <h2>Request a Custom Software Quote</h2>
+                    </div>
+
+                    <form onsubmit="submitContactForm(event)">
+                        <div class="form-group">
+                            <label>Your Name / Company Name</label>
+                            <input type="text" id="cName" required class="form-control" placeholder="e.g. Baadshah Tyre Corp">
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div class="form-group">
+                                <label>Project Type</label>
+                                <select id="cType" class="form-control">
+                                    <option value="Desktop ERP / Management Tool">Desktop ERP / Management Tool</option>
+                                    <option value="FBR Invoicing & Inventory System">FBR Invoicing & Inventory System</option>
+                                    <option value="Mobile App or Game">Mobile App or Game</option>
+                                    <option value="Full-Stack Web Portal">Full-Stack Web Portal</option>
+                                    <option value="Other Custom Software">Other Custom Software</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone / WhatsApp</label>
+                                <input type="text" id="cPhone" required class="form-control" placeholder="e.g. 0370-0818276">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Project Requirements & Details</label>
+                            <textarea id="cDetails" rows="5" required class="form-control" placeholder="Describe what you need your custom software to do (e.g. customer tracking, multi-warehouse records, closing reports...)"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">🚀 Send Message & Request Quote</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Mashal Tech Enterprise. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
+        </footer>
+    </div>
+
+    <script>
+        function submitContactForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('cName').value;
+            const type = document.getElementById('cType').value;
+            const phone = document.getElementById('cPhone').value;
+            const details = document.getElementById('cDetails').value;
+
+            const subject = encodeURIComponent(`Custom Project Inquiry: ${type} from ${name}`);
+            const body = encodeURIComponent(`Name/Company: ${name}\nProject Type: ${type}\nPhone/WhatsApp: ${phone}\n\nRequirements:\n${details}`);
+
+            window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
+        }
+    </script>
+</body>
+</html>

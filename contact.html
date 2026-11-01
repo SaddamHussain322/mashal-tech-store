@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Contact & Custom Quote</title>
+    <title>Mashal Tech — Interactive Solution Estimator & Contact</title>
     <style>
         :root {
             --bg: #f3f4f6;
@@ -20,13 +20,9 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 16px 24px; }
         
-        .container {
-            width: 100%;
-            max-width: 1550px;
-            margin: 0 auto;
-        }
+        .container { width: 100%; max-width: 1550px; margin: 0 auto; }
 
-        /* Platform & Navigation Tabs */
+        /* Navigation Switcher Tabs */
         .platform-tabs { display: flex; gap: 12px; margin-bottom: 20px; }
         .platform-btn {
             flex: 1; padding: 14px 20px; background: var(--surface); border: 1px solid var(--border);
@@ -38,71 +34,72 @@
 
         .top-nav {
             background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px;
+            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
         }
         .brand { font-size: 1.3rem; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 10px; }
         .brand-icon { background: var(--accent); color: white; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; }
 
-        /* Contact Layout */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 24px;
-        }
-        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+        .contact-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: 24px; }
+        @media (max-width: 950px) { .contact-grid { grid-template-columns: 1fr; } }
 
-        .section-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 28px;
-            margin-bottom: 24px;
-        }
-
-        .section-header {
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
-        }
+        .section-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 28px; margin-bottom: 24px; }
+        .section-header { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; }
         .section-header h2 { font-size: 1.2rem; font-weight: 700; }
 
-        .info-item {
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
+        .info-item { margin-bottom: 20px; font-size: 0.95rem; }
         .info-item strong { display: block; color: var(--text-main); margin-bottom: 4px; font-size: 1rem; }
         .info-item span { color: var(--text-muted); }
 
+        /* Wizard Stepper Styling */
+        .stepper-header { display: flex; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 14px; }
+        .step-pill { font-size: 0.88rem; font-weight: 600; color: var(--text-muted); padding: 6px 12px; border-radius: 20px; background: #f3f4f6; }
+        .step-pill.active { background: var(--accent); color: white; }
+
+        .wizard-step { display: none; }
+        .wizard-step.active { display: block; }
+
+        /* Option Cards Grid */
+        .option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
+        .option-card {
+            border: 2px solid var(--border); border-radius: 8px; padding: 16px; cursor: pointer; text-align: center;
+            transition: all 0.2s ease; background: #fafafa;
+        }
+        .option-card:hover { border-color: #93c5fd; background: #eff6ff; }
+        .option-card.selected { border-color: var(--accent); background: #eff6ff; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.15); }
+        .option-card .icon { font-size: 2rem; margin-bottom: 8px; }
+        .option-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+        .option-card p { font-size: 0.78rem; color: var(--text-muted); }
+
+        /* Checkbox Features Grid */
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .feature-checkbox {
+            display: flex; align-items: center; gap: 10px; border: 1px solid var(--border);
+            padding: 12px; border-radius: 6px; cursor: pointer; background: #fff; font-size: 0.88rem; font-weight: 600;
+        }
+        .feature-checkbox input { accent-color: var(--accent); width: 18px; height: 18px; }
+
         .form-group { margin-bottom: 16px; }
         .form-group label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
-        .form-control {
-            width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; background: #f9fafb; outline: none;
-        }
+        .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; background: #f9fafb; outline: none; }
         .form-control:focus { background: #fff; border-color: var(--accent); }
 
-        /* Action Buttons Grid */
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
+        /* Live Scope Summary Box */
+        .scope-preview {
+            background: #f8fafc; border: 1px dashed var(--accent); border-radius: 8px; padding: 18px; margin: 20px 0; font-size: 0.88rem; color: #1e293b;
         }
+        .scope-preview h4 { color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+
+        /* Navigation Buttons */
+        .wizard-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
+        .btn-nav { padding: 10px 20px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: 1px solid var(--border); background: #fff; }
+        .btn-next { background: var(--accent); color: white; border: none; }
+        .btn-next:hover { background: var(--accent-hover); }
+
+        .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
         @media (max-width: 600px) { .action-buttons { grid-template-columns: 1fr; } }
 
-        .btn-whatsapp {
-            background: var(--whatsapp-green); color: white; border: none; padding: 14px 20px;
-            border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center;
-            transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-whatsapp:hover { background: var(--whatsapp-hover); }
-
-        .btn-gmail {
-            background: var(--accent); color: white; border: none; padding: 14px 20px;
-            border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center;
-            transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-gmail:hover { background: var(--accent-hover); }
+        .btn-whatsapp { background: var(--whatsapp-green); color: white; border: none; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; }
+        .btn-gmail { background: var(--accent); color: white; border: none; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; }
 
         footer { text-align: center; padding: 24px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
     </style>
@@ -111,32 +108,32 @@
 
     <div class="container">
 
-        <!-- Platform & Contact Switcher Tabs -->
+        <!-- Top Navigation Switcher Tabs -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
-            <a href="contact.html" class="platform-btn active">📞 Contact & Quote</a>
+            <a href="contact.html" class="platform-btn active">📞 Solution Estimator & Contact</a>
         </div>
 
-        <!-- Top Header -->
+        <!-- Header -->
         <div class="top-nav">
             <a href="index.html" class="brand">
                 <div class="brand-icon">M</div>
-                Mashal Tech Support Hub
+                Mashal Tech Software House
             </a>
             <div style="font-size: 0.85rem; color: var(--text-muted);">
-                Official Response Time: <strong>Within 24 Hours</strong>
+                Interactive Scope Builder • Response: <strong>Within 24 Hours</strong>
             </div>
         </div>
 
-        <!-- Contact Page Grid -->
+        <!-- Grid Layout -->
         <div class="contact-grid">
             
-            <!-- Left Column: Direct Contact Info -->
+            <!-- Sidebar Info -->
             <div>
                 <div class="section-box">
                     <div class="section-header">
-                        <h2>Direct Developer Info</h2>
+                        <h2>Direct Developer Contact</h2>
                     </div>
 
                     <div class="info-item">
@@ -146,74 +143,143 @@
                     </div>
 
                     <div class="info-item">
-                        <span>📞</span>
-                        <strong>Phone / WhatsApp</strong>
-                        <span>Direct Messaging Enabled Below</span>
+                        <span>💬</span>
+                        <strong>WhatsApp Direct</strong>
+                        <span>Encrypted Dispatch Active</span>
                     </div>
 
                     <div class="info-item">
                         <span>🏢</span>
-                        <strong>Operational Base</strong>
+                        <strong>Operational Headquarters</strong>
                         <span>Mardan & Peshawar, Pakistan</span>
                     </div>
 
                     <div class="info-item">
                         <span>🛡️</span>
-                        <strong>Enterprise License</strong>
+                        <strong>Licensing Authority</strong>
                         <span>MT-LIC-2026-SECURE</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Custom Quote & Inquiry Form -->
+            <!-- Main Wizard Area -->
             <div>
                 <div class="section-box">
-                    <div class="section-header">
-                        <h2>Request a Custom Software Quote</h2>
+                    
+                    <!-- Stepper Bar -->
+                    <div class="stepper-header">
+                        <span class="step-pill active" id="pill-1">1. Choose Platform</span>
+                        <span class="step-pill" id="pill-2">2. Select Features</span>
+                        <span class="step-pill" id="pill-3">3. Deliverable Draft</span>
                     </div>
 
-                    <form id="quoteForm">
-                        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
-                            <div class="form-group">
-                                <label>Customer Name / Company Name</label>
-                                <input type="text" id="cName" required class="form-control" placeholder="e.g. Al-Madina Trading / John Doe">
+                    <form id="wizardForm">
+                        
+                        <!-- STEP 1: PLATFORM CHOICE -->
+                        <div class="wizard-step active" id="step-1">
+                            <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 1: Select Software Platform</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">What core architecture does your enterprise require?</p>
+                            
+                            <div class="option-grid">
+                                <div class="option-card selected" onclick="selectPlatform('Desktop App (.NET / Windows Forms / Python)', this)">
+                                    <div class="icon">🖥️</div>
+                                    <h4>Desktop App</h4>
+                                    <p>Offline C# .NET / Python tools, multi-sticker tags, ledgers.</p>
+                                </div>
+                                <div class="option-card" onclick="selectPlatform('Mobile App (Android / Unity Game)', this)">
+                                    <div class="icon">📱</div>
+                                    <h4>Mobile App / Game</h4>
+                                    <p>Android utilities, field agent tools, interactive 2D builds.</p>
+                                </div>
+                                <div class="option-card" onclick="selectPlatform('Full-Stack Web Portal (Node/Express/PostgreSQL)', this)">
+                                    <div class="icon">🌐</div>
+                                    <h4>Full-Stack Web Portal</h4>
+                                    <p>Recruitment ERPs, cloud dashboards, multi-user portals.</p>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Country</label>
-                                <input type="text" id="cCountry" required class="form-control" placeholder="e.g. Pakistan">
+
+                            <div class="wizard-actions" style="justify-content: flex-end;">
+                                <button type="button" class="btn-nav btn-next" onclick="goToStep(2)">Next: Select Features ➔</button>
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                            <div class="form-group">
-                                <label>Project Type / App Choice</label>
-                                <select id="cAppType" class="form-control">
-                                    <option value="Mobile App Development">📱 Mobile App Development</option>
-                                    <option value="Desktop App Development">💻 Desktop App Development</option>
-                                    <option value="FBR Invoicing & Inventory System">🧾 FBR Invoicing & Inventory System</option>
-                                    <option value="Full-Stack Web Portal">🌐 Full-Stack Web Portal</option>
-                                </select>
+                        <!-- STEP 2: FEATURE SELECTION -->
+                        <div class="wizard-step" id="step-2">
+                            <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 2: Choose Functional Modules</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Check the core features needed for your custom software build:</p>
+
+                            <div class="feature-grid">
+                                <label class="feature-checkbox">
+                                    <input type="checkbox" value="Automated Closing Ledger & Petty Cash" onchange="updateScope()"> Closing Ledger & Cash Logs
+                                </label>
+                                <label class="feature-checkbox">
+                                    <input type="checkbox" value="Independent Multi-Sticker Generator" onchange="updateScope()"> Custom Multi-Sticker Tags
+                                </label>
+                                <label class="feature-checkbox">
+                                    <input type="checkbox" value="FBR Invoicing & Tax Calculation" onchange="updateScope()"> FBR Tax & QR Invoicing
+                                </label>
+                                <label class="feature-checkbox">
+                                    <input type="checkbox" value="Candidate Onboarding Pipeline" onchange="updateScope()"> Candidate Recruitment Tracking
+                                </label>
+                                <label class="feature-checkbox">
+                                    <input type="checkbox" value="Offline Encrypted Database Storage" onchange="updateScope()"> Encrypted Offline Database
+                                </label>
+                                <label class="feature-checkbox">
+                                    <input type="checkbox" value="Multi-User Role Permissions" onchange="updateScope()"> Role & Auth Permissions
+                                </label>
                             </div>
+
+                            <div class="wizard-actions">
+                                <button type="button" class="btn-nav" onclick="goToStep(1)">⬅ Back</button>
+                                <button type="button" class="btn-nav btn-next" onclick="goToStep(3)">Next: Final Scope Draft ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: CUSTOMER DETAILS & LIVE SCOPE DRAFT -->
+                        <div class="wizard-step" id="step-3">
+                            <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 3: Client Details & Instant Dispatch</h2>
+
+                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+                                <div class="form-group">
+                                    <label>Client / Company Name</label>
+                                    <input type="text" id="cName" required class="form-control" placeholder="e.g. Al-Madina Trading / John Doe">
+                                </div>
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input type="text" id="cCountry" required class="form-control" placeholder="e.g. Pakistan">
+                                </div>
+                            </div>
+
                             <div class="form-group">
-                                <label>Contact Number</label>
+                                <label>Phone / WhatsApp Number</label>
                                 <input type="text" id="cContact" required class="form-control" placeholder="e.g. +92 370 0818276">
                             </div>
+
+                            <div class="form-group">
+                                <label>Additional Specific Requirements</label>
+                                <textarea id="cDetails" rows="3" class="form-control" placeholder="Mention any extra layout specs or business workflows..."></textarea>
+                            </div>
+
+                            <!-- Live Generated Scope Summary -->
+                            <div class="scope-preview">
+                                <h4>⚡ Generated Scope Preview</h4>
+                                <div id="scopeSummaryText">Select options in Step 1 & 2 to generate project scope.</div>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button type="button" onclick="sendViaWhatsApp()" class="btn-whatsapp">
+                                    💬 Submit Scope via WhatsApp
+                                </button>
+                                <button type="button" onclick="sendViaGmail()" class="btn-gmail">
+                                    📧 Submit Scope via Gmail
+                                </button>
+                            </div>
+
+                            <div class="wizard-actions" style="margin-top: 15px;">
+                                <button type="button" class="btn-nav" onclick="goToStep(2)">⬅ Edit Features</button>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Project Requirements & Details</label>
-                            <textarea id="cDetails" rows="5" required class="form-control" placeholder="Describe what you need your custom software to do (e.g. customer tracking, multi-warehouse records, closing reports...)"></textarea>
-                        </div>
-
-                        <!-- 2 Send Buttons -->
-                        <div class="action-buttons">
-                            <button type="button" onclick="sendViaWhatsApp()" class="btn-whatsapp">
-                                💬 Send via WhatsApp
-                            </button>
-                            <button type="button" onclick="sendViaGmail()" class="btn-gmail">
-                                📧 Send via Gmail
-                            </button>
-                        </div>
                     </form>
                 </div>
             </div>
@@ -225,56 +291,85 @@
         </footer>
     </div>
 
+    <!-- Wizard Logic -->
     <script>
-        function getFormData() {
+        let selectedPlatform = "Desktop App (.NET / Windows Forms / Python)";
+
+        function selectPlatform(platform, element) {
+            selectedPlatform = platform;
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            updateScope();
+        }
+
+        function goToStep(stepNum) {
+            document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
+            document.querySelectorAll('.step-pill').forEach(pill => pill.classList.remove('active'));
+
+            document.getElementById(`step-${stepNum}`).classList.add('active');
+            document.getElementById(`pill-${stepNum}`).classList.add('active');
+
+            if (stepNum === 3) updateScope();
+        }
+
+        function updateScope() {
+            const checkedBoxes = Array.from(document.querySelectorAll('.feature-grid input:checked')).map(cb => cb.value);
+            const featuresText = checkedBoxes.length > 0 ? checkedBoxes.join(', ') : 'Standard System Core';
+            
+            const summaryHtml = `<strong>Target Platform:</strong> ${selectedPlatform}<br>` +
+                                `<strong>Included Deliverables:</strong> ${featuresText}`;
+            
+            document.getElementById('scopeSummaryText').innerHTML = summaryHtml;
+        }
+
+        function getScopeData() {
             const name = document.getElementById('cName').value.trim();
             const country = document.getElementById('cCountry').value.trim();
-            const appType = document.getElementById('cAppType').value;
             const contact = document.getElementById('cContact').value.trim();
-            const details = document.getElementById('cDetails').value.trim();
+            const extraDetails = document.getElementById('cDetails').value.trim();
 
-            if (!name || !country || !contact || !details) {
-                alert('Please fill out all fields before sending!');
+            if (!name || !country || !contact) {
+                alert('Please complete your Name, Country, and Contact Number in Step 3!');
                 return null;
             }
 
-            return { name, country, appType, contact, details };
+            const checkedBoxes = Array.from(document.querySelectorAll('.feature-grid input:checked')).map(cb => cb.value);
+            const features = checkedBoxes.length > 0 ? checkedBoxes.join('\n - ') : 'Standard System Core';
+
+            return { name, country, contact, extraDetails, features, platform: selectedPlatform };
         }
 
         function sendViaWhatsApp() {
-            const data = getFormData();
+            const data = getScopeData();
             if (!data) return;
 
-            // Encoded message for WhatsApp with hidden recipient number logic
-            const message = `*New Custom Software Quote Inquiry*\n\n` +
-                            `👤 *Name/Company:* ${data.name}\n` +
+            const message = `*Custom Software Scope Inquiry — Mashal Tech*\n\n` +
+                            `👤 *Client/Company:* ${data.name}\n` +
                             `🌍 *Country:* ${data.country}\n` +
-                            `🛠️ *Project Type:* ${data.appType}\n` +
-                            `📞 *Contact No:* ${data.contact}\n\n` +
-                            `📋 *Requirements & Details:*\n${data.details}`;
+                            `📞 *Contact No:* ${data.contact}\n` +
+                            `🛠️ *Platform Choice:* ${data.platform}\n\n` +
+                            `📋 *Selected Modules:*\n - ${data.features}\n\n` +
+                            `📝 *Additional Details:* ${data.extraDetails || 'N/A'}`;
 
-            // Target number hidden safely behind the WhatsApp API redirect link
-            const whatsappNumber = "923700818276";
-            const url = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+            const targetNumber = "923700818276";
+            window.open(`https://api.whatsapp.com/send?phone=${targetNumber}&text=${encodeURIComponent(message)}`, '_blank');
         }
 
         function sendViaGmail() {
-            const data = getFormData();
+            const data = getScopeData();
             if (!data) return;
 
-            const subject = encodeURIComponent(`Custom Quote Request: ${data.appType} from ${data.name}`);
+            const subject = encodeURIComponent(`Software Scope Proposal: ${data.platform} for ${data.name}`);
             const body = encodeURIComponent(
-                `Customer Info:\n` +
-                `Name: ${data.name}\n` +
-                `Contact No: ${data.contact}\n` +
+                `Client Name/Company: ${data.name}\n` +
                 `Country: ${data.country}\n` +
-                `Project type: ${data.appType}\n\n` +
-                `Project Requirements & detail:\n${data.details}`
+                `Contact No: ${data.contact}\n\n` +
+                `Platform Architecture: ${data.platform}\n\n` +
+                `Selected Modules:\n - ${data.features}\n\n` +
+                `Extra Specifications:\n${data.extraDetails || 'None provided'}`
             );
 
-            const email = "6saddamhussain9@gmail.com";
-            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
         }
     </script>
 </body>

@@ -22,7 +22,6 @@
         
         .container { width: 100%; max-width: 1550px; margin: 0 auto; }
 
-        /* Navigation Switcher Tabs */
         .platform-tabs { display: flex; gap: 12px; margin-bottom: 20px; }
         .platform-btn {
             flex: 1; padding: 14px 20px; background: var(--surface); border: 1px solid var(--border);
@@ -50,7 +49,6 @@
         .info-item strong { display: block; color: var(--text-main); margin-bottom: 4px; font-size: 1rem; }
         .info-item span { color: var(--text-muted); }
 
-        /* Wizard Stepper Styling */
         .stepper-header { display: flex; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 14px; }
         .step-pill { font-size: 0.88rem; font-weight: 600; color: var(--text-muted); padding: 6px 12px; border-radius: 20px; background: #f3f4f6; }
         .step-pill.active { background: var(--accent); color: white; }
@@ -58,7 +56,6 @@
         .wizard-step { display: none; }
         .wizard-step.active { display: block; }
 
-        /* Option Cards Grid */
         .option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
         .option-card {
             border: 2px solid var(--border); border-radius: 8px; padding: 16px; cursor: pointer; text-align: center;
@@ -70,7 +67,6 @@
         .option-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
         .option-card p { font-size: 0.78rem; color: var(--text-muted); }
 
-        /* Checkbox Features Grid */
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px; }
         .feature-checkbox {
             display: flex; align-items: center; gap: 10px; border: 1px solid var(--border);
@@ -83,13 +79,9 @@
         .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; background: #f9fafb; outline: none; }
         .form-control:focus { background: #fff; border-color: var(--accent); }
 
-        /* Live Scope Summary Box */
-        .scope-preview {
-            background: #f8fafc; border: 1px dashed var(--accent); border-radius: 8px; padding: 18px; margin: 20px 0; font-size: 0.88rem; color: #1e293b;
-        }
+        .scope-preview { background: #f8fafc; border: 1px dashed var(--accent); border-radius: 8px; padding: 18px; margin: 20px 0; font-size: 0.88rem; color: #1e293b; }
         .scope-preview h4 { color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 
-        /* Navigation Buttons */
         .wizard-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
         .btn-nav { padding: 10px 20px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: 1px solid var(--border); background: #fff; }
         .btn-next { background: var(--accent); color: white; border: none; }
@@ -99,7 +91,13 @@
         @media (max-width: 600px) { .action-buttons { grid-template-columns: 1fr; } }
 
         .btn-whatsapp { background: var(--whatsapp-green); color: white; border: none; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; }
+        .btn-whatsapp:hover { background: var(--whatsapp-hover); }
         .btn-gmail { background: var(--accent); color: white; border: none; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; }
+        .btn-gmail:hover { background: var(--accent-hover); }
+
+        /* Floating WhatsApp Button */
+        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); text-decoration: none; font-weight: 700; font-size: 0.9rem; z-index: 9999; transition: transform 0.2s ease, background-color 0.2s ease; }
+        .floating-whatsapp:hover { background: #1ebe5d; transform: translateY(-3px); }
 
         footer { text-align: center; padding: 24px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
     </style>
@@ -107,66 +105,30 @@
 <body>
 
     <div class="container">
-
-        <!-- Top Navigation Switcher Tabs -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
             <a href="contact.html" class="platform-btn active">📞 Solution Estimator & Contact</a>
         </div>
 
-        <!-- Header -->
         <div class="top-nav">
-            <a href="index.html" class="brand">
-                <div class="brand-icon">M</div>
-                Mashal Tech Software House
-            </a>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">
-                Interactive Scope Builder • Response: <strong>Within 24 Hours</strong>
-            </div>
+            <a href="index.html" class="brand"><div class="brand-icon">M</div>Mashal Tech Software House</a>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Interactive Scope Builder • Response: <strong>Within 24 Hours</strong></div>
         </div>
 
-        <!-- Grid Layout -->
         <div class="contact-grid">
-            
-            <!-- Sidebar Info -->
             <div>
                 <div class="section-box">
-                    <div class="section-header">
-                        <h2>Direct Developer Contact</h2>
-                    </div>
-
-                    <div class="info-item">
-                        <span>📧</span>
-                        <strong>Official Email</strong>
-                        <span>6saddamhussain9@gmail.com</span>
-                    </div>
-
-                    <div class="info-item">
-                        <span>💬</span>
-                        <strong>WhatsApp Direct</strong>
-                        <span>Encrypted Dispatch Active</span>
-                    </div>
-
-                    <div class="info-item">
-                        <span>🏢</span>
-                        <strong>Operational Headquarters</strong>
-                        <span>Mardan & Peshawar, Pakistan</span>
-                    </div>
-
-                    <div class="info-item">
-                        <span>🛡️</span>
-                        <strong>Licensing Authority</strong>
-                        <span>MT-LIC-2026-SECURE</span>
-                    </div>
+                    <div class="section-header"><h2>Direct Developer Contact</h2></div>
+                    <div class="info-item"><span>📧</span><strong>Official Email</strong><span>6saddamhussain9@gmail.com</span></div>
+                    <div class="info-item"><span>💬</span><strong>WhatsApp Direct</strong><span>Encrypted Dispatch Active</span></div>
+                    <div class="info-item"><span>🏢</span><strong>Operational Headquarters</strong><span>Mardan & Peshawar, Pakistan</span></div>
+                    <div class="info-item"><span>🛡️</span><strong>Licensing Authority</strong><span>MT-LIC-2026-SECURE</span></div>
                 </div>
             </div>
 
-            <!-- Main Wizard Area -->
             <div>
                 <div class="section-box">
-                    
-                    <!-- Stepper Bar -->
                     <div class="stepper-header">
                         <span class="step-pill active" id="pill-1">1. Choose Platform</span>
                         <span class="step-pill" id="pill-2">2. Select Features</span>
@@ -174,8 +136,6 @@
                     </div>
 
                     <form id="wizardForm">
-                        
-                        <!-- STEP 1: PLATFORM CHOICE -->
                         <div class="wizard-step active" id="step-1">
                             <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 1: Select Software Platform</h2>
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">What core architecture does your enterprise require?</p>
@@ -203,30 +163,17 @@
                             </div>
                         </div>
 
-                        <!-- STEP 2: FEATURE SELECTION -->
                         <div class="wizard-step" id="step-2">
                             <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 2: Choose Functional Modules</h2>
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Check the core features needed for your custom software build:</p>
 
                             <div class="feature-grid">
-                                <label class="feature-checkbox">
-                                    <input type="checkbox" value="Automated Closing Ledger & Petty Cash" onchange="updateScope()"> Closing Ledger & Cash Logs
-                                </label>
-                                <label class="feature-checkbox">
-                                    <input type="checkbox" value="Independent Multi-Sticker Generator" onchange="updateScope()"> Custom Multi-Sticker Tags
-                                </label>
-                                <label class="feature-checkbox">
-                                    <input type="checkbox" value="FBR Invoicing & Tax Calculation" onchange="updateScope()"> FBR Tax & QR Invoicing
-                                </label>
-                                <label class="feature-checkbox">
-                                    <input type="checkbox" value="Candidate Onboarding Pipeline" onchange="updateScope()"> Candidate Recruitment Tracking
-                                </label>
-                                <label class="feature-checkbox">
-                                    <input type="checkbox" value="Offline Encrypted Database Storage" onchange="updateScope()"> Encrypted Offline Database
-                                </label>
-                                <label class="feature-checkbox">
-                                    <input type="checkbox" value="Multi-User Role Permissions" onchange="updateScope()"> Role & Auth Permissions
-                                </label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Automated Closing Ledger & Petty Cash" onchange="updateScope()"> Closing Ledger & Cash Logs</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Independent Multi-Sticker Generator" onchange="updateScope()"> Custom Multi-Sticker Tags</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="FBR Invoicing & Tax Calculation" onchange="updateScope()"> FBR Tax & QR Invoicing</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Candidate Onboarding Pipeline" onchange="updateScope()"> Candidate Recruitment Tracking</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Offline Encrypted Database Storage" onchange="updateScope()"> Encrypted Offline Database</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Multi-User Role Permissions" onchange="updateScope()"> Role & Auth Permissions</label>
                             </div>
 
                             <div class="wizard-actions">
@@ -235,7 +182,6 @@
                             </div>
                         </div>
 
-                        <!-- STEP 3: CUSTOMER DETAILS & LIVE SCOPE DRAFT -->
                         <div class="wizard-step" id="step-3">
                             <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 3: Client Details & Instant Dispatch</h2>
 
@@ -260,30 +206,23 @@
                                 <textarea id="cDetails" rows="3" class="form-control" placeholder="Mention any extra layout specs or business workflows..."></textarea>
                             </div>
 
-                            <!-- Live Generated Scope Summary -->
                             <div class="scope-preview">
                                 <h4>⚡ Generated Scope Preview</h4>
                                 <div id="scopeSummaryText">Select options in Step 1 & 2 to generate project scope.</div>
                             </div>
 
                             <div class="action-buttons">
-                                <button type="button" onclick="sendViaWhatsApp()" class="btn-whatsapp">
-                                    💬 Submit Scope via WhatsApp
-                                </button>
-                                <button type="button" onclick="sendViaGmail()" class="btn-gmail">
-                                    📧 Submit Scope via Gmail
-                                </button>
+                                <button type="button" onclick="sendViaWhatsApp()" class="btn-whatsapp">💬 Submit Scope via WhatsApp</button>
+                                <button type="button" onclick="sendViaGmail()" class="btn-gmail">📧 Submit Scope via Gmail</button>
                             </div>
 
                             <div class="wizard-actions" style="margin-top: 15px;">
                                 <button type="button" class="btn-nav" onclick="goToStep(2)">⬅ Edit Features</button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
-
         </div>
 
         <footer>
@@ -291,7 +230,11 @@
         </footer>
     </div>
 
-    <!-- Wizard Logic -->
+    <!-- Floating WhatsApp Button -->
+    <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
+        <span>💬</span> <span>Chat with Us</span>
+    </a>
+
     <script>
         let selectedPlatform = "Desktop App (.NET / Windows Forms / Python)";
 
@@ -305,21 +248,15 @@
         function goToStep(stepNum) {
             document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
             document.querySelectorAll('.step-pill').forEach(pill => pill.classList.remove('active'));
-
             document.getElementById(`step-${stepNum}`).classList.add('active');
             document.getElementById(`pill-${stepNum}`).classList.add('active');
-
             if (stepNum === 3) updateScope();
         }
 
         function updateScope() {
             const checkedBoxes = Array.from(document.querySelectorAll('.feature-grid input:checked')).map(cb => cb.value);
             const featuresText = checkedBoxes.length > 0 ? checkedBoxes.join(', ') : 'Standard System Core';
-            
-            const summaryHtml = `<strong>Target Platform:</strong> ${selectedPlatform}<br>` +
-                                `<strong>Included Deliverables:</strong> ${featuresText}`;
-            
-            document.getElementById('scopeSummaryText').innerHTML = summaryHtml;
+            document.getElementById('scopeSummaryText').innerHTML = `<strong>Target Platform:</strong> ${selectedPlatform}<br><strong>Included Deliverables:</strong> ${featuresText}`;
         }
 
         function getScopeData() {
@@ -335,41 +272,27 @@
 
             const checkedBoxes = Array.from(document.querySelectorAll('.feature-grid input:checked')).map(cb => cb.value);
             const features = checkedBoxes.length > 0 ? checkedBoxes.join('\n - ') : 'Standard System Core';
-
             return { name, country, contact, extraDetails, features, platform: selectedPlatform };
         }
 
         function sendViaWhatsApp() {
             const data = getScopeData();
             if (!data) return;
-
-            const message = `*Custom Software Scope Inquiry — Mashal Tech*\n\n` +
-                            `👤 *Client/Company:* ${data.name}\n` +
-                            `🌍 *Country:* ${data.country}\n` +
-                            `📞 *Contact No:* ${data.contact}\n` +
-                            `🛠️ *Platform Choice:* ${data.platform}\n\n` +
-                            `📋 *Selected Modules:*\n - ${data.features}\n\n` +
-                            `📝 *Additional Details:* ${data.extraDetails || 'N/A'}`;
-
-            const targetNumber = "923700818276";
-            window.open(`https://api.whatsapp.com/send?phone=${targetNumber}&text=${encodeURIComponent(message)}`, '_blank');
+            const message = `*Custom Software Scope Inquiry — Mashal Tech*\n\n👤 *Client/Company:* ${data.name}\n🌍 *Country:* ${data.country}\n📞 *Contact No:* ${data.contact}\n🛠️ *Platform Choice:* ${data.platform}\n\n📋 *Selected Modules:*\n - ${data.features}\n\n📝 *Additional Details:* ${data.extraDetails || 'N/A'}`;
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
 
         function sendViaGmail() {
             const data = getScopeData();
             if (!data) return;
-
             const subject = encodeURIComponent(`Software Scope Proposal: ${data.platform} for ${data.name}`);
-            const body = encodeURIComponent(
-                `Client Name/Company: ${data.name}\n` +
-                `Country: ${data.country}\n` +
-                `Contact No: ${data.contact}\n\n` +
-                `Platform Architecture: ${data.platform}\n\n` +
-                `Selected Modules:\n - ${data.features}\n\n` +
-                `Extra Specifications:\n${data.extraDetails || 'None provided'}`
-            );
-
+            const body = encodeURIComponent(`Client Name/Company: ${data.name}\nCountry: ${data.country}\nContact No: ${data.contact}\n\nPlatform Architecture: ${data.platform}\n\nSelected Modules:\n - ${data.features}\n\nExtra Specifications:\n${data.extraDetails || 'None provided'}`);
             window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        function openQuickWhatsApp() {
+            const message = "Hi! I am visiting Mashal Tech Store and would like to inquire about a custom software project.";
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
 </body>

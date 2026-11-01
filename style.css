@@ -1,0 +1,66 @@
+:root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-subtle: #f1f5f9;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --accent: #0f172a;
+    --accent-hover: #1e293b;
+    --primary-blue: #2563eb;
+    --primary-blue-hover: #1d4ed8;
+    --success: #059669;
+    --success-bg: #ecfdf5;
+    --radius: 6px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 24px; font-size: 14px; }
+
+.container { max-width: 1400px; margin: 0 auto; }
+
+/* Top Announcement Strip */
+.announcement-strip {
+    background: #0f172a; color: #f8fafc; padding: 10px 16px; border-radius: var(--radius);
+    font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+}
+.announcement-link { color: #93c5fd; text-decoration: none; font-weight: 600; }
+.announcement-link:hover { text-decoration: underline; }
+
+/* Unified Platform Navigation */
+.platform-nav { display: flex; gap: 4px; margin-bottom: 16px; background: #e2e8f0; padding: 3px; border-radius: var(--radius); }
+.nav-tab {
+    flex: 1; padding: 8px 14px; background: transparent; color: var(--text-muted);
+    text-decoration: none; text-align: center; font-size: 0.85rem; font-weight: 600;
+    border-radius: 4px; transition: all 0.1s ease;
+}
+.nav-tab:hover { color: var(--text-main); background: rgba(255,255,255,0.5); }
+.nav-tab.active { background: var(--surface); color: var(--text-main); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+
+/* Site Header */
+.site-header {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02); gap: 16px; flex-wrap: wrap;
+}
+.brand-group { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
+.brand-logo { width: 32px; height: 32px; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-weight: 700; font-size: 0.9rem; }
+.brand-title { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
+
+.security-badge { font-family: ui-monospace, monospace; font-size: 0.75rem; color: var(--success); background: var(--success-bg); border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 4px; font-weight: 500; }
+
+/* Panels & Containers */
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.01); }
+.panel-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.panel-title { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+
+/* Buttons & Elements */
+.btn { display: inline-block; padding: 6px 14px; background: var(--primary-blue); color: white; border-radius: 4px; font-size: 0.78rem; font-weight: 600; text-decoration: none; transition: background 0.1s; border: none; cursor: pointer; }
+.btn:hover { background: var(--primary-blue-hover); }
+
+/* Footer */
+footer { text-align: center; padding: 24px 0; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 20px; }
+
+/* Floating WhatsApp */
+.floating-whatsapp { position: fixed; bottom: 20px; right: 20px; background: #059669; color: white; border-radius: 20px; padding: 10px 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-decoration: none; font-weight: 600; font-size: 0.82rem; z-index: 99; transition: transform 0.1s; }
+.floating-whatsapp:hover { transform: translateY(-2px); }

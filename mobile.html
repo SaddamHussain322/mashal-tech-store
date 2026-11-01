@@ -136,4 +136,37 @@
                             <li>📞 <strong>Phone/WhatsApp:</strong> 0370-0818276</li>
                         </ul>
                     </div>
-                    <div class="
+                    <div class="license-box">
+                        <h4 style="color: var(--text-main); margin-bottom: 4px;">📜 Certified Build</h4>
+                        <p>All mobile packages are managed and deployed under <strong>Mashal Tech Mobile Infrastructure</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Mashal Tech Mobile. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
+        </footer>
+    </div>
+
+    <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
+        <span>💬</span> <span>Chat with Us</span>
+    </a>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const rows = document.querySelectorAll('.product-row');
+        searchInput.addEventListener('keyup', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            rows.forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(query) ? 'flex' : 'none';
+            });
+        });
+
+        function openQuickWhatsApp() {
+            const message = "Hi! I am visiting Mashal Tech Store and would like to inquire about a custom mobile app project.";
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
+</html>

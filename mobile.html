@@ -3,205 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Mobile Apps & Games Engineering</title>
+    <title>Mashal Tech — Mobile Apps & Games Store</title>
     <style>
         :root {
             --bg: #f8fafc;
-            --surface: #ffffff;
+            --card-bg: #ffffff;
             --border: #e2e8f0;
-            --border-subtle: #f1f5f9;
-            --text-main: #0f172a;
+            --text-dark: #0f172a;
             --text-muted: #64748b;
-            --accent: #0f172a;
-            --accent-hover: #1e293b;
-            --primary-green: #059669;
-            --primary-green-hover: #047857;
-            --success-bg: #ecfdf5;
-            --radius: 6px;
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --accent-indigo: #6366f1;
+            --radius: 12px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-        body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 24px; font-size: 14px; }
-        
-        .container { max-width: 1400px; margin: 0 auto; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-dark); line-height: 1.6; padding: 24px 16px; font-size: 14px; }
+        .container { max-width: 1280px; margin: 0 auto; }
 
-        /* Announcement Strip */
-        .announcement-strip {
-            background: #0f172a; color: #f8fafc; padding: 10px 16px; border-radius: var(--radius);
-            font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+        /* Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: #ffffff; padding: 16px 24px; border-radius: var(--radius);
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.3); flex-wrap: wrap; gap: 12px;
         }
-        .announcement-link { color: #93c5fd; text-decoration: none; font-weight: 600; }
-        .announcement-link:hover { text-decoration: underline; }
+        .hero-banner-title { font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .hero-btn { background: #ffffff; color: #047857; padding: 8px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.85rem; transition: transform 0.15s ease; }
+        .hero-btn:hover { transform: translateY(-1px); }
 
-        /* Unified Navigation Bar */
-        .platform-nav { display: flex; gap: 4px; margin-bottom: 16px; background: #e2e8f0; padding: 3px; border-radius: var(--radius); }
+        /* Modern Navigation Tabs */
+        .nav-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
         .nav-tab {
-            flex: 1; padding: 8px 14px; background: transparent; color: var(--text-muted);
-            text-decoration: none; text-align: center; font-size: 0.85rem; font-weight: 600;
-            border-radius: 4px; transition: all 0.1s ease;
+            flex: 1; min-width: 140px; padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: var(--radius); font-size: 0.9rem; font-weight: 600; color: var(--text-muted);
+            text-decoration: none; text-align: center; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .nav-tab:hover { color: var(--text-main); background: rgba(255,255,255,0.5); }
-        .nav-tab.active { background: var(--surface); color: var(--text-main); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .nav-tab:hover { color: var(--text-dark); border-color: #cbd5e1; }
+        .nav-tab.active { background: var(--primary); color: #ffffff; border-color: var(--primary); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35); }
 
         /* Site Header */
         .site-header {
-            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02); gap: 16px; flex-wrap: wrap;
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); flex-wrap: wrap; gap: 16px;
         }
-        .brand-group { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
-        .brand-logo { width: 32px; height: 32px; background: var(--primary-green); color: white; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-weight: 700; font-size: 0.9rem; }
-        .brand-title { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
-        
-        .security-badge { font-family: ui-monospace, monospace; font-size: 0.75rem; color: var(--primary-green); background: var(--success-bg); border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 4px; font-weight: 500; }
+        .brand { font-size: 1.25rem; font-weight: 800; color: var(--text-dark); text-decoration: none; display: flex; align-items: center; gap: 12px; }
+        .brand-badge { background: var(--primary); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 800; }
 
-        .search-container { flex: 1; max-width: 400px; position: relative; }
-        .search-input { width: 100%; padding: 7px 12px 7px 32px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; outline: none; background: #fff; color: var(--text-main); }
-        .search-input:focus { border-color: var(--primary-green); box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.1); }
-        .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.8rem; }
+        .search-box { flex: 1; max-width: 420px; position: relative; }
+        .search-box input { width: 100%; padding: 10px 16px 10px 38px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; outline: none; background: #f8fafc; }
+        .search-box input:focus { background: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15); }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
 
-        /* Workspace Grid */
-        .workspace-grid { display: grid; grid-template-columns: 2.6fr 1fr; gap: 20px; }
-        @media (max-width: 950px) { .workspace-grid { grid-template-columns: 1fr; } }
+        /* Content Layout */
+        .layout-grid { display: grid; grid-template-columns: 2.8fr 1.2fr; gap: 24px; }
+        @media (max-width: 900px) { .layout-grid { grid-template-columns: 1fr; } }
 
-        /* Panels & Rows */
-        .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.01); }
-        .panel-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .panel-title { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04); }
+        .card-header { border-bottom: 2px solid #f1f5f9; padding-bottom: 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .card-header h2 { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); }
 
-        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); gap: 16px; }
-        .item-row:last-child { border-bottom: none; }
-        .item-meta { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
-        .item-icon { width: 36px; height: 36px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-        .item-title { font-size: 0.9rem; font-weight: 600; color: var(--text-main); text-decoration: none; }
-        .item-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+        .app-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #f1f5f9; gap: 16px; }
+        .app-item:last-child { border-bottom: none; }
+        .app-icon { width: 52px; height: 52px; background: #ecfdf5; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .app-info h3 { font-size: 0.98rem; font-weight: 700; color: var(--text-dark); }
+        .app-info p { font-size: 0.84rem; color: var(--text-muted); margin-top: 2px; }
+        .tag-pill { display: inline-block; background: #ecfdf5; color: #047857; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 6px; border: 1px solid #a7f3d0; }
 
-        .tag { font-family: ui-monospace, monospace; font-size: 0.7rem; background: var(--success-bg); color: #047857; padding: 2px 6px; border-radius: 4px; border: 1px solid #a7f3d0; font-weight: 500; display: inline-block; margin-top: 4px; }
-        
-        .item-stats { text-align: right; font-size: 0.8rem; color: var(--text-muted); }
-        .item-size { font-weight: 600; color: var(--text-main); font-family: ui-monospace, monospace; }
+        .download-btn { background: var(--primary); color: white; padding: 8px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem; transition: background 0.2s ease; display: inline-block; }
+        .download-btn:hover { background: var(--primary-dark); }
 
-        .btn { display: inline-block; padding: 5px 12px; background: var(--primary-green); color: white; border-radius: 4px; font-size: 0.78rem; font-weight: 600; text-decoration: none; transition: background 0.1s; border: none; cursor: pointer; }
-        .btn:hover { background: var(--primary-green-hover); }
+        .sidebar-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 16px; font-size: 0.85rem; }
 
-        /* CTA Banner */
-        .cta-banner { background: #065f46; color: white; padding: 20px; border-radius: var(--radius); margin: 18px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-        .cta-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
-        .cta-subtitle { font-size: 0.78rem; color: #a7f3d0; }
-        
-        .btn-light { background: #ffffff; color: #065f46; padding: 6px 14px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; text-decoration: none; }
-        .btn-light:hover { background: #f1f5f9; }
+        footer { text-align: center; padding: 28px 0; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
 
-        /* Sidebar & Footer */
-        .sidebar-content { padding: 18px; }
-        .sidebar-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
-        .contact-list { list-style: none; font-size: 0.82rem; color: var(--text-main); margin-top: 8px; }
-        .contact-list li { margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-
-        footer { text-align: center; padding: 24px 0; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 20px; }
-
-        .floating-whatsapp { position: fixed; bottom: 20px; right: 20px; background: #059669; color: white; border-radius: 20px; padding: 10px 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-decoration: none; font-weight: 600; font-size: 0.82rem; z-index: 99; }
+        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 22px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 20px -3px rgba(37, 211, 102, 0.4); text-decoration: none; font-weight: 700; font-size: 0.9rem; z-index: 99; transition: transform 0.2s ease; }
+        .floating-whatsapp:hover { transform: translateY(-3px); }
     </style>
 </head>
 <body>
 
     <div class="container">
         
-        <!-- Top Announcement Strip -->
-        <div class="announcement-strip">
-            <span>📱 Mobile engineering division active. Custom Android utilities & Unity builds available.</span>
-            <a href="contact.html" class="announcement-link">Request Build &rarr;</a>
+        <div class="hero-banner">
+            <div class="hero-banner-title">📱 <strong>Need a custom mobile app or game?</strong> Build bespoke Android utilities & Unity games with us!</div>
+            <a href="contact.html" class="hero-btn">Contact Mobile Team</a>
         </div>
 
-        <!-- Unified Platform Navigation Bar -->
-        <nav class="platform-nav">
+        <div class="nav-tabs">
             <a href="index.html" class="nav-tab">💻 PC Software</a>
             <a href="mobile.html" class="nav-tab active">📱 Mobile Apps</a>
             <a href="contact.html" class="nav-tab">🚀 Project & ROI Hub</a>
             <a href="track.html" class="nav-tab">🔍 Track Order</a>
-        </nav>
+        </div>
 
-        <!-- Header -->
-        <header class="site-header">
-            <a href="mobile.html" class="brand-group">
-                <div class="brand-logo">M</div>
-                <span class="brand-title">Mashal Tech Mobile</span>
+        <div class="site-header">
+            <a href="mobile.html" class="brand">
+                <div class="brand-badge">M</div> Mashal Tech Mobile
             </a>
-            <div class="security-badge">UNITY-MOBILE-SECURE</div>
-            <div class="search-container">
+            <div class="search-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search mobile packages...">
+                <input type="text" id="searchInput" placeholder="Search mobile apps & games...">
             </div>
-        </header>
+        </div>
 
-        <div class="workspace-grid">
+        <div class="layout-grid">
             
-            <!-- Main Content Area -->
             <div>
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Authorized Android Apps & Games</span>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Authorized Android Apps & Games</h2>
                     </div>
 
-                    <div class="item-row">
-                        <div class="item-meta">
-                            <div class="item-icon">🎮</div>
-                            <div>
-                                <a class="item-title">Tactical 2D Shooter</a>
-                                <p class="item-desc">Top-down tactical battle royale & dynamic lobby simulation build.</p>
-                                <span class="tag">Unity Mobile Alpha</span>
+                    <div class="app-item">
+                        <div style="display: flex; gap: 16px; align-items: flex-start;">
+                            <div class="app-icon">🎮</div>
+                            <div class="app-info">
+                                <h3>Tactical 2D Shooter</h3>
+                                <p>Top-down tactical battle royale & dynamic lobby simulation build.</p>
+                                <span class="tag-pill">🎮 Unity Mobile</span>
                             </div>
                         </div>
-                        <div class="item-stats">
-                            <span class="item-size">120 MB</span>
-                            <span style="display:block; margin-top:2px;">Android x86/ARM</span>
-                            <a href="#" onclick="alert('Mobile APK build package link coming soon!')" class="btn" style="margin-top:6px;">Get APK</a>
+                        <div style="text-align: right;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">120 MB</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Alpha Build</span>
+                            <a href="#" onclick="alert('APK Download package coming soon!')" class="download-btn">Get APK</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Custom Mobile Development Section -->
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Custom Mobile App Development</span>
-                        <span class="tag">Cross-Platform</span>
-                    </div>
-
-                    <div style="padding: 18px 18px 0 18px;">
-                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-                            We develop cross-platform mobile solutions, Android utilities, and interactive game prototypes tailored precisely to your exact operational requirements.
-                        </p>
-                    </div>
-
-                    <div class="cta-banner">
-                        <div>
-                            <div class="cta-title">Need a bespoke mobile app or game prototype?</div>
-                            <div class="cta-subtitle">Connect with our mobile development team for custom scoping.</div>
-                        </div>
-                        <div style="display: flex; gap: 8px;">
-                            <a href="contact.html" class="btn-light">Open Wizard</a>
-                            <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20would%20like%20to%20discuss%20a%20custom%20mobile%20app." target="_blank" class="btn-light" style="background:#047857; color:white;">WhatsApp</a>
-                        </div>
-                    </div>
+                <div class="card" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white;">
+                    <h2 style="font-size: 1.15rem; margin-bottom: 8px; color: white;">Build a Custom Mobile Application</h2>
+                    <p style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 18px;">We develop cross-platform Android tools, field utilities, and interactive Unity prototypes optimized for real-world usage.</p>
+                    <a href="contact.html" style="background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; font-size: 0.85rem;">Request Mobile Quote &rarr;</a>
                 </div>
             </div>
 
-            <!-- Sidebar -->
             <div>
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Mobile Directives</span>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Mobile Engineering Team</h2>
                     </div>
-                    <div class="sidebar-content">
-                        <p class="sidebar-text">All mobile packages are managed, compiled, and deployed under Mashal Tech Mobile Infrastructure.</p>
-                        
-                        <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;">
-                            <p style="font-size: 0.8rem; font-weight: 600; margin-bottom: 6px;">Direct Mobile Team Contact</p>
-                            <ul class="contact-list">
-                                <li>📧 6saddamhussain9@gmail.com</li>
-                                <li>📞 0370-0818276</li>
-                            </ul>
-                        </div>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">Direct developer dispatch for mobile projects and Unity game architecture.</p>
+                    
+                    <div class="sidebar-box">
+                        <p style="margin-bottom: 8px;"><strong>📧 Email:</strong><br>6saddamhussain9@gmail.com</p>
+                        <p><strong>📞 Phone / WhatsApp:</strong><br>0370-0818276</p>
                     </div>
                 </div>
             </div>
@@ -209,28 +157,23 @@
         </div>
 
         <footer>
-            <p>&copy; 2026 Mashal Tech Mobile. All builds verified under secure infrastructure guidelines.</p>
+            <p>&copy; 2026 Mashal Tech Mobile. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
         </footer>
     </div>
 
-    <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
-        <span>💬</span> <span>Direct Support</span>
+    <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20have%20an%20inquiry%20about%20a%20mobile%20app." target="_blank" class="floating-whatsapp">
+        <span>💬</span> <span>Chat with Us</span>
     </a>
 
     <script>
         const searchInput = document.getElementById('searchInput');
-        const rows = document.querySelectorAll('.item-row');
-
+        const items = document.querySelectorAll('.app-item');
         searchInput.addEventListener('keyup', function(e) {
             const query = e.target.value.toLowerCase().trim();
-            rows.forEach(row => {
-                row.style.display = row.innerText.toLowerCase().includes(query) ? 'flex' : 'none';
+            items.forEach(item => {
+                item.style.display = item.innerText.toLowerCase().includes(query) ? 'flex' : 'none';
             });
         });
-
-        function openQuickWhatsApp() {
-            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent('Hi! I am reviewing Mashal Tech mobile apps and have an inquiry.')}`, '_blank');
-        }
     </script>
 </body>
 </html>

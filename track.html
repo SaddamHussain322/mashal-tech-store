@@ -22,10 +22,11 @@
         
         .container { width: 100%; max-width: 1550px; margin: 0 auto; }
 
+        /* Clean 4-Tab Navigation */
         .platform-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .platform-btn {
-            flex: 1; min-width: 130px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
-            border-radius: 8px; font-size: 0.85rem; font-weight: 700; color: var(--text-muted);
+            flex: 1; min-width: 150px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; font-size: 0.9rem; font-weight: 700; color: var(--text-muted);
             text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
             transition: all 0.2s ease;
         }
@@ -79,13 +80,12 @@
 
     <div class="container">
         
+        <!-- Clean 4-Tab Navigation (AI & ROI fully housed inside contact.html hub) -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
-            <a href="contact.html" class="platform-btn">📞 Estimator & AI</a>
+            <a href="contact.html" class="platform-btn">🚀 Project & ROI Hub</a>
             <a href="track.html" class="platform-btn active">🔍 Track Order</a>
-            <a href="contact.html" class="platform-btn">🤖 AI Blueprint</a>
-            <a href="roi-calculator.html" class="platform-btn">📈 ROI Calculator</a>
         </div>
 
         <div class="top-nav">
@@ -155,7 +155,7 @@
             const resultBox = document.getElementById('pipelineResult');
             const notFound = document.getElementById('notFoundMsg');
 
-            if (key === 'MT-2026-8812' || key === 'CB-9941') {
+            if (key.startsWith('MT-') || key === 'CB-9941') {
                 resultBox.style.display = 'block';
                 notFound.style.display = 'none';
                 document.getElementById('projectKeyTag').innerText = key;

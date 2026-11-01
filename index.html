@@ -3,302 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Enterprise Software & Web Engineering</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mashal Tech — PC Enterprise Software & Web Store</title>
     <style>
         :root {
             --bg: #f8fafc;
             --surface: #ffffff;
             --border: #e2e8f0;
-            --border-subtle: #f1f5f9;
             --text-main: #0f172a;
             --text-muted: #64748b;
-            --accent: #0f172a;
-            --accent-hover: #1e293b;
-            --primary-blue: #2563eb;
-            --primary-blue-hover: #1d4ed8;
-            --success: #059669;
-            --success-bg: #ecfdf5;
-            --radius: 6px;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-        body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 24px; font-size: 14px; antialiased: true; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; font-size: 14px; antialiased: true; }
         
-        .container { max-width: 1400px; margin: 0 auto; }
+        .container { max-width: 1280px; margin: 0 auto; }
 
-        /* Top Announcement Strip */
-        .announcement-strip {
-            background: #0f172a; color: #f8fafc; padding: 10px 16px; border-radius: var(--radius);
-            font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
-            letter-spacing: -0.01em;
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: #ffffff; padding: 16px 24px; border-radius: var(--radius);
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.25); flex-wrap: wrap; gap: 12px;
         }
-        .announcement-link { color: #93c5fd; text-decoration: none; font-weight: 600; }
-        .announcement-link:hover { text-decoration: underline; }
+        .hero-banner-title { font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 8px; letter-spacing: -0.01em; }
+        .hero-btn { background: #ffffff; color: #1e3a8a; padding: 8px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.85rem; transition: all 0.2s ease; box-shadow: var(--shadow-sm); }
+        .hero-btn:hover { background: #f8fafc; transform: translateY(-1px); }
 
-        /* Human-Grade Navigation Bar */
-        .platform-nav { display: flex; gap: 4px; margin-bottom: 16px; background: #e2e8f0; padding: 3px; border-radius: var(--radius); }
+        /* Unified 4-Tab Navigation Bar */
+        .nav-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
         .nav-tab {
-            flex: 1; padding: 8px 14px; background: transparent; color: var(--text-muted);
-            text-decoration: none; text-align: center; font-size: 0.85rem; font-weight: 600;
-            border-radius: 4px; transition: all 0.1s ease;
+            flex: 1; min-width: 140px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); font-size: 0.88rem; font-weight: 700; color: var(--text-muted);
+            text-decoration: none; text-align: center; transition: all 0.2s ease; box-shadow: var(--shadow-sm);
         }
-        .nav-tab:hover { color: var(--text-main); background: rgba(255,255,255,0.5); }
-        .nav-tab.active { background: var(--surface); color: var(--text-main); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .nav-tab:hover { color: var(--text-main); border-color: #cbd5e1; background: #ffffff; }
+        .nav-tab.active { background: var(--primary); color: #ffffff; border-color: var(--primary); box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); }
 
-        /* Header Layout */
+        /* Site Header */
         .site-header {
             background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02); gap: 16px; flex-wrap: wrap;
+            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+            box-shadow: var(--shadow-sm); flex-wrap: wrap; gap: 16px;
         }
-        .brand-group { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
-        .brand-logo { width: 32px; height: 32px; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-weight: 700; font-size: 0.9rem; }
-        .brand-title { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
+        .brand { font-size: 1.25rem; font-weight: 800; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 12px; letter-spacing: -0.02em; }
+        .brand-badge { background: var(--primary); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 800; font-size: 1.1rem; }
+
+        .search-box { flex: 1; max-width: 420px; position: relative; }
+        .search-box input { width: 100%; padding: 10px 16px 10px 38px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; outline: none; background: #f8fafc; transition: all 0.2s; }
+        .search-box input:focus { background: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.85rem; }
+
+        /* Category Filter Bar */
+        .categories-bar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; display: flex; gap: 24px; margin-bottom: 24px; overflow-x: auto; box-shadow: var(--shadow-sm); }
+        .cat-item { color: var(--text-muted); font-size: 0.88rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: color 0.2s; }
+        .cat-item:hover { color: var(--text-main); }
+        .cat-item.active { color: var(--primary); font-weight: 700; }
+
+        /* Layout Grid */
+        .layout-grid { display: grid; grid-template-columns: 2.8fr 1.2fr; gap: 24px; }
+        @media (max-width: 900px) { .layout-grid { grid-template-columns: 1fr; } }
+
+        /* Card Sections */
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .card-header { border-bottom: 2px solid #f1f5f9; padding-bottom: 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .card-header h2 { font-size: 1.05rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.01em; }
+
+        /* Product Rows */
+        .product-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #f1f5f9; gap: 16px; }
+        .product-row:last-child { border-bottom: none; }
+        .product-thumb { width: 54px; height: 54px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; cursor: pointer; flex-shrink: 0; box-shadow: inset 0 2px 4px rgba(255,255,255,0.8); }
+        .product-info h3 { font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .product-title-link { color: var(--text-main); text-decoration: none; cursor: pointer; }
+        .product-title-link:hover { color: var(--primary); text-decoration: underline; }
+        .product-info p { font-size: 0.84rem; color: var(--text-muted); margin-top: 2px; }
         
-        .security-badge { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.75rem; color: var(--success); background: var(--success-bg); border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 4px; font-weight: 500; }
+        .tag-pill { display: inline-flex; align-items: center; gap: 4px; background: #f0fdf4; color: #16a34a; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 6px; border: 1px solid #bbf7d0; }
 
-        .search-container { flex: 1; max-width: 400px; position: relative; }
-        .search-input { width: 100%; padding: 7px 12px 7px 32px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; outline: none; background: #fff; color: var(--text-main); transition: border-color 0.1s; }
-        .search-input:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1); }
-        .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.8rem; }
+        .download-btn { background: var(--primary); color: white; padding: 8px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem; transition: all 0.2s ease; display: inline-block; box-shadow: var(--shadow-sm); }
+        .download-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
 
-        /* Sub-Filter Menu */
-        .sub-filters { display: flex; gap: 6px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; }
-        .filter-pill { background: var(--surface); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: all 0.1s; }
-        .filter-pill:hover { border-color: #cbd5e1; color: var(--text-main); }
-        .filter-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
-
-        /* Grid Structure */
-        .workspace-grid { display: grid; grid-template-columns: 2.6fr 1fr; gap: 20px; }
-        @media (max-width: 950px) { .workspace-grid { grid-template-columns: 1fr; } }
-
-        /* Cards & Panels */
-        .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.01); }
-        .panel-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .panel-title { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
-        .panel-action { font-size: 0.8rem; color: var(--primary-blue); text-decoration: none; font-weight: 500; cursor: pointer; }
-        .panel-action:hover { text-decoration: underline; }
-
-        /* Enterprise Table / List Rows */
-        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); gap: 16px; transition: background 0.05s; }
-        .item-row:last-child { border-bottom: none; }
-        .item-row:hover { background: #fafafa; }
-        
-        .item-meta { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
-        .item-icon { width: 36px; height: 36px; background: #f1f5f9; border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; cursor: pointer; }
-        .item-title { font-size: 0.9rem; font-weight: 600; color: var(--text-main); text-decoration: none; cursor: pointer; }
-        .item-title:hover { color: var(--primary-blue); text-decoration: underline; }
-        .item-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
-
-        .tag { font-family: ui-monospace, monospace; font-size: 0.7rem; background: #f1f5f9; color: #475569; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border); font-weight: 500; display: inline-block; margin-top: 4px; }
-        
-        .item-stats { text-align: right; font-size: 0.8rem; color: var(--text-muted); }
-        .item-size { font-weight: 600; color: var(--text-main); font-family: ui-monospace, monospace; }
-
-        .btn { display: inline-block; padding: 5px 12px; background: var(--primary-blue); color: white; border-radius: 4px; font-size: 0.78rem; font-weight: 600; text-decoration: none; transition: background 0.1s; border: none; cursor: pointer; }
-        .btn:hover { background: var(--primary-blue-hover); }
-
-        /* Sidebar Widgets */
-        .sidebar-content { padding: 18px; }
-        .sidebar-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
-        .sidebar-text { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
-        .contact-list { list-style: none; font-size: 0.82rem; color: var(--text-main); margin-top: 8px; }
-        .contact-list li { margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-
-        /* Web Dev Section Human Architecture Grid */
-        .web-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 18px; background: #fafafa; border-top: 1px solid var(--border); }
-        @media (max-width: 650px) { .web-grid { grid-template-columns: 1fr; } }
-        .web-feature-card { background: var(--surface); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius); }
-        .web-feature-card h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
-        .web-feature-card p { font-size: 0.78rem; color: var(--text-muted); }
-
-        /* Human CTA Box */
-        .cta-banner { background: #0f172a; color: white; padding: 20px; border-radius: var(--radius); margin: 18px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-        .cta-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
-        .cta-subtitle { font-size: 0.78rem; color: #94a3b8; }
-        
-        .btn-light { background: #ffffff; color: #0f172a; padding: 6px 14px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; text-decoration: none; transition: background 0.1s; }
-        .btn-light:hover { background: #f1f5f9; }
-        .btn-whatsapp-sub { background: #059669; color: white; padding: 6px 14px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; text-decoration: none; }
-        .btn-whatsapp-sub:hover { background: #047857; }
+        /* Web Feature Grid */
+        .web-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .web-feature-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .web-feature-box h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; color: var(--text-main); }
+        .web-feature-box p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
 
         /* Modal */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(2px); z-index: 1000; justify-content: center; align-items: center; padding: 16px; }
-        .modal-card { background: var(--surface); border-radius: 8px; max-width: 750px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 24px; border: 1px solid var(--border); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
-        .close-modal { float: right; font-size: 1.2rem; font-weight: 700; color: var(--text-muted); cursor: pointer; background: none; border: none; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-card { background: #fff; border-radius: var(--radius); max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 32px; position: relative; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.4rem; color: var(--text-muted); cursor: pointer; border: none; background: none; font-weight: bold; }
+        
+        .screenshot-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+        .screenshot-box { background: #0f172a; color: #f8fafc; border-radius: 8px; padding: 25px 12px; text-align: center; font-size: 0.82rem; }
+        .feature-list { list-style: none; margin: 14px 0; }
+        .feature-list li { font-size: 0.88rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .feature-list li::before { content: "✔"; color: #16a34a; font-weight: bold; }
+        .value-box { background: #eff6ff; border-left: 4px solid var(--primary); padding: 12px 16px; border-radius: 4px; margin: 16px 0; font-size: 0.85rem; color: #1e40af; }
+
+        /* Sidebar Contact Box */
+        .contact-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 16px; font-size: 0.85rem; }
+        .contact-box p { margin-bottom: 10px; line-height: 1.5; color: var(--text-main); }
+        .contact-box p:last-child { margin-bottom: 0; }
 
         /* Footer */
-        footer { text-align: center; padding: 24px 0; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 20px; }
+        footer { text-align: center; padding: 28px 0; font-size: 0.82rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
 
-        .floating-whatsapp { position: fixed; bottom: 20px; right: 20px; background: #059669; color: white; border-radius: 20px; padding: 10px 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-decoration: none; font-weight: 600; font-size: 0.82rem; z-index: 99; transition: transform 0.1s; }
-        .floating-whatsapp:hover { transform: translateY(-2px); }
+        /* Floating WhatsApp */
+        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 22px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 20px -3px rgba(37, 211, 102, 0.4); text-decoration: none; font-weight: 700; font-size: 0.88rem; z-index: 99; transition: transform 0.2s ease; }
+        .floating-whatsapp:hover { transform: translateY(-3px); }
     </style>
 </head>
 <body>
 
     <div class="container">
         
-        <!-- Top Announcement Strip -->
-        <div class="announcement-strip">
-            <span>⚡ Enterprise deployment engine operational. Custom software builds available for Q4.</span>
-            <a href="contact.html" class="announcement-link">Initialize Spec &rarr;</a>
+        <!-- Hero Announcement Strip -->
+        <div class="hero-banner">
+            <div class="hero-banner-title">📢 <strong>Looking for tailored software?</strong> Build custom desktop ERPs & enterprise databases with us!</div>
+            <a href="contact.html" class="hero-btn">Contact Developers</a>
         </div>
 
-        <!-- Human-Grade Navigation Bar -->
-        <nav class="platform-nav">
+        <!-- Clean 4-Tab Navigation Bar -->
+        <div class="nav-tabs">
             <a href="index.html" class="nav-tab active">💻 PC Software</a>
             <a href="mobile.html" class="nav-tab">📱 Mobile Apps</a>
             <a href="contact.html" class="nav-tab">🚀 Project & ROI Hub</a>
             <a href="track.html" class="nav-tab">🔍 Track Order</a>
-        </nav>
-
-        <!-- Header -->
-        <header class="site-header">
-            <a href="index.html" class="brand-group">
-                <div class="brand-logo">M</div>
-                <span class="brand-title">Mashal Tech Enterprise</span>
-            </a>
-            <div class="security-badge">MT-LIC-2026-SECURE</div>
-            <div class="search-container">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Filter solutions by keyword...">
-            </div>
-        </header>
-
-        <!-- Sub-filter Menu -->
-        <div class="sub-filters">
-            <span class="filter-pill active" onclick="filterCategory('all', this)">All Build Artifacts</span>
-            <span class="filter-pill" onclick="filterCategory('desktop', this)">Desktop Systems (.NET)</span>
-            <span class="filter-pill" onclick="filterCategory('erp', this)">Enterprise ERPs</span>
-            <span class="filter-pill" onclick="filterCategory('portal', this)">Full-Stack Web Portals</span>
         </div>
 
-        <div class="workspace-grid">
+        <!-- Site Header -->
+        <div class="site-header">
+            <a href="index.html" class="brand">
+                <div class="brand-badge">M</div> Mashal Tech Enterprise
+            </a>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search PC solutions & Web Portals...">
+            </div>
+        </div>
+
+        <!-- Secondary Categories Bar -->
+        <div class="categories-bar">
+            <span class="cat-item active" onclick="filterCategory('all', this)">💻 All Solutions</span>
+            <span class="cat-item" onclick="filterCategory('desktop', this)">🖥️ Desktop Systems</span>
+            <span class="cat-item" onclick="filterCategory('erp', this)">🧾 Enterprise ERPs</span>
+            <span class="cat-item" onclick="filterCategory('portal', this)">🌐 Web Portals</span>
+        </div>
+
+        <!-- Layout Grid -->
+        <div class="layout-grid">
             
-            <!-- Main Content Area -->
             <div>
-                <!-- PC Software Catalog -->
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Authorized Software Inventory</span>
-                        <span class="panel-action" onclick="resetSearch()">Clear Filter</span>
+                <!-- PC Software Catalog Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Authorized PC Software Solutions</h2>
+                        <span style="font-size: 0.82rem; color: var(--primary); cursor: pointer; font-weight: 600;" onclick="resetSearch()">Show All</span>
                     </div>
 
-                    <div class="item-row" data-category="desktop">
-                        <div class="item-meta">
-                            <div class="item-icon" onclick="openModal('customerbook-modal')">📊</div>
-                            <div>
-                                <a class="item-title" onclick="openModal('customerbook-modal')">CustomerBookGUI</a>
-                                <p class="item-desc">Enterprise customer tracking system with petty cash ledgers & closing records.</p>
-                                <span class="tag">Verified Build v1.0</span>
+                    <div class="product-row" data-category="desktop">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb" onclick="openModal('customerbook-modal')">📊</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="openModal('customerbook-modal')">CustomerBookGUI</a></h3>
+                                <p>Enterprise customer tracking system with petty cash ledgers & closing records.</p>
+                                <div><span class="tag-pill">✔ Verified Build v1.0</span></div>
                             </div>
                         </div>
-                        <div class="item-stats">
-                            <span class="item-size">34.2 MB</span>
-                            <span style="display:block; margin-top:2px;">Windows x64</span>
-                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="btn" style="margin-top:6px;">Download .rar</a>
+                        <div style="text-align: right; min-width: 130px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">34.2 MB</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Windows x64</span>
+                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="download-btn">Download .rar</a>
                         </div>
                     </div>
 
-                    <div class="item-row" data-category="erp">
-                        <div class="item-meta">
-                            <div class="item-icon">🧾</div>
-                            <div>
-                                <a class="item-title" onclick="alert('Enterprise ERP specifications available upon request.')">Custom Inventory & Invoicing ERP</a>
-                                <p class="item-desc">Automated sales invoicing infrastructure compliant with regulatory guidelines.</p>
-                                <span class="tag">Audit Ready</span>
+                    <div class="product-row" data-category="erp">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb">🧾</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="alert('Enterprise ERP details coming soon!')">Custom Inventory & Invoicing ERP</a></h3>
+                                <p>Automated sales invoicing infrastructure compliant with regulatory guidelines.</p>
+                                <div><span class="tag-pill">✔ Audit Ready</span></div>
                             </div>
                         </div>
-                        <div class="item-stats">
-                            <span class="item-size">28.5 MB</span>
-                            <span style="display:block; margin-top:2px;">Database Linked</span>
+                        <div style="text-align: right; min-width: 130px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">28.5 MB</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">Database Linked</span>
                         </div>
                     </div>
 
-                    <div class="item-row" data-category="portal">
-                        <div class="item-meta">
-                            <div class="item-icon">🌐</div>
-                            <div>
-                                <a class="item-title" onclick="window.location.href='contact.html'">Full-Stack Business Web Portal</a>
-                                <p class="item-desc">Cloud-backed React & Node.js application deployed seamlessly via Vercel.</p>
-                                <span class="tag">PostgreSQL / Express</span>
+                    <div class="product-row" data-category="portal">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb">🌐</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="window.location.href='contact.html'">Full-Stack Business Web Portal</a></h3>
+                                <p>Cloud-backed React & Node.js web applications with custom database sync.</p>
+                                <div><span class="tag-pill">✔ Vercel Hosted</span></div>
                             </div>
                         </div>
-                        <div class="item-stats">
-                            <span class="item-size">Cloud App</span>
-                            <span style="display:block; margin-top:2px;">Live Deploy</span>
-                            <a href="contact.html" class="btn" style="background:#0f172a; margin-top:6px;">Request Spec</a>
+                        <div style="text-align: right; min-width: 130px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">Cloud App</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Live Deploy</span>
+                            <a href="contact.html" class="download-btn" style="background: #0f172a;">Request Spec</a>
                         </div>
                     </div>
 
-                    <div id="noResults" style="display:none; padding:20px; text-align:center; color: var(--text-muted); font-size: 0.85rem;">No matching build artifacts found.</div>
+                    <div id="noResults" style="display:none; padding:20px; text-align:center; color: var(--text-muted);">No matching solutions found.</div>
                 </div>
 
-                <!-- Web Development Section -->
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Custom Full-Stack Web Applications</span>
-                        <span class="tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">Vercel Infrastructure</span>
+                <!-- Custom Full-Stack Web Applications Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🌐 Custom Full-Stack Web Applications</h2>
+                        <span style="font-size: 0.78rem; font-weight: 600; color: #1d4ed8; background: #eff6ff; padding: 4px 10px; border-radius: 20px; border: 1px solid #bfdbfe;">Audit Ready</span>
                     </div>
 
-                    <div style="padding: 18px 18px 0 18px;">
-                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-                            From high-converting brand landing pages to scalable, database-driven enterprise web portals—we design, build, and deploy custom web solutions tailored to your business operations.
-                        </p>
-                    </div>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+                        From high-converting brand landing pages to scalable, database-driven enterprise web portals—we design, build, and deploy custom web solutions tailored to your business operations.
+                    </p>
 
                     <div class="web-grid">
-                        <div class="web-feature-card">
-                            <h4>Full-Stack Performance</h4>
-                            <p>React, Node.js, and Express architectures optimized for zero-latency interactions.</p>
+                        <div class="web-feature-box">
+                            <h4>🌐 Full-Stack Performance</h4>
+                            <p>React, Node.js, and Express architectures for lightning-fast speeds.</p>
                         </div>
-                        <div class="web-feature-card">
-                            <h4>PostgreSQL Integration</h4>
-                            <p>Secure relational database structures for ledgers, user auth, and real-time logs.</p>
+                        <div class="web-feature-box">
+                            <h4>🗄️ PostgreSQL Database</h4>
+                            <p>Robust data storage for secure lead forms, inventory, and ledgers.</p>
                         </div>
-                        <div class="web-feature-card">
-                            <h4>Responsive Layouts</h4>
-                            <p>Pixel-perfect grid compliance across mobile, tablet, and widescreen displays.</p>
+                        <div class="web-feature-box">
+                            <h4>📱 Responsive Layouts</h4>
+                            <p>Pixel-perfect UI optimized across mobile, tablet, and desktop screens.</p>
                         </div>
-                        <div class="web-feature-card">
-                            <h4>Cloud Delivery</h4>
-                            <p>Automated SSL configuration, custom domain routing, and fast global CDN caching.</p>
+                        <div class="web-feature-box">
+                            <h4>🔒 Custom Domain Hosting</h4>
+                            <p>SSL security and fast global delivery via Vercel / cloud hosts.</p>
                         </div>
                     </div>
 
-                    <!-- CTA Banner -->
-                    <div class="cta-banner">
+                    <!-- CTA Banner inside card -->
+                    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
                         <div>
-                            <div class="cta-title">Need a custom web portal or brand website?</div>
-                            <div class="cta-subtitle">Contact engineering directly for a structured technical roadmap.</div>
+                            <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: white;">Need a custom web portal or brand website?</h3>
+                            <p style="font-size: 0.82rem; color: #94a3b8;">Get a dedicated quote or request a live consultation with our engineering team.</p>
                         </div>
                         <div style="display: flex; gap: 8px;">
-                            <a href="contact.html" class="btn-light">Open Wizard</a>
-                            <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20would%20like%20to%20discuss%20a%20custom%20web%20application." target="_blank" class="btn-whatsapp-sub">WhatsApp</a>
+                            <a href="contact.html" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem;">Open Wizard</a>
+                            <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20am%20interested%20in%20building%20a%20custom%20web%20application." target="_blank" style="background: #059669; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem;">WhatsApp</a>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Sidebar -->
             <div>
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Engineering Directives</span>
+                <!-- Sidebar -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Need Custom Software?</h2>
                     </div>
-                    <div class="sidebar-content">
-                        <p class="sidebar-text">We build and distribute verified desktop software utilities, Android mobile packages, and enterprise database solutions.</p>
-                        
-                        <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;">
-                            <p style="font-size: 0.8rem; font-weight: 600; margin-bottom: 6px;">Direct Developer Dispatch</p>
-                            <ul class="contact-list">
-                                <li>📧 6saddamhussain9@gmail.com</li>
-                                <li>📞 0370-0818276</li>
-                                <li>🏢 Mardan & Peshawar, PK</li>
-                            </ul>
-                        </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">We craft tailored offline desktop tools, mobile apps, and cloud web portals designed specifically around your workflow.</p>
+                    
+                    <div class="contact-box">
+                        <p style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Direct Developer Contact</p>
+                        <p>📧 <strong>Email:</strong><br><a href="mailto:6saddamhussain9@gmail.com" style="color: var(--text-main); text-decoration: none; font-weight: 600;">6saddamhussain9@gmail.com</a></p>
+                        <p>📞 <strong>Phone / WhatsApp:</strong><br><a href="https://api.whatsapp.com/send?phone=923700818276" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">0370-0818276</a></p>
+                        <p>🏢 <strong>Location:</strong><br>Mardan & Peshawar, PK</p>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-top: 16px; font-size: 0.82rem; color: var(--text-muted);">
+                        <strong style="color: var(--text-main); display: block; margin-bottom: 2px;">📜 Certificate of Authenticity</strong>
+                        All software packages are compiled and distributed under <strong>Mashal Tech Enterprise</strong>.
                     </div>
                 </div>
             </div>
@@ -306,42 +287,50 @@
         </div>
 
         <footer>
-            <p>&copy; 2026 Mashal Tech Enterprise. All build records verified under secure repository guidelines.</p>
+            <p>&copy; 2026 Mashal Tech Enterprise. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
         </footer>
     </div>
 
-    <!-- Modal Component -->
+    <!-- CustomerBook Modal -->
     <div id="customerbook-modal" class="modal-overlay">
         <div class="modal-card">
             <button class="close-modal" onclick="closeModal('customerbook-modal')">&times;</button>
-            <h2 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 4px;">CustomerBookGUI — System Architecture</h2>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;">Standalone Desktop Binary • .NET 10.0 Windows Forms</p>
-            
-            <div style="background: var(--bg); border: 1px solid var(--border); padding: 12px; border-radius: var(--radius); font-size: 0.82rem; margin-bottom: 16px;">
-                <strong>System Summary:</strong> Designed for high-frequency inventory environments. Features double-entry petty cash ledgers, automatic closing functions, and unique sticker tag generation.
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border);">
+                <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📊</div>
+                <div>
+                    <h2 style="font-size: 1.15rem; font-weight: 700;">CustomerBookGUI — Enterprise Ledger & Customer System</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted);">Official PC Build v1.0 • Standalone Offline Deployment</p>
+                </div>
             </div>
-
-            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Core Specifications</div>
-            <ul style="list-style: disc; padding-left: 18px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">
-                <li style="margin-bottom: 4px;">Generates 3 independent layout stickers with unique serial numbers.</li>
-                <li style="margin-bottom: 4px;">Fully offline SQLite/JSON local persistence layer.</li>
-                <li style="margin-bottom: 4px;">Optimized for 64-bit Windows environments.</li>
+            <div class="value-box">
+                💡 <strong>Why You Need This System:</strong> Streamlines daily financial closing, eliminates balance calculation mistakes, and renders 3 independent printable sticker tags with unique file numbers automatically.
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 14px;">📸 System Screenshots & UI Walkthrough</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot-box"><span>🖥️ Main Dashboard</span><small style="color:#94a3b8; display:block; margin-top:2px;">Customer Ledgers</small></div>
+                <div class="screenshot-box"><span>🏷️ Multi-Sticker Generator</span><small style="color:#94a3b8; display:block; margin-top:2px;">3 Unique File Outputs</small></div>
+                <div class="screenshot-box"><span>📒 Petty Cash Journal</span><small style="color:#94a3b8; display:block; margin-top:2px;">Real-Time Cash Logs</small></div>
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 16px;">⚡ Core Capabilities</h3>
+            <ul class="feature-list">
+                <li><strong>Interactive Multi-Sticker Output:</strong> Generates 3 independent layout stickers with unique file numbers and customer names.</li>
+                <li><strong>Automated Closing Ledgers:</strong> Tracks debit/credit transactions, petty cash entries, and daily cash totals.</li>
+                <li><strong>100% Offline Desktop Utility:</strong> Zero cloud dependency—runs directly from USB drives on 64-bit Windows OS.</li>
             </ul>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 16px;">
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Package: <strong>34.2 MB (.rar)</strong></span>
-                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="btn">Download Stable Binary</a>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+                <span style="font-size: 0.82rem; color: var(--text-muted);">File Size: <strong>34.2 MB</strong> | OS: <strong>Windows (x64)</strong></span>
+                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="download-btn" style="padding: 10px 20px;">⬇ Download Official Package (.rar)</a>
             </div>
         </div>
     </div>
 
     <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
-        <span>💬</span> <span>Direct Support</span>
+        <span>💬</span> <span>Chat with Us</span>
     </a>
 
     <script>
         const searchInput = document.getElementById('searchInput');
-        const rows = document.querySelectorAll('.item-row');
+        const rows = document.querySelectorAll('.product-row');
         const noResults = document.getElementById('noResults');
 
         searchInput.addEventListener('keyup', function(e) {
@@ -355,7 +344,7 @@
         });
 
         function filterCategory(category, element) {
-            document.querySelectorAll('.filter-pill').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
             if (element) element.classList.add('active');
             searchInput.value = '';
             let visibleCount = 0;
@@ -367,13 +356,14 @@
             noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        function resetSearch() { searchInput.value = ''; filterCategory('all', document.querySelector('.filter-pill')); }
+        function resetSearch() { searchInput.value = ''; filterCategory('all', document.querySelector('.cat-item')); }
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         window.onclick = function(e) { if (e.target.classList.contains('modal-overlay')) e.target.style.display = 'none'; }
 
         function openQuickWhatsApp() {
-            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent('Hi! I am reviewing Mashal Tech infrastructure and have a technical inquiry.')}`, '_blank');
+            const message = "Hi! I am visiting Mashal Tech Store and would like to inquire about a custom software project.";
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
 </body>

@@ -3,338 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — PC Enterprise Software & Web Store</title>
+    <title>Mashal Tech — Enterprise Software & Web Engineering</title>
     <style>
         :root {
-            --bg: #f3f4f6;
+            --bg: #f8fafc;
             --surface: #ffffff;
-            --border: #e5e7eb;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --tag-bg: #f0fdf4;
-            --tag-text: #16a34a;
+            --border: #e2e8f0;
+            --border-subtle: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #0f172a;
+            --accent-hover: #1e293b;
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --success: #059669;
+            --success-bg: #ecfdf5;
+            --radius: 6px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 16px 24px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 24px; font-size: 14px; antialiased: true; }
         
-        .container { width: 100%; max-width: 1550px; margin: 0 auto; }
+        .container { max-width: 1400px; margin: 0 auto; }
 
-        .custom-banner {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-            color: #ffffff; padding: 14px 24px; border-radius: 8px; margin-bottom: 20px;
-            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        /* Top Announcement Strip */
+        .announcement-strip {
+            background: #0f172a; color: #f8fafc; padding: 10px 16px; border-radius: var(--radius);
+            font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+            letter-spacing: -0.01em;
         }
-        .custom-banner-text { font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
-        .custom-banner-btn { background: #ffffff; color: #1e3a8a; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: background 0.15s; }
-        .custom-banner-btn:hover { background: #f1f5f9; }
+        .announcement-link { color: #93c5fd; text-decoration: none; font-weight: 600; }
+        .announcement-link:hover { text-decoration: underline; }
 
-        /* Unified 4-Tab Navigation Bar */
-        .platform-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .platform-btn {
-            flex: 1; min-width: 150px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
-            border-radius: 8px; font-size: 0.9rem; font-weight: 700; color: var(--text-muted);
-            text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
-            transition: all 0.2s ease;
+        /* Human-Grade Navigation Bar */
+        .platform-nav { display: flex; gap: 4px; margin-bottom: 16px; background: #e2e8f0; padding: 3px; border-radius: var(--radius); }
+        .nav-tab {
+            flex: 1; padding: 8px 14px; background: transparent; color: var(--text-muted);
+            text-decoration: none; text-align: center; font-size: 0.85rem; font-weight: 600;
+            border-radius: 4px; transition: all 0.1s ease;
         }
-        .platform-btn:hover { background: #f9fafb; color: var(--text-main); border-color: #d1d5db; }
-        .platform-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.25); }
+        .nav-tab:hover { color: var(--text-main); background: rgba(255,255,255,0.5); }
+        .nav-tab.active { background: var(--surface); color: var(--text-main); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
 
-        .top-nav {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 20px; flex-wrap: wrap;
+        /* Header Layout */
+        .site-header {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02); gap: 16px; flex-wrap: wrap;
         }
-        .brand { font-size: 1.3rem; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        .brand-icon { background: var(--accent); color: white; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; font-size: 1rem; }
-        .license-badge-header { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
+        .brand-group { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
+        .brand-logo { width: 32px; height: 32px; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-weight: 700; font-size: 0.9rem; }
+        .brand-title { font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; }
+        
+        .security-badge { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.75rem; color: var(--success); background: var(--success-bg); border: 1px solid #a7f3d0; padding: 4px 8px; border-radius: 4px; font-weight: 500; }
 
-        .search-box { flex: 1; max-width: 500px; position: relative; }
-        .search-box input { width: 100%; padding: 10px 14px 10px 38px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; outline: none; background: #f9fafb; }
-        .search-box input:focus { background: #fff; border-color: var(--accent); }
-        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; }
+        .search-container { flex: 1; max-width: 400px; position: relative; }
+        .search-input { width: 100%; padding: 7px 12px 7px 32px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; outline: none; background: #fff; color: var(--text-main); transition: border-color 0.1s; }
+        .search-input:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1); }
+        .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.8rem; }
 
-        .categories-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 24px; display: flex; gap: 32px; margin-bottom: 24px; overflow-x: auto; }
-        .cat-item { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; }
-        .cat-item:hover { color: var(--text-main); }
-        .cat-item.active { color: var(--accent); font-weight: 700; }
+        /* Sub-Filter Menu */
+        .sub-filters { display: flex; gap: 6px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; }
+        .filter-pill { background: var(--surface); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: all 0.1s; }
+        .filter-pill:hover { border-color: #cbd5e1; color: var(--text-main); }
+        .filter-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-        .content-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 24px; }
-        @media (max-width: 950px) { .content-layout { grid-template-columns: 1fr; } .custom-banner { flex-direction: column; text-align: center; gap: 10px; } }
+        /* Grid Structure */
+        .workspace-grid { display: grid; grid-template-columns: 2.6fr 1fr; gap: 20px; }
+        @media (max-width: 950px) { .workspace-grid { grid-template-columns: 1fr; } }
 
-        .section-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-        .section-header h2 { font-size: 1.15rem; font-weight: 700; }
+        /* Cards & Panels */
+        .panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.01); }
+        .panel-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .panel-title { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+        .panel-action { font-size: 0.8rem; color: var(--primary-blue); text-decoration: none; font-weight: 500; cursor: pointer; }
+        .panel-action:hover { text-decoration: underline; }
 
-        .product-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); gap: 20px; }
-        .product-row:last-child { border-bottom: none; }
-        .product-info { display: flex; align-items: flex-start; gap: 16px; flex: 1; }
-        .product-thumb { width: 48px; height: 48px; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; flex-shrink: 0; }
-        .product-details h3 { font-size: 1rem; font-weight: 600; }
-        .product-title-link { color: var(--text-main); text-decoration: none; cursor: pointer; }
-        .product-title-link:hover { color: var(--accent); text-decoration: underline; }
-        .product-details p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
-        .tag-badge { background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 4px; font-weight: 600; font-size: 0.78rem; border: 1px solid #bbf7d0; }
-        .product-stats { text-align: right; font-size: 0.85rem; color: var(--text-muted); min-width: 120px; }
-        .product-stats .size { font-weight: 600; color: var(--text-main); display: block; }
+        /* Enterprise Table / List Rows */
+        .item-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border-subtle); gap: 16px; transition: background 0.05s; }
+        .item-row:last-child { border-bottom: none; }
+        .item-row:hover { background: #fafafa; }
+        
+        .item-meta { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
+        .item-icon { width: 36px; height: 36px; background: #f1f5f9; border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; cursor: pointer; }
+        .item-title { font-size: 0.9rem; font-weight: 600; color: var(--text-main); text-decoration: none; cursor: pointer; }
+        .item-title:hover { color: var(--primary-blue); text-decoration: underline; }
+        .item-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
 
-        .download-btn { display: inline-block; margin-top: 6px; background: var(--accent); color: white; padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }
-        .download-btn:hover { background: var(--accent-hover); }
+        .tag { font-family: ui-monospace, monospace; font-size: 0.7rem; background: #f1f5f9; color: #475569; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border); font-weight: 500; display: inline-block; margin-top: 4px; }
+        
+        .item-stats { text-align: right; font-size: 0.8rem; color: var(--text-muted); }
+        .item-size { font-weight: 600; color: var(--text-main); font-family: ui-monospace, monospace; }
 
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(17, 24, 39, 0.7); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
-        .modal-card { background: #fff; border-radius: 12px; max-width: 850px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 32px; position: relative; }
-        .close-modal { position: absolute; top: 18px; right: 20px; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; border: none; background: none; }
-        .modal-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-        .modal-icon { width: 56px; height: 56px; background: #e2e8f0; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
-        .screenshot-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 20px 0; }
-        .screenshot-box { background: #1e293b; color: #f8fafc; border-radius: 8px; padding: 35px 15px; text-align: center; font-size: 0.85rem; }
-        .feature-list { list-style: none; margin: 16px 0; }
-        .feature-list li { font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .feature-list li::before { content: "✔"; color: #16a34a; font-weight: bold; }
-        .value-box { background: #eff6ff; border-left: 4px solid var(--accent); padding: 14px 18px; border-radius: 4px; margin: 18px 0; font-size: 0.88rem; color: #1e40af; }
-        .license-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-top: 15px; font-size: 0.85rem; color: var(--text-muted); }
+        .btn { display: inline-block; padding: 5px 12px; background: var(--primary-blue); color: white; border-radius: 4px; font-size: 0.78rem; font-weight: 600; text-decoration: none; transition: background 0.1s; border: none; cursor: pointer; }
+        .btn:hover { background: var(--primary-blue-hover); }
 
-        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); text-decoration: none; font-weight: 700; font-size: 0.9rem; z-index: 9999; transition: transform 0.2s ease, background-color 0.2s ease; }
-        .floating-whatsapp:hover { background: #1ebe5d; transform: translateY(-3px); }
+        /* Sidebar Widgets */
+        .sidebar-content { padding: 18px; }
+        .sidebar-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
+        .sidebar-text { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+        .contact-list { list-style: none; font-size: 0.82rem; color: var(--text-main); margin-top: 8px; }
+        .contact-list li { margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
 
-        footer { text-align: center; padding: 24px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
+        /* Web Dev Section Human Architecture Grid */
+        .web-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 18px; background: #fafafa; border-top: 1px solid var(--border); }
+        @media (max-width: 650px) { .web-grid { grid-template-columns: 1fr; } }
+        .web-feature-card { background: var(--surface); border: 1px solid var(--border); padding: 14px; border-radius: var(--radius); }
+        .web-feature-card h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+        .web-feature-card p { font-size: 0.78rem; color: var(--text-muted); }
+
+        /* Human CTA Box */
+        .cta-banner { background: #0f172a; color: white; padding: 20px; border-radius: var(--radius); margin: 18px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .cta-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
+        .cta-subtitle { font-size: 0.78rem; color: #94a3b8; }
+        
+        .btn-light { background: #ffffff; color: #0f172a; padding: 6px 14px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; text-decoration: none; transition: background 0.1s; }
+        .btn-light:hover { background: #f1f5f9; }
+        .btn-whatsapp-sub { background: #059669; color: white; padding: 6px 14px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; text-decoration: none; }
+        .btn-whatsapp-sub:hover { background: #047857; }
+
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(2px); z-index: 1000; justify-content: center; align-items: center; padding: 16px; }
+        .modal-card { background: var(--surface); border-radius: 8px; max-width: 750px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 24px; border: 1px solid var(--border); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        .close-modal { float: right; font-size: 1.2rem; font-weight: 700; color: var(--text-muted); cursor: pointer; background: none; border: none; }
+
+        /* Footer */
+        footer { text-align: center; padding: 24px 0; font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 20px; }
+
+        .floating-whatsapp { position: fixed; bottom: 20px; right: 20px; background: #059669; color: white; border-radius: 20px; padding: 10px 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-decoration: none; font-weight: 600; font-size: 0.82rem; z-index: 99; transition: transform 0.1s; }
+        .floating-whatsapp:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="custom-banner">
-            <div class="custom-banner-text">📢 <strong>Looking for tailored software?</strong> Build custom desktop ERPs & enterprise databases with us!</div>
-            <a href="contact.html" class="custom-banner-btn">Contact Developers</a>
+        
+        <!-- Top Announcement Strip -->
+        <div class="announcement-strip">
+            <span>⚡ Enterprise deployment engine operational. Custom software builds available for Q4.</span>
+            <a href="contact.html" class="announcement-link">Initialize Spec &rarr;</a>
         </div>
 
-        <!-- Clean Unified 4-Tab Navigation Bar -->
-        <div class="platform-tabs">
-            <a href="index.html" class="platform-btn active">💻 PC Software</a>
-            <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
-            <a href="contact.html" class="platform-btn">🚀 Project & ROI Hub</a>
-            <a href="track.html" class="platform-btn">🔍 Track Order</a>
-        </div>
+        <!-- Human-Grade Navigation Bar -->
+        <nav class="platform-nav">
+            <a href="index.html" class="nav-tab active">💻 PC Software</a>
+            <a href="mobile.html" class="nav-tab">📱 Mobile Apps</a>
+            <a href="contact.html" class="nav-tab">🚀 Project & ROI Hub</a>
+            <a href="track.html" class="nav-tab">🔍 Track Order</a>
+        </nav>
 
-        <div class="top-nav">
-            <a href="index.html" class="brand"><div class="brand-icon">M</div>Mashal Tech</a>
-            <div class="license-badge-header">🛡️ Verified Enterprise License: MT-LIC-2026-SECURE</div>
-            <div class="search-box">
+        <!-- Header -->
+        <header class="site-header">
+            <a href="index.html" class="brand-group">
+                <div class="brand-logo">M</div>
+                <span class="brand-title">Mashal Tech Enterprise</span>
+            </a>
+            <div class="security-badge">MT-LIC-2026-SECURE</div>
+            <div class="search-container">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search PC solutions & Web Portals...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Filter solutions by keyword...">
             </div>
+        </header>
+
+        <!-- Sub-filter Menu -->
+        <div class="sub-filters">
+            <span class="filter-pill active" onclick="filterCategory('all', this)">All Build Artifacts</span>
+            <span class="filter-pill" onclick="filterCategory('desktop', this)">Desktop Systems (.NET)</span>
+            <span class="filter-pill" onclick="filterCategory('erp', this)">Enterprise ERPs</span>
+            <span class="filter-pill" onclick="filterCategory('portal', this)">Full-Stack Web Portals</span>
         </div>
 
-        <!-- Secondary Categories Bar (Includes Web Portals) -->
-        <div class="categories-bar">
-            <span class="cat-item active" onclick="filterCategory('all', this)">💻 All Solutions</span>
-            <span class="cat-item" onclick="filterCategory('desktop', this)">🖥️ Desktop Systems</span>
-            <span class="cat-item" onclick="filterCategory('erp', this)">🧾 Enterprise ERPs</span>
-            <span class="cat-item" onclick="filterCategory('portal', this)">🌐 Web Portals</span>
-        </div>
-
-        <div class="content-layout">
+        <div class="workspace-grid">
+            
+            <!-- Main Content Area -->
             <div>
-                <!-- PC Software Catalog Section -->
-                <div class="section-box">
-                    <div class="section-header">
-                        <h2>Authorized PC Software Solutions</h2>
-                        <span style="font-size: 0.85rem; color: var(--accent); cursor: pointer;" onclick="resetSearch()">Show All</span>
+                <!-- PC Software Catalog -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Authorized Software Inventory</span>
+                        <span class="panel-action" onclick="resetSearch()">Clear Filter</span>
                     </div>
 
-                    <div class="product-row" data-category="desktop">
-                        <div class="product-info">
-                            <div class="product-thumb" onclick="openModal('customerbook-modal')">📊</div>
-                            <div class="product-details">
-                                <h3><a class="product-title-link" onclick="openModal('customerbook-modal')">CustomerBookGUI</a></h3>
-                                <p>Enterprise customer tracking system with petty cash ledgers & closing records.</p>
-                                <div><span class="tag-badge">✔ Verified Build</span></div>
+                    <div class="item-row" data-category="desktop">
+                        <div class="item-meta">
+                            <div class="item-icon" onclick="openModal('customerbook-modal')">📊</div>
+                            <div>
+                                <a class="item-title" onclick="openModal('customerbook-modal')">CustomerBookGUI</a>
+                                <p class="item-desc">Enterprise customer tracking system with petty cash ledgers & closing records.</p>
+                                <span class="tag">Verified Build v1.0</span>
                             </div>
                         </div>
-                        <div class="product-stats">
-                            <span class="size">34.2 MB</span>
-                            <span>v1.0 Secure</span>
-                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="download-btn">Download .rar</a>
+                        <div class="item-stats">
+                            <span class="item-size">34.2 MB</span>
+                            <span style="display:block; margin-top:2px;">Windows x64</span>
+                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="btn" style="margin-top:6px;">Download .rar</a>
                         </div>
                     </div>
 
-                    <div class="product-row" data-category="erp">
-                        <div class="product-info">
-                            <div class="product-thumb">🧾</div>
-                            <div class="product-details">
-                                <h3><a class="product-title-link" onclick="alert('Enterprise ERP details coming soon!')">Custom Inventory & Invoicing ERP</a></h3>
-                                <p>Automated sales invoicing infrastructure.</p>
-                                <div><span class="tag-badge">✔ Licensed System</span></div>
+                    <div class="item-row" data-category="erp">
+                        <div class="item-meta">
+                            <div class="item-icon">🧾</div>
+                            <div>
+                                <a class="item-title" onclick="alert('Enterprise ERP specifications available upon request.')">Custom Inventory & Invoicing ERP</a>
+                                <p class="item-desc">Automated sales invoicing infrastructure compliant with regulatory guidelines.</p>
+                                <span class="tag">Audit Ready</span>
                             </div>
                         </div>
-                        <div class="product-stats">
-                            <span class="size">28.5 MB</span>
-                            <span>Audit Ready</span>
+                        <div class="item-stats">
+                            <span class="item-size">28.5 MB</span>
+                            <span style="display:block; margin-top:2px;">Database Linked</span>
                         </div>
                     </div>
 
-                    <div class="product-row" data-category="portal">
-                        <div class="product-info">
-                            <div class="product-thumb">🌐</div>
-                            <div class="product-details">
-                                <h3><a class="product-title-link" onclick="window.location.href='contact.html'">Full-Stack Business Web Portal</a></h3>
-                                <p>Cloud-backed React & Node.js web applications with custom database sync.</p>
-                                <div><span class="tag-badge">✔ Vercel Hosted</span></div>
+                    <div class="item-row" data-category="portal">
+                        <div class="item-meta">
+                            <div class="item-icon">🌐</div>
+                            <div>
+                                <a class="item-title" onclick="window.location.href='contact.html'">Full-Stack Business Web Portal</a>
+                                <p class="item-desc">Cloud-backed React & Node.js application deployed seamlessly via Vercel.</p>
+                                <span class="tag">PostgreSQL / Express</span>
                             </div>
                         </div>
-                        <div class="product-stats">
-                            <span class="size">Cloud App</span>
-                            <span>Live Deploy</span>
-                            <a href="contact.html" class="download-btn" style="background: var(--ai-accent, #7c3aed);">Request Web Spec</a>
+                        <div class="item-stats">
+                            <span class="item-size">Cloud App</span>
+                            <span style="display:block; margin-top:2px;">Live Deploy</span>
+                            <a href="contact.html" class="btn" style="background:#0f172a; margin-top:6px;">Request Spec</a>
                         </div>
                     </div>
 
-                    <div id="noResults" style="display:none; padding:20px; text-align:center; color: var(--text-muted);">No matching solutions found.</div>
+                    <div id="noResults" style="display:none; padding:20px; text-align:center; color: var(--text-muted); font-size: 0.85rem;">No matching build artifacts found.</div>
                 </div>
 
-                <!-- Custom Full-Stack Web Applications Showcase Section -->
-                <div class="section-box">
-                    <div class="section-header">
-                        <h2>🌐 Custom Full-Stack Web Applications</h2>
-                        <span class="tag-badge" style="background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe;">
-                            Audit Ready & Vercel Hosted
-                        </span>
+                <!-- Web Development Section -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Custom Full-Stack Web Applications</span>
+                        <span class="tag" style="background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe;">Vercel Infrastructure</span>
                     </div>
 
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6;">
-                        From high-converting brand landing pages to scalable, database-driven enterprise web portals—we design, build, and deploy custom web solutions tailored to your business.
-                    </p>
-
-                    <!-- Key Feature Highlights Showcase -->
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 28px;">
-                        
-                        <div style="background: #fafafa; border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
-                            <div style="font-size: 1.5rem; margin-bottom: 8px;">🌐</div>
-                            <h3 style="font-size: 0.98rem; font-weight: 700; margin-bottom: 6px;">Full-Stack Performance</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-                                Built using modern technology like React, Node.js, and Express for lightning-fast load times and smooth user interaction.
-                            </p>
-                        </div>
-
-                        <div style="background: #fafafa; border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
-                            <div style="font-size: 1.5rem; margin-bottom: 8px;">🗄️</div>
-                            <h3 style="font-size: 0.98rem; font-weight: 700; margin-bottom: 6px;">Database & Backend Integration</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-                                Robust data management powered by PostgreSQL for secure lead forms, inventory logs, and customer portals.
-                            </p>
-                        </div>
-
-                        <div style="background: #fafafa; border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
-                            <div style="font-size: 1.5rem; margin-bottom: 8px;">📱</div>
-                            <h3 style="font-size: 0.98rem; font-weight: 700; margin-bottom: 6px;">Responsive & Accessible Design</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-                                Perfectly symmetrical, pixel-perfect layouts optimized for mobile, tablet, and desktop screens alike.
-                            </p>
-                        </div>
-
-                        <div style="background: #fafafa; border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
-                            <div style="font-size: 1.5rem; margin-bottom: 8px;">🔒</div>
-                            <h3 style="font-size: 0.98rem; font-weight: 700; margin-bottom: 6px;">Custom Domain & Hosting Setup</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-                                End-to-end setup—including SSL security, custom domains, and fast global delivery via Vercel / cloud hosts.
-                            </p>
-                        </div>
-
+                    <div style="padding: 18px 18px 0 18px;">
+                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                            From high-converting brand landing pages to scalable, database-driven enterprise web portals—we design, build, and deploy custom web solutions tailored to your business operations.
+                        </p>
                     </div>
 
-                    <!-- Instant Call-to-Action (CTA) Banner -->
-                    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #ffffff; padding: 24px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <div class="web-grid">
+                        <div class="web-feature-card">
+                            <h4>Full-Stack Performance</h4>
+                            <p>React, Node.js, and Express architectures optimized for zero-latency interactions.</p>
+                        </div>
+                        <div class="web-feature-card">
+                            <h4>PostgreSQL Integration</h4>
+                            <p>Secure relational database structures for ledgers, user auth, and real-time logs.</p>
+                        </div>
+                        <div class="web-feature-card">
+                            <h4>Responsive Layouts</h4>
+                            <p>Pixel-perfect grid compliance across mobile, tablet, and widescreen displays.</p>
+                        </div>
+                        <div class="web-feature-card">
+                            <h4>Cloud Delivery</h4>
+                            <p>Automated SSL configuration, custom domain routing, and fast global CDN caching.</p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Banner -->
+                    <div class="cta-banner">
                         <div>
-                            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; color: #ffffff;">
-                                Need a custom web portal or brand website for your company?
-                            </h3>
-                            <p style="font-size: 0.88rem; color: #94a3b8;">
-                                Get a dedicated quote or request a live consultation with our engineering team.
-                            </p>
-                            <div style="font-size: 0.85rem; margin-top: 10px; color: #cbd5e1; display: flex; gap: 18px; flex-wrap: wrap;">
-                                <span>📧 <strong>Email:</strong> 6saddamhussain9@gmail.com</span>
-                                <span>📞 <strong>Direct Contact:</strong> 0370-0818276</span>
-                            </div>
+                            <div class="cta-title">Need a custom web portal or brand website?</div>
+                            <div class="cta-subtitle">Contact engineering directly for a structured technical roadmap.</div>
                         </div>
-
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <a href="contact.html" style="background: #2563eb; color: #ffffff; padding: 12px 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: background 0.2s;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563eb'">
-                                🚀 Build Web Spec in Wizard
-                            </a>
-                            <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20am%20interested%20in%20building%20a%20custom%20full-stack%20web%20application." target="_blank" style="background: #25d366; color: #ffffff; padding: 12px 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.9rem; transition: background 0.2s;" onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25d366'">
-                                💬 WhatsApp Developer
-                            </a>
+                        <div style="display: flex; gap: 8px;">
+                            <a href="contact.html" class="btn-light">Open Wizard</a>
+                            <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20would%20like%20to%20discuss%20a%20custom%20web%20application." target="_blank" class="btn-whatsapp-sub">WhatsApp</a>
                         </div>
                     </div>
                 </div>
 
             </div>
 
+            <!-- Sidebar -->
             <div>
-                <div class="section-box">
-                    <div class="section-header"><h2>Need Custom Software?</h2></div>
-                    <div style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-                        <p style="margin-bottom: 12px;">We craft tailored offline desktop tools, mobile apps, and cloud web portals designed specifically around your workflow.</p>
-                        <p><strong>Direct Developer Contact:</strong></p>
-                        <ul style="list-style: none; margin-top: 8px;">
-                            <li style="margin-bottom: 6px;">📧 <strong>Email:</strong> 6saddamhussain9@gmail.com</li>
-                            <li>📞 <strong>Phone/WhatsApp:</strong> 0370-0818276</li>
-                        </ul>
+                <div class="panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Engineering Directives</span>
                     </div>
-                    <div class="license-box">
-                        <h4 style="color: var(--text-main); margin-bottom: 4px;">📜 Certificate of Authenticity</h4>
-                        <p>All software solutions are compiled and deployed under <strong>Mashal Tech Enterprise</strong>.</p>
+                    <div class="sidebar-content">
+                        <p class="sidebar-text">We build and distribute verified desktop software utilities, Android mobile packages, and enterprise database solutions.</p>
+                        
+                        <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;">
+                            <p style="font-size: 0.8rem; font-weight: 600; margin-bottom: 6px;">Direct Developer Dispatch</p>
+                            <ul class="contact-list">
+                                <li>📧 6saddamhussain9@gmail.com</li>
+                                <li>📞 0370-0818276</li>
+                                <li>🏢 Mardan & Peshawar, PK</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <footer>
-            <p>&copy; 2026 Mashal Tech Enterprise. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
+            <p>&copy; 2026 Mashal Tech Enterprise. All build records verified under secure repository guidelines.</p>
         </footer>
     </div>
 
-    <!-- CustomerBook Modal -->
+    <!-- Modal Component -->
     <div id="customerbook-modal" class="modal-overlay">
         <div class="modal-card">
             <button class="close-modal" onclick="closeModal('customerbook-modal')">&times;</button>
-            <div class="modal-header">
-                <div class="modal-icon">📊</div>
-                <div>
-                    <h2 style="font-size: 1.3rem;">CustomerBookGUI — Enterprise Ledger & Customer System</h2>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Official PC Build v1.0 • Standalone Offline Deployment</p>
-                </div>
+            <h2 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 4px;">CustomerBookGUI — System Architecture</h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px;">Standalone Desktop Binary • .NET 10.0 Windows Forms</p>
+            
+            <div style="background: var(--bg); border: 1px solid var(--border); padding: 12px; border-radius: var(--radius); font-size: 0.82rem; margin-bottom: 16px;">
+                <strong>System Summary:</strong> Designed for high-frequency inventory environments. Features double-entry petty cash ledgers, automatic closing functions, and unique sticker tag generation.
             </div>
-            <div class="value-box">
-                💡 <strong>Why You Need This System:</strong> Streamlines daily financial closing, eliminates balance calculation mistakes, and renders 3 independent printable sticker tags with unique file numbers automatically.
-            </div>
-            <h3 style="font-size: 1rem; margin-top: 15px;">📸 System Screenshots & UI Walkthrough</h3>
-            <div class="screenshot-gallery">
-                <div class="screenshot-box"><span>🖥️ Main Dashboard</span><small>Customer Ledgers & Balances</small></div>
-                <div class="screenshot-box"><span>🏷️ Multi-Sticker Generator</span><small>3 Unique File Number Output</small></div>
-                <div class="screenshot-box"><span>📒 Petty Cash Journal</span><small>Real-Time Cash Drawer Logs</small></div>
-            </div>
-            <h3 style="font-size: 1rem; margin-top: 20px;">⚡ Core Capabilities</h3>
-            <ul class="feature-list">
-                <li><strong>Interactive Multi-Sticker Output:</strong> Generates 3 independent layout stickers with unique file numbers and customer names.</li>
-                <li><strong>Automated Closing Ledgers:</strong> Tracks debit/credit transactions, petty cash entries, and daily cash totals.</li>
-                <li><strong>100% Offline Desktop Utility:</strong> Zero cloud dependency—runs directly from USB drives on 64-bit Windows OS.</li>
+
+            <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Core Specifications</div>
+            <ul style="list-style: disc; padding-left: 18px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">
+                <li style="margin-bottom: 4px;">Generates 3 independent layout stickers with unique serial numbers.</li>
+                <li style="margin-bottom: 4px;">Fully offline SQLite/JSON local persistence layer.</li>
+                <li style="margin-bottom: 4px;">Optimized for 64-bit Windows environments.</li>
             </ul>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);">
-                <span style="font-size: 0.85rem; color: var(--text-muted);">File Size: <strong>34.2 MB</strong> | OS: <strong>Windows (x64)</strong></span>
-                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="download-btn" style="padding: 10px 20px; font-size: 0.9rem;">⬇ Download Official Package (.rar)</a>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 16px;">
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Package: <strong>34.2 MB (.rar)</strong></span>
+                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0/publish.rar" class="btn">Download Stable Binary</a>
             </div>
         </div>
     </div>
 
     <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
-        <span>💬</span> <span>Chat with Us</span>
+        <span>💬</span> <span>Direct Support</span>
     </a>
 
     <script>
         const searchInput = document.getElementById('searchInput');
-        const rows = document.querySelectorAll('.product-row');
+        const rows = document.querySelectorAll('.item-row');
         const noResults = document.getElementById('noResults');
 
         searchInput.addEventListener('keyup', function(e) {
@@ -348,7 +354,7 @@
         });
 
         function filterCategory(category, element) {
-            document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.filter-pill').forEach(el => el.classList.remove('active'));
             if (element) element.classList.add('active');
             searchInput.value = '';
             let visibleCount = 0;
@@ -360,14 +366,13 @@
             noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        function resetSearch() { searchInput.value = ''; filterCategory('all', document.querySelector('.cat-item')); }
+        function resetSearch() { searchInput.value = ''; filterCategory('all', document.querySelector('.filter-pill')); }
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         window.onclick = function(e) { if (e.target.classList.contains('modal-overlay')) e.target.style.display = 'none'; }
 
         function openQuickWhatsApp() {
-            const message = "Hi! I am visiting Mashal Tech Store and would like to inquire about a custom software project.";
-            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent('Hi! I am reviewing Mashal Tech infrastructure and have a technical inquiry.')}`, '_blank');
         }
     </script>
 </body>

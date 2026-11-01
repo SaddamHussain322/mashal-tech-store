@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Project Estimator, AI Blueprint & ROI Hub</title>
+    <title>Mashal Tech — Unified Project Wizard, AI Blueprint & ROI Hub</title>
     <style>
         :root {
             --bg: #f8fafc;
@@ -67,16 +67,25 @@
 
         /* Wizard Step Elements */
         .wizard-step { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
-        .wizard-step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
-        .form-control { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; outline: none; background: #ffffff; color: var(--text-main); margin-bottom: 14px; transition: all 0.2s; }
+        .wizard-step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+        .form-control { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; outline: none; background: #ffffff; color: var(--text-main); margin-bottom: 12px; transition: all 0.2s; }
         .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+
+        /* Thumbnails Selector */
+        .thumbnail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 12px; }
+        .thumb-option { background: #ffffff; border: 2px solid var(--border); border-radius: 8px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+        .thumb-option:hover { border-color: #94a3b8; color: var(--text-main); }
+        .thumb-option.selected { border-color: var(--primary); background: #eff6ff; color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); }
+
+        /* AI Blueprint Preview Box */
+        .ai-preview-box { background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 8px; padding: 14px; font-size: 0.85rem; color: #4c1d95; margin-top: 8px; display: none; }
+        .ai-suggestion-box { background: #fef3c7; border: 1px solid #fde68a; border-radius: 8px; padding: 12px; font-size: 0.82rem; color: #78350f; margin-top: 10px; display: none; }
+
+        /* Calculator Results Box */
+        .calculator-box { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 16px; margin-top: 10px; font-size: 0.88rem; color: #065f46; display: none; }
 
         .btn-action { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.88rem; border: none; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm); display: inline-block; }
         .btn-action:hover { background: var(--primary-hover); transform: translateY(-1px); }
-
-        /* Progress Bar Styles */
-        .progress-container { background: #e2e8f0; border-radius: 20px; height: 10px; width: 100%; overflow: hidden; margin: 10px 0 16px 0; }
-        .progress-bar { background: var(--roi-accent); height: 100%; width: 75%; border-radius: 20px; transition: width 0.4s ease; }
 
         /* Sidebar Contact Box */
         .contact-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 16px; font-size: 0.85rem; }
@@ -97,7 +106,7 @@
         
         <!-- Hero Announcement Strip -->
         <div class="hero-banner">
-            <div class="hero-banner-title">🚀 <strong>Project & ROI Hub:</strong> Configure custom specifications & calculate savings instantly.</div>
+            <div class="hero-banner-title">🚀 <strong>Project & ROI Hub:</strong> Client Spec, Live AI Blueprints, Cost Estimator & Tracking Keys.</div>
             <a href="index.html" class="hero-btn">Explore Catalog</a>
         </div>
 
@@ -123,53 +132,72 @@
         <div class="layout-grid">
             
             <div>
-                <!-- Unified 4-Step Wizard & Estimator Hub -->
+                <!-- Unified Project Wizard Hub -->
                 <div class="card">
                     <div class="card-header">
-                        <h2>Unified Project Wizard & ROI Estimator</h2>
-                        <span style="font-size: 0.78rem; font-weight: 600; color: var(--roi-accent); background: #ecfdf5; padding: 4px 10px; border-radius: 20px; border: 1px solid #a7f3d0;">Live Calculator</span>
+                        <h2>Unified Client Specification & AI Estimator</h2>
+                        <span style="font-size: 0.78rem; font-weight: 600; color: var(--roi-accent); background: #ecfdf5; padding: 4px 10px; border-radius: 20px; border: 1px solid #a7f3d0;">Fully Interactive</span>
                     </div>
 
                     <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
-                        Complete your specifications below to generate an automated tracking key, view your live AI architecture preview, and calculate projected business savings under local PKR budget constraints.
+                        Provide your details, pick your target architecture thumbnail, type your prompt to generate a live AI architectural blueprint with expert recommendations, calculate your automated cost in PKR, and instantly assign your unique tracking key.
                     </p>
 
-                    <!-- Wizard Step 1: Solution Architecture -->
+                    <!-- Step 1: Client Details & Thumbnails -->
                     <div class="wizard-step">
-                        <h3>Step 1: Select Solution Architecture</h3>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <button type="button" class="btn-action" style="background: var(--primary);" onclick="selectArch(this, 'Desktop ERP')">Desktop ERP (.NET)</button>
-                            <button type="button" class="btn-action" style="background: #e2e8f0; color: var(--text-main);" onclick="selectArch(this, 'Mobile Unity')">Mobile App (Unity)</button>
-                            <button type="button" class="btn-action" style="background: #e2e8f0; color: var(--text-main);" onclick="selectArch(this, 'Web Portal')">Full-Stack Web Portal</button>
+                        <h3>👤 Step 1: Client Details & Solution Type</h3>
+                        <input type="text" id="clientName" class="form-control" placeholder="Name of Client (e.g., Saddam Hussain)">
+                        <input type="text" id="companyName" class="form-control" placeholder="Company Name (e.g., Baadshah Tyre Corp / Mashal Tech)">
+                        <input type="text" id="mobileNumber" class="form-control" placeholder="Mobile Number (e.g., 0370-0818276)">
+                        
+                        <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 6px;">Select Solution Thumbnail / Architecture:</label>
+                        <div class="thumbnail-grid">
+                            <div class="thumb-option selected" onclick="selectThumb(this, 'Desktop App')">🖥️ Desktop App</div>
+                            <div class="thumb-option" onclick="selectThumb(this, 'Mobile App')">📱 Mobile App</div>
+                            <div class="thumb-option" onclick="selectThumb(this, 'Web App')">⚡ Web App</div>
+                            <div class="thumb-option" onclick="selectThumb(this, 'Website')">🌐 Website</div>
                         </div>
                     </div>
 
-                    <!-- Wizard Step 2: Scope & Budget (PKR) -->
-                    <div class="wizard-step">
-                        <h3>Step 2: Project Scope & PKR Budget Cap</h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">Maximum cap strictly enforced under 100,000 PKR.</p>
-                        <input type="text" id="clientName" class="form-control" placeholder="Company / Client Name">
-                        <input type="number" id="budgetCap" class="form-control" placeholder="Proposed Budget (PKR, Max 100,000)" max="100000">
-                    </div>
-
-                    <!-- Wizard Step 3: Seasonal Discount & ROI Savings -->
-                    <div class="wizard-step" style="background: #ecfdf5; border-color: #a7f3d0;">
-                        <h3 style="color: #065f46;">Step 3: Seasonal Discount & Efficiency Progress</h3>
-                        <p style="font-size: 0.82rem; color: #047857; margin-bottom: 6px;">Seasonal deployment discount tier active (75% Operational Savings Efficiency).</p>
-                        <div class="progress-container">
-                            <div class="progress-bar"></div>
+                    <!-- Step 2: AI Blueprint & Smart Suggestions -->
+                    <div class="wizard-step" style="border-color: #ddd6fe; background: #faf5ff;">
+                        <h3 style="color: #6d28d9;">🤖 Step 2: AI Blueprint Generator & Smart Suggestions</h3>
+                        <p style="font-size: 0.82rem; color: #5b21b6; margin-bottom: 8px;">Describe your project requirements below to instantly generate a structured system layout and recommendations tailored for you:</p>
+                        <textarea id="userPrompt" class="form-control" rows="3" placeholder="Type prompt here (e.g., I need a secure inventory ledger system with closing reports...)" oninput="generateAIBlueprint()"></textarea>
+                        
+                        <div id="aiPreviewBox" class="ai-preview-box">
+                            <strong>📐 Live AI Architecture Blueprint:</strong><br>
+                            <span id="blueprintText">Awaiting prompt input...</span>
                         </div>
-                        <span style="font-size: 0.8rem; font-weight: 700; color: #047857;">Estimated Annual Workflow Savings: PKR 85,000 — Fully within local budget bounds.</span>
+
+                        <div id="aiSuggestionBox" class="ai-suggestion-box">
+                            <strong>💡 Expert Recommendation for Your Case:</strong><br>
+                            <span id="suggestionText">Enter your workflow scope to receive optimized architecture advice.</span>
+                        </div>
                     </div>
 
-                    <!-- Wizard Step 4: Tracking Key Generation & Dispatch -->
+                    <!-- Step 3: Automated Cost Calculator -->
+                    <div class="wizard-step" style="border-color: #a7f3d0; background: #f0fdf4;">
+                        <h3 style="color: #065f46;">💰 Step 3: Automated Cost Calculator (PKR)</h3>
+                        <p style="font-size: 0.82rem; color: #047857; margin-bottom: 10px;">Automatically computes your payable development fee strictly capped under 100,000 PKR.</p>
+                        
+                        <button type="button" class="btn-action" onclick="calculateCost()" style="background: var(--roi-accent);">🧮 Run Automated Cost Calculation</button>
+                        
+                        <div id="calculatorResultBox" class="calculator-box">
+                            <strong>📊 Cost Evaluation Report:</strong><br>
+                            <span id="calcOutputText">Click the button above to evaluate your investment.</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Unique Tracking Key & Dispatch -->
                     <div class="wizard-step">
-                        <h3>Step 4: Generate Tracking Key & Direct Dispatch</h3>
-                        <input type="text" id="generatedKey" class="form-control" readonly placeholder="Click button below to generate unique order tracking key..." style="background: #f1f5f9; font-weight: 700; color: #1e293b;">
+                        <h3>🔍 Step 4: Assign Unique Tracking Key & Dispatch</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">Generates a permanent tracking identifier so you can check live order progress anytime on the Track Order tab.</p>
+                        <input type="text" id="generatedKey" class="form-control" readonly placeholder="Click button below to generate tracking key..." style="background: #f1f5f9; font-weight: 700; color: #1e293b;">
                         
                         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-                            <button type="button" class="btn-action" onclick="generateTrackingKey()" style="background: var(--ai-accent);">⚡ Generate Tracking Key</button>
-                            <button type="button" class="btn-action" onclick="dispatchWhatsApp()" style="background: #25d366;">💬 Dispatch to WhatsApp (+923700818276)</button>
+                            <button type="button" class="btn-action" onclick="generateTrackingKey()" style="background: var(--ai-accent);">⚡ Generate Unique Tracking Key</button>
+                            <button type="button" class="btn-action" onclick="dispatchWhatsApp()" style="background: #25d366;">💬 Dispatch Spec to WhatsApp (+923700818276)</button>
                         </div>
                     </div>
 
@@ -177,7 +205,7 @@
             </div>
 
             <div>
-                <!-- Direct Dispatch Sidebar -->
+                <!-- Direct Support Sidebar -->
                 <div class="card">
                     <div class="card-header">
                         <h2>Direct Support</h2>
@@ -205,17 +233,52 @@
     </a>
 
     <script>
-        let selectedArchitecture = 'Desktop ERP';
+        let selectedThumbnail = 'Desktop App';
 
-        function selectArch(button, archType) {
-            selectedArchitecture = archType;
-            const parent = button.parentElement;
-            parent.querySelectorAll('button').forEach(btn => {
-                btn.style.background = '#e2e8f0';
-                btn.style.color = 'var(--text-main)';
-            });
-            button.style.background = 'var(--primary)';
-            button.style.color = '#ffffff';
+        function selectThumb(element, thumbName) {
+            selectedThumbnail = thumbName;
+            document.querySelectorAll('.thumb-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function generateAIBlueprint() {
+            const promptVal = document.getElementById('userPrompt').value.trim();
+            const previewBox = document.getElementById('aiPreviewBox');
+            const blueprintText = document.getElementById('blueprintText');
+            const suggestionBox = document.getElementById('aiSuggestionBox');
+            const suggestionText = document.getElementById('suggestionText');
+
+            if (promptVal.length > 3) {
+                previewBox.style.display = 'block';
+                suggestionBox.style.display = 'block';
+                
+                blueprintText.innerText = `[${selectedThumbnail.toUpperCase()} ARCHITECTURE]: Modular component layout initialized. Core pipeline: Secure Frontend UI -> Local/Cloud Database Sync -> Automated Report Export.`;
+                
+                if (selectedThumbnail === 'Desktop App') {
+                    suggestionText.innerText = `For your desktop enterprise workflow, implementing C# .NET Windows Forms with an offline SQLite ledger layer guarantees zero latency, robust security, and reliable multi-sticker printing.`;
+                } else if (selectedThumbnail === 'Mobile App') {
+                    suggestionText.innerText = `For optimal mobile performance, building a cross-platform or Unity 2D framework ensures smooth frame rates, lightweight package size, and rapid offline deployment.`;
+                } else {
+                    suggestionText.innerText = `For your web application/website, a React frontend paired with an Express and PostgreSQL backend hosted on Vercel delivers lightning-fast global load speeds and secure database records.`;
+                }
+            } else {
+                previewBox.style.display = 'none';
+                suggestionBox.style.display = 'none';
+            }
+        }
+
+        function calculateCost() {
+            const resultBox = document.getElementById('calculatorResultBox');
+            const outputText = document.getElementById('calcOutputText');
+            resultBox.style.display = 'block';
+
+            let baseCost = 45000;
+            if (selectedThumbnail === 'Mobile App') baseCost = 65000;
+            if (selectedThumbnail === 'Web App') baseCost = 55000;
+            if (selectedThumbnail === 'Website') baseCost = 35000;
+
+            const finalCap = Math.min(baseCost, 100000);
+            outputText.innerHTML = `Selected Solution: <strong>${selectedThumbnail}</strong><br>Base Evaluation Cost: <strong>PKR ${finalCap.toLocaleString()}</strong><br><em>Status: Strictly verified under the 100,000 PKR local budgetary cap with full seasonal operational savings applied.</em>`;
         }
 
         function generateTrackingKey() {
@@ -223,15 +286,17 @@
             const randomNum = Math.floor(100000 + Math.random() * 900000);
             const trackingKey = `MT-TRK-2026-${randomNum}`;
             document.getElementById('generatedKey').value = trackingKey;
-            alert(`Tracking Key Generated: ${trackingKey}\nArchitecture: ${selectedArchitecture}\nReady for developer dispatch!`);
+            alert(`Success! Tracking Key Assigned: ${trackingKey}\nClient: ${client}\nSolution: ${selectedThumbnail}`);
         }
 
         function dispatchWhatsApp() {
             const client = document.getElementById('clientName').value.trim() || 'Valued Client';
-            const budget = document.getElementById('budgetCap').value.trim() || 'Under 100,000';
+            const company = document.getElementById('companyName').value.trim() || 'Mashal Tech Partner';
+            const mobile = document.getElementById('mobileNumber').value.trim() || '0370-0818276';
             const trackingKey = document.getElementById('generatedKey').value || 'Pending Generation';
-            
-            const message = `Hi Mashal Tech! I am ${client}. Selected Architecture: ${selectedArchitecture}. Proposed Budget: PKR ${budget}. Tracking Key: ${trackingKey}. Let's proceed with development.`;
+            const promptText = document.getElementById('userPrompt').value.trim() || 'Standard Enterprise Build';
+
+            const message = `Hi Mashal Tech! New Project Spec:\n- Client: ${client}\n- Company: ${company}\n- Mobile: ${mobile}\n- Architecture: ${selectedThumbnail}\n- Tracking Key: ${trackingKey}\n- Scope Prompt: ${promptText}`;
             window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Solution Estimator & AI Blueprint Center</title>
+    <title>Mashal Tech — Unified Solution, AI & ROI Hub</title>
     <style>
         :root {
             --bg: #f3f4f6;
@@ -14,7 +14,7 @@
             --accent: #2563eb;
             --accent-hover: #1d4ed8;
             --ai-accent: #7c3aed;
-            --ai-hover: #6d28d9;
+            --roi-accent: #059669;
             --whatsapp-green: #25d366;
             --whatsapp-hover: #1ebe5d;
         }
@@ -24,10 +24,11 @@
         
         .container { width: 100%; max-width: 1550px; margin: 0 auto; }
 
+        /* Clean 4-Tab Navigation */
         .platform-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .platform-btn {
-            flex: 1; min-width: 130px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
-            border-radius: 8px; font-size: 0.85rem; font-weight: 700; color: var(--text-muted);
+            flex: 1; min-width: 150px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; font-size: 0.9rem; font-weight: 700; color: var(--text-muted);
             text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
             transition: all 0.2s ease;
         }
@@ -40,14 +41,6 @@
         .brand { font-size: 1.3rem; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 10px; }
         .brand-icon { background: var(--accent); color: white; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; }
 
-        .mode-switcher { display: flex; gap: 12px; margin-bottom: 24px; }
-        .mode-btn {
-            flex: 1; padding: 12px; background: #e5e7eb; border: none; border-radius: 6px;
-            font-weight: 700; font-size: 0.95rem; cursor: pointer; color: var(--text-muted); transition: all 0.2s;
-        }
-        .mode-btn.active-mode-wizard { background: var(--accent); color: white; }
-        .mode-btn.active-mode-ai { background: var(--ai-accent); color: white; }
-
         .contact-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: 24px; }
         @media (max-width: 950px) { .contact-grid { grid-template-columns: 1fr; } }
 
@@ -59,11 +52,9 @@
         .info-item strong { display: block; color: var(--text-main); margin-bottom: 4px; font-size: 1rem; }
         .info-item span { color: var(--text-muted); }
 
-        .interactive-mode-section { display: none; }
-        .interactive-mode-section.active { display: block; }
-
-        .stepper-header { display: flex; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 14px; flex-wrap: wrap; gap: 8px; }
-        .step-pill { font-size: 0.88rem; font-weight: 600; color: var(--text-muted); padding: 6px 12px; border-radius: 20px; background: #f3f4f6; }
+        /* Multi-Step Wizard Flow */
+        .stepper-header { display: flex; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 14px; flex-wrap: wrap; gap: 6px; }
+        .step-pill { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); padding: 6px 10px; border-radius: 20px; background: #f3f4f6; text-align: center; flex: 1; }
         .step-pill.active { background: var(--accent); color: white; }
 
         .wizard-step { display: none; }
@@ -92,29 +83,24 @@
         .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; background: #f9fafb; outline: none; }
         .form-control:focus { background: #fff; border-color: var(--accent); }
 
-        .scope-preview { background: #f8fafc; border: 1px dashed var(--accent); border-radius: 8px; padding: 18px; margin: 20px 0; font-size: 0.88rem; color: #1e293b; }
-        .scope-preview h4 { color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        /* Sliders for Step 4 */
+        .slider-group { margin-bottom: 18px; }
+        .slider-group label { display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
+        .slider-group label span { color: var(--roi-accent); font-weight: 700; }
+        .slider-group input[type="range"] { width: 100%; accent-color: var(--roi-accent); cursor: pointer; }
+
+        .results-mini-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 16px; }
+        .result-metric { font-size: 1.6rem; font-weight: 800; color: var(--roi-accent); margin: 4px 0; }
+
+        .discount-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px; margin-bottom: 16px; }
+        .discount-header { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #92400e; margin-bottom: 6px; }
+        .progress-bar-container { background: #fef3c7; border-radius: 20px; height: 12px; width: 100%; overflow: hidden; }
+        .progress-bar-fill { background: linear-gradient(90deg, #f59e0b, #d97706); height: 100%; width: 0%; border-radius: 20px; transition: width 0.3s; }
 
         .wizard-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
         .btn-nav { padding: 10px 20px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: 1px solid var(--border); background: #fff; }
         .btn-next { background: var(--accent); color: white; border: none; }
         .btn-next:hover { background: var(--accent-hover); }
-
-        .btn-ai {
-            background: var(--ai-accent); color: white; border: none; padding: 14px 24px;
-            border-radius: 6px; font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%;
-            transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-ai:hover { background: var(--ai-hover); }
-
-        .blueprint-output {
-            display: none; background: #f8fafc; border: 2px dashed var(--ai-accent); border-radius: 8px; padding: 24px; margin-top: 24px;
-        }
-        .blueprint-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-        .blueprint-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
-        .blueprint-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
-        .blueprint-card h4 { font-size: 0.9rem; color: var(--ai-accent); margin-bottom: 6px; }
-        .blueprint-card p, .blueprint-card ul { font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; }
 
         .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
         @media (max-width: 600px) { .action-buttons { grid-template-columns: 1fr; } }
@@ -123,40 +109,38 @@
         .btn-whatsapp:hover { background: var(--whatsapp-hover); }
         .btn-gmail { background: var(--accent); color: white; border: none; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; }
         .btn-gmail:hover { background: var(--accent-hover); }
-        .btn-gmail-ai { background: var(--ai-accent); color: white; border: none; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; }
-        .btn-gmail-ai:hover { background: var(--ai-hover); }
 
-        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); text-decoration: none; font-weight: 700; font-size: 0.9rem; z-index: 9999; transition: transform 0.2s ease, background-color 0.2s ease; }
-        .floating-whatsapp:hover { background: #1ebe5d; transform: translateY(-3px); }
+        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); text-decoration: none; font-weight: 700; font-size: 0.9rem; z-index: 9999; transition: transform 0.2s ease; }
+        .floating-whatsapp:hover { transform: translateY(-3px); }
 
         footer { text-align: center; padding: 24px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
     </style>
 </head>
-<body>
+<body onload="calculateROI()">
 
     <div class="container">
         
+        <!-- Clean 4-Tab Navigation Bar -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
-            <a href="contact.html" class="platform-btn active">📞 Estimator & AI</a>
+            <a href="contact.html" class="platform-btn active">🚀 Project & ROI Hub</a>
             <a href="track.html" class="platform-btn">🔍 Track Order</a>
-            <a href="ai-blueprint.html" class="platform-btn">🤖 AI Standalone</a>
-            <a href="roi-calculator.html" class="platform-btn">📈 ROI Calculator</a>
         </div>
 
         <div class="top-nav">
             <a href="index.html" class="brand">
                 <div class="brand-icon">M</div>
-                Mashal Tech Solution Center
+                Mashal Tech Client Center
             </a>
             <div style="font-size: 0.85rem; color: var(--text-muted);">
-                Interactive Wizard & AI Blueprint Generator
+                Unified Multi-Step Solution & Savings Wizard
             </div>
         </div>
 
         <div class="contact-grid">
             
+            <!-- Left Sidebar -->
             <div>
                 <div class="section-box">
                     <div class="section-header">
@@ -183,186 +167,162 @@
 
                     <div class="info-item">
                         <span>🛡️</span>
-                        <strong>Licensing Authority</strong>
+                        <strong>Enterprise License</strong>
                         <span>MT-LIC-2026-SECURE</span>
                     </div>
                 </div>
             </div>
 
+            <!-- Right Main Area: Multi-Step Form -->
             <div>
                 <div class="section-box">
                     
-                    <div class="mode-switcher">
-                        <button type="button" id="btnModeWizard" class="mode-btn active-mode-wizard" onclick="switchMode('wizard')">🛠️ Interactive Solution Wizard</button>
-                        <button type="button" id="btnModeAi" class="mode-btn" onclick="switchMode('ai')">🤖 AI Instant Blueprint</button>
+                    <!-- Stepper Progress Header -->
+                    <div class="stepper-header">
+                        <span class="step-pill active" id="pill-1">1. Platform</span>
+                        <span class="step-pill" id="pill-2">2. Modules</span>
+                        <span class="step-pill" id="pill-3">3. AI Blueprint</span>
+                        <span class="step-pill" id="pill-4">4. ROI & Discount</span>
                     </div>
 
-                    <div id="modeWizardSection" class="interactive-mode-section active">
-                        <div class="stepper-header">
-                            <span class="step-pill active" id="pill-1">1. Choose Platform</span>
-                            <span class="step-pill" id="pill-2">2. Select Features</span>
-                            <span class="step-pill" id="pill-3">3. Deliverable Draft</span>
+                    <form id="unifiedForm">
+                        
+                        <!-- STEP 1: PLATFORM -->
+                        <div class="wizard-step active" id="step-1">
+                            <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 1: Select Software Platform</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">What core architecture does your enterprise require?</p>
+                            
+                            <div class="option-grid">
+                                <div class="option-card selected" onclick="selectPlatform('Desktop App (.NET / Windows Forms / Python)', this)">
+                                    <div class="icon">🖥️</div>
+                                    <h4>Desktop App</h4>
+                                    <p>Offline C# .NET / Python tools, multi-sticker tags, ledgers.</p>
+                                </div>
+                                <div class="option-card" onclick="selectPlatform('Mobile App (Android / Unity Game)', this)">
+                                    <div class="icon">📱</div>
+                                    <h4>Mobile App / Game</h4>
+                                    <p>Android utilities, field agent tools, interactive 2D builds.</p>
+                                </div>
+                                <div class="option-card" onclick="selectPlatform('Full-Stack Web Portal (Node/Express/PostgreSQL)', this)">
+                                    <div class="icon">🌐</div>
+                                    <h4>Web Portal</h4>
+                                    <p>Recruitment ERPs, cloud dashboards, multi-user portals.</p>
+                                </div>
+                            </div>
+
+                            <div class="wizard-actions" style="justify-content: flex-end;">
+                                <button type="button" class="btn-nav btn-next" onclick="goToStep(2)">Next: Select Modules ➔</button>
+                            </div>
                         </div>
 
-                        <form id="wizardForm">
-                            <div class="wizard-step active" id="step-1">
-                                <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 1: Select Software Platform</h2>
-                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">What core architecture does your enterprise require?</p>
-                                
-                                <div class="option-grid">
-                                    <div class="option-card selected" onclick="selectPlatform('Desktop App (.NET / Windows Forms / Python)', this)">
-                                        <div class="icon">🖥️</div>
-                                        <h4>Desktop App</h4>
-                                        <p>Offline C# .NET / Python tools, multi-sticker tags, ledgers.</p>
-                                    </div>
-                                    <div class="option-card" onclick="selectPlatform('Mobile App (Android / Unity Game)', this)">
-                                        <div class="icon">📱</div>
-                                        <h4>Mobile App / Game</h4>
-                                        <p>Android utilities, field agent tools, interactive 2D builds.</p>
-                                    </div>
-                                    <div class="option-card" onclick="selectPlatform('Full-Stack Web Portal (Node/Express/PostgreSQL)', this)">
-                                        <div class="icon">🌐</div>
-                                        <h4>Web Portal</h4>
-                                        <p>Recruitment ERPs, cloud dashboards, multi-user portals.</p>
-                                    </div>
-                                </div>
+                        <!-- STEP 2: MODULES -->
+                        <div class="wizard-step" id="step-2">
+                            <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 2: Choose Functional Modules</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Check the core features needed for your custom software build:</p>
 
-                                <div class="wizard-actions" style="justify-content: flex-end;">
-                                    <button type="button" class="btn-nav btn-next" onclick="goToStep(2)">Next: Select Features ➔</button>
+                            <div class="feature-grid">
+                                <label class="feature-checkbox"><input type="checkbox" value="Automated Closing Ledger & Petty Cash" onchange="updateSummary()"> Closing Ledger & Cash Logs</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Independent Multi-Sticker Generator" onchange="updateSummary()"> Custom Multi-Sticker Tags</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="FBR Invoicing & Tax Calculation" onchange="updateSummary()"> FBR Tax & QR Invoicing</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Candidate Onboarding Pipeline" onchange="updateSummary()"> Candidate Recruitment Tracking</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Offline Encrypted Database Storage" onchange="updateSummary()"> Encrypted Offline Database</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Multi-User Role Permissions" onchange="updateSummary()"> Role & Auth Permissions</label>
+                            </div>
+
+                            <div class="wizard-actions">
+                                <button type="button" class="btn-nav" onclick="goToStep(1)">⬅ Back</button>
+                                <button type="button" class="btn-nav btn-next" onclick="goToStep(3)">Next: AI Blueprint ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: AI BLUEPRINT GENERATOR -->
+                        <div class="wizard-step" id="step-3">
+                            <h2 style="font-size: 1.1rem; margin-bottom: 8px;">Step 3: AI Specification & Blueprint</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Describe your workflow in plain English. Our AI will formulate your system spec:</p>
+
+                            <div class="form-group">
+                                <label>Describe Your Custom Software Idea</label>
+                                <textarea id="aiPrompt" rows="3" class="form-control" placeholder="e.g. I run a wholesale distribution warehouse and need an offline Windows desktop app that logs customer ledgers and prints sticker tags..."></textarea>
+                            </div>
+
+                            <div style="background: #f8fafc; border: 1px dashed var(--accent); padding: 14px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 16px;">
+                                <strong>AI Architectural Match:</strong> <span id="aiStackOutput" style="color: var(--accent); font-weight: 600;">C# .NET 10.0 Windows Forms (Standalone x64)</span>
+                            </div>
+
+                            <div class="wizard-actions">
+                                <button type="button" class="btn-nav" onclick="goToStep(2)">⬅ Back</button>
+                                <button type="button" class="btn-nav btn-next" onclick="goToStep(4)">Next: ROI & Discount ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 4: ROI CALCULATOR & DISPATCH -->
+                        <div class="wizard-step" id="step-4">
+                            <h2 style="font-size: 1.1rem; margin-bottom: 8px;">Step 4: ROI Savings, Discount & Dispatch</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Configure your team parameters to see your PKR savings and seasonal discount:</p>
+
+                            <div class="slider-group">
+                                <label>Employees Handling Manual Tasks: <span id="valEmployees">3</span></label>
+                                <input type="range" id="rangeEmployees" min="1" max="20" value="3" oninput="calculateROI()">
+                            </div>
+
+                            <div class="slider-group">
+                                <label>Hours Spent per Employee Weekly: <span id="valHours">8</span> hrs</label>
+                                <input type="range" id="rangeHours" min="2" max="25" value="8" oninput="calculateROI()">
+                            </div>
+
+                            <div class="slider-group">
+                                <label>Average Hourly Wage (PKR): Rs. <span id="valWage">350</span> / hr</label>
+                                <input type="range" id="rangeWage" min="150" max="1500" step="50" value="350" oninput="calculateROI()">
+                            </div>
+
+                            <div class="results-mini-card">
+                                <p style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #166534;">Projected Monthly Savings</p>
+                                <div class="result-metric" id="outTotalSavings">Rs. 29,937</div>
+                                <p style="font-size: 0.78rem; color: #166534;" id="outHoursSaved">Saved Across 85 Monthly Hours</p>
+                            </div>
+
+                            <!-- Special Seasonal Discount Bar -->
+                            <div class="discount-box">
+                                <div class="discount-header">
+                                    <span id="discountTitle">🎁 Earned Seasonal Discount: 15% OFF</span>
+                                    <span id="discountAmount">Rs. 4,500 Value</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-fill" id="discountBarFill"></div>
                                 </div>
                             </div>
 
-                            <div class="wizard-step" id="step-2">
-                                <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 2: Choose Functional Modules</h2>
-                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Check the core features needed for your custom software build:</p>
-
-                                <div class="feature-grid">
-                                    <label class="feature-checkbox"><input type="checkbox" value="Automated Closing Ledger & Petty Cash" onchange="updateScope()"> Closing Ledger & Cash Logs</label>
-                                    <label class="feature-checkbox"><input type="checkbox" value="Independent Multi-Sticker Generator" onchange="updateScope()"> Custom Multi-Sticker Tags</label>
-                                    <label class="feature-checkbox"><input type="checkbox" value="FBR Invoicing & Tax Calculation" onchange="updateScope()"> FBR Tax & QR Invoicing</label>
-                                    <label class="feature-checkbox"><input type="checkbox" value="Candidate Onboarding Pipeline" onchange="updateScope()"> Candidate Recruitment Tracking</label>
-                                    <label class="feature-checkbox"><input type="checkbox" value="Offline Encrypted Database Storage" onchange="updateScope()"> Encrypted Offline Database</label>
-                                    <label class="feature-checkbox"><input type="checkbox" value="Multi-User Role Permissions" onchange="updateScope()"> Role & Auth Permissions</label>
+                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 12px;">
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label>Client / Company Name</label>
+                                    <input type="text" id="cName" class="form-control" placeholder="e.g. Al-Madina Trading">
                                 </div>
-
-                                <div class="wizard-actions">
-                                    <button type="button" class="btn-nav" onclick="goToStep(1)">⬅ Back</button>
-                                    <button type="button" class="btn-nav btn-next" onclick="goToStep(3)">Next: Final Scope Draft ➔</button>
-                                </div>
-                            </div>
-
-                            <div class="wizard-step" id="step-3">
-                                <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 3: Client Details & Instant Dispatch</h2>
-
-                                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
-                                    <div class="form-group">
-                                        <label>Client / Company Name</label>
-                                        <input type="text" id="cName" class="form-control" placeholder="e.g. Al-Madina Trading / John Doe">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Country</label>
-                                        <input type="text" id="cCountry" class="form-control" placeholder="e.g. Pakistan">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Phone / WhatsApp Number</label>
-                                    <input type="text" id="cContact" class="form-control" placeholder="e.g. +92 370 0818276">
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Additional Specific Requirements</label>
-                                    <textarea id="cDetails" rows="3" class="form-control" placeholder="Mention any extra layout specs or business workflows..."></textarea>
-                                </div>
-
-                                <div class="scope-preview">
-                                    <h4>⚡ Generated Scope Preview</h4>
-                                    <div id="scopeSummaryText">Select options in Step 1 & 2 to generate project scope.</div>
-                                </div>
-
-                                <div class="action-buttons">
-                                    <button type="button" onclick="sendWizardWhatsApp()" class="btn-whatsapp">💬 Submit via WhatsApp</button>
-                                    <button type="button" onclick="sendWizardGmail()" class="btn-gmail">📧 Submit via Gmail</button>
-                                </div>
-
-                                <div class="wizard-actions" style="margin-top: 15px;">
-                                    <button type="button" class="btn-nav" onclick="goToStep(2)">⬅ Edit Features</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div id="modeAiSection" class="interactive-mode-section">
-                        <h2 style="font-size: 1.1rem; margin-bottom: 8px;">🤖 AI Software Blueprint Generator</h2>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
-                            Type your requirements in plain English. Our AI engine will instantly build an architectural blueprint, tech stack recommendation, and timeline.
-                        </p>
-
-                        <form id="aiForm">
-                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
-                                <div class="form-group">
-                                    <label>Your Name / Company Name</label>
-                                    <input type="text" id="aiName" class="form-control" placeholder="e.g. Al-Madina Tyre Depot">
-                                </div>
-                                <div class="form-group">
-                                    <label>WhatsApp / Contact Number</label>
-                                    <input type="text" id="aiContact" class="form-control" placeholder="e.g. +92 370 0818276">
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label>Country</label>
+                                    <input type="text" id="cCountry" class="form-control" value="Pakistan">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Describe Your Custom Software Idea</label>
-                                <textarea id="aiPrompt" rows="4" class="form-control" placeholder="e.g. I run a wholesale distribution warehouse and need an offline Windows desktop app that logs customer ledgers, prints 3 independent sticker tags, and records petty cash daily..."></textarea>
-                            </div>
-
-                            <button type="button" onclick="generateBlueprint()" class="btn-ai">
-                                ⚡ Generate Instant AI Architectural Blueprint
-                            </button>
-                        </form>
-
-                        <div class="blueprint-output" id="blueprintResult">
-                            <div class="blueprint-header">
-                                <div>
-                                    <h3 style="font-size: 1.05rem; color: var(--ai-accent);">📊 AI-Generated System Specification</h3>
-                                    <p style="font-size: 0.78rem; color: var(--text-muted);">Parsed for: <strong id="outClient">Client</strong></p>
-                                </div>
-                                <span style="background: #ede9fe; color: #6d28d9; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Verified Blueprint v1.0</span>
-                            </div>
-
-                            <div class="blueprint-grid">
-                                <div class="blueprint-card">
-                                    <h4>🛠️ Recommended Tech Stack</h4>
-                                    <p id="outStack">C# .NET 10.0 / Windows Forms (Standalone x64) with SQLite Encrypted Local Database.</p>
-                                </div>
-                                <div class="blueprint-card">
-                                    <h4>📦 Core Modules</h4>
-                                    <ul id="outModules">
-                                        <li>Multi-Sticker Unique Tag Generator</li>
-                                        <li>Double-Entry Petty Cash Ledger</li>
-                                        <li>Offline USB Portability Architecture</li>
-                                    </ul>
-                                </div>
-                                <div class="blueprint-card">
-                                    <h4>⏱️ Estimated Timeline</h4>
-                                    <p id="outTimeline">3 to 5 Working Days (Includes QA Audit & Trial Testing)</p>
-                                </div>
-                                <div class="blueprint-card">
-                                    <h4>🔒 Security & Compliance</h4>
-                                    <p id="outSecurity">Zero cloud dependency, local AES encryption, automated FBR audit logs.</p>
-                                </div>
-                            </div>
-
-                            <div style="background: #fff; border: 1px solid var(--border); padding: 12px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 16px;">
-                                <strong>Original Client Request:</strong> <span id="outPromptEcho" style="color: var(--text-muted);">...</span>
+                                <label>Phone / WhatsApp Number</label>
+                                <input type="text" id="cContact" class="form-control" placeholder="e.g. +92 370 0818276">
                             </div>
 
                             <div class="action-buttons">
-                                <button type="button" onclick="sendAiWhatsApp()" class="btn-whatsapp">💬 Send Blueprint to WhatsApp</button>
-                                <button type="button" onclick="sendAiGmail()" class="btn-gmail-ai">📧 Send Blueprint via Gmail</button>
+                                <button type="button" onclick="sendViaWhatsApp()" class="btn-whatsapp">
+                                    💬 Submit via WhatsApp
+                                </button>
+                                <button type="button" onclick="sendViaGmail()" class="btn-gmail">
+                                    📧 Submit via Gmail
+                                </button>
+                            </div>
+
+                            <div class="wizard-actions" style="margin-top: 15px;">
+                                <button type="button" class="btn-nav" onclick="goToStep(3)">⬅ Back to AI Spec</button>
                             </div>
                         </div>
-                    </div>
 
+                    </form>
                 </div>
             </div>
 
@@ -373,37 +333,19 @@
         </footer>
     </div>
 
+    <!-- Floating WhatsApp Button -->
     <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
         <span>💬</span> <span>Chat with Us</span>
     </a>
 
     <script>
-        function switchMode(mode) {
-            const wizardSec = document.getElementById('modeWizardSection');
-            const aiSec = document.getElementById('modeAiSection');
-            const btnWiz = document.getElementById('btnModeWizard');
-            const btnAi = document.getElementById('btnModeAi');
-
-            if (mode === 'wizard') {
-                wizardSec.classList.add('active');
-                aiSec.classList.remove('active');
-                btnWiz.className = 'mode-btn active-mode-wizard';
-                btnAi.className = 'mode-btn';
-            } else {
-                aiSec.classList.add('active');
-                wizardSec.classList.remove('active');
-                btnAi.className = 'mode-btn active-mode-ai';
-                btnWiz.className = 'mode-btn';
-            }
-        }
-
         let selectedPlatform = "Desktop App (.NET / Windows Forms / Python)";
 
         function selectPlatform(platform, element) {
             selectedPlatform = platform;
             document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
-            updateScope();
+            document.getElementById('aiStackOutput').innerText = platform.includes('Mobile') ? 'Unity 2D Mobile / Cross-Platform Android APK' : (platform.includes('Web') ? 'Node.js Express + PostgreSQL' : 'C# .NET 10.0 Windows Forms (Standalone x64)');
         }
 
         function goToStep(stepNum) {
@@ -411,94 +353,87 @@
             document.querySelectorAll('.step-pill').forEach(pill => pill.classList.remove('active'));
             document.getElementById(`step-${stepNum}`).classList.add('active');
             document.getElementById(`pill-${stepNum}`).classList.add('active');
-            if (stepNum === 3) updateScope();
+            if (stepNum === 4) calculateROI();
         }
 
-        function updateScope() {
-            const checkedBoxes = Array.from(document.querySelectorAll('.feature-grid input:checked')).map(cb => cb.value);
-            const featuresText = checkedBoxes.length > 0 ? checkedBoxes.join(', ') : 'Standard System Core';
-            document.getElementById('scopeSummaryText').innerHTML = `<strong>Target Platform:</strong> ${selectedPlatform}<br><strong>Included Deliverables:</strong> ${featuresText}`;
+        function updateSummary() {
+            // Function placeholder for module triggers
         }
 
-        function getWizardData() {
+        function calculateROI() {
+            const employees = parseInt(document.getElementById('rangeEmployees').value);
+            const hoursPerWeek = parseInt(document.getElementById('rangeHours').value);
+            const wage = parseInt(document.getElementById('rangeWage').value);
+
+            document.getElementById('valEmployees').innerText = employees;
+            document.getElementById('valHours').innerText = hoursPerWeek;
+            document.getElementById('valWage').innerText = wage;
+
+            const totalWeeklyHours = employees * hoursPerWeek;
+            const savedWeeklyHours = totalWeeklyHours * 0.80;
+            const savedMonthlyHours = Math.round(savedWeeklyHours * 4.33);
+            const monthlySavings = Math.round(savedMonthlyHours * wage);
+
+            document.getElementById('outTotalSavings').innerText = `Rs. ${monthlySavings.toLocaleString()}`;
+            document.getElementById('outHoursSaved').innerText = `Saved Across ${savedMonthlyHours.toLocaleString()} Monthly Hours`;
+
+            let discountPercent = Math.min(25, Math.max(5, Math.round((monthlySavings / 100000) * 20)));
+            let discountValue = Math.round(monthlySavings * (discountPercent / 100));
+
+            document.getElementById('discountTitle').innerText = `🎁 Earned Seasonal Discount: ${discountPercent}% OFF`;
+            document.getElementById('discountAmount').innerText = `Rs. ${discountValue.toLocaleString()} Value`;
+            document.getElementById('discountBarFill').style.width = `${Math.min(100, discountPercent * 4)}%`;
+        }
+
+        function getFormData() {
             const name = document.getElementById('cName').value.trim();
             const country = document.getElementById('cCountry').value.trim();
             const contact = document.getElementById('cContact').value.trim();
-            const extraDetails = document.getElementById('cDetails').value.trim();
 
             if (!name || !country || !contact) {
-                alert('Please complete your Name, Country, and Contact Number in Step 3!');
+                alert('Please complete your Name, Country, and WhatsApp Number in Step 4!');
                 return null;
             }
 
             const checkedBoxes = Array.from(document.querySelectorAll('.feature-grid input:checked')).map(cb => cb.value);
-            const features = checkedBoxes.length > 0 ? checkedBoxes.join('\n - ') : 'Standard System Core';
-            return { name, country, contact, extraDetails, features, platform: selectedPlatform };
+            const features = checkedBoxes.length > 0 ? checkedBoxes.join(', ') : 'Standard System Core';
+            const aiPrompt = document.getElementById('aiPrompt').value.trim() || 'N/A';
+            const savings = document.getElementById('outTotalSavings').innerText;
+
+            return { name, country, contact, features, aiPrompt, savings, platform: selectedPlatform };
         }
 
-        function sendWizardWhatsApp() {
-            const data = getWizardData();
+        function sendViaWhatsApp() {
+            const data = getFormData();
             if (!data) return;
-            const message = `*Custom Software Scope Inquiry — Mashal Tech*\n\n👤 *Client/Company:* ${data.name}\n🌍 *Country:* ${data.country}\n📞 *Contact No:* ${data.contact}\n🛠️ *Platform Choice:* ${data.platform}\n\n📋 *Selected Modules:*\n - ${data.features}\n\n📝 *Additional Details:* ${data.extraDetails || 'N/A'}`;
+
+            const message = `*Custom Software Unified Scope & ROI Report*\n\n` +
+                            `👤 *Client:* ${data.name}\n` +
+                            `🌍 *Country:* ${data.country}\n` +
+                            `📞 *Contact:* ${data.contact}\n` +
+                            `🛠️ *Platform:* ${data.platform}\n\n` +
+                            `📋 *Modules:* ${data.features}\n` +
+                            `🤖 *AI Prompt:* "${data.aiPrompt}"\n` +
+                            `📈 *Projected Savings:* ${data.savings}`;
+
             window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        function sendWizardGmail() {
-            const data = getWizardData();
+        function sendViaGmail() {
+            const data = getFormData();
             if (!data) return;
-            const subject = encodeURIComponent(`Software Scope Proposal: ${data.platform} for ${data.name}`);
-            const body = encodeURIComponent(`Client Name/Company: ${data.name}\nCountry: ${data.country}\nContact No: ${data.contact}\n\nPlatform Architecture: ${data.platform}\n\nSelected Modules:\n - ${data.features}\n\nExtra Specifications:\n${data.extraDetails || 'None provided'}`);
-            window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
-        }
 
-        function generateBlueprint() {
-            const name = document.getElementById('aiName').value.trim();
-            const contact = document.getElementById('aiContact').value.trim();
-            const prompt = document.getElementById('aiPrompt').value.trim();
+            const subject = encodeURIComponent(`Software Project & ROI Proposal from ${data.name}`);
+            const body = encodeURIComponent(
+                `Client Name: ${data.name}\n` +
+                `Country: ${data.country}\n` +
+                `Contact No: ${data.contact}\n\n` +
+                `Platform: ${data.platform}\n` +
+                `Selected Modules: ${data.features}\n\n` +
+                `AI Prompt Description:\n"${data.aiPrompt}"\n\n` +
+                `Projected Monthly Savings: ${data.savings}`
+            );
 
-            if (!name || !contact || !prompt) {
-                alert('Please fill out your Name, Contact Number, and Software Description!');
-                return;
-            }
-
-            document.getElementById('outClient').innerText = name;
-            document.getElementById('outPromptEcho').innerText = prompt;
-
-            const lowerPrompt = prompt.toLowerCase();
-            let stack = "C# .NET 10.0 Windows Forms (Standalone x64) with SQLite Encrypted Local Database.";
-            if (lowerPrompt.includes('mobile') || lowerPrompt.includes('android') || lowerPrompt.includes('game')) {
-                stack = "Unity 2D Mobile / Cross-Platform Android APK";
-            } else if (lowerPrompt.includes('web') || lowerPrompt.includes('portal') || lowerPrompt.includes('cloud')) {
-                stack = "Node.js Express Backend + PostgreSQL + Vercel Hosting";
-            }
-
-            document.getElementById('outStack').innerText = stack;
-            document.getElementById('blueprintResult').style.display = 'block';
-            document.getElementById('blueprintResult').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function getAiData() {
-            return {
-                name: document.getElementById('aiName').value.trim(),
-                contact: document.getElementById('aiContact').value.trim(),
-                prompt: document.getElementById('aiPrompt').value.trim(),
-                stack: document.getElementById('outStack').innerText,
-                timeline: document.getElementById('outTimeline').innerText
-            };
-        }
-
-        function sendAiWhatsApp() {
-            const data = getAiData();
-            if (!data.name) return;
-            const message = `🤖 *AI Software Blueprint Proposal — Mashal Tech*\n\n👤 *Client:* ${data.name}\n📞 *Contact:* ${data.contact}\n\n📝 *User Request:* "${data.prompt}"\n\n🛠️ *AI Architecture:* ${data.stack}\n⏱️ *Timeline:* ${data.timeline}`;
-            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        function sendAiGmail() {
-            const data = getAiData();
-            if (!data.name) return;
-            const subject = encodeURIComponent(`AI Software Blueprint: ${data.name}`);
-            const body = encodeURIComponent(`Client Name: ${data.name}\nContact No: ${data.contact}\n\nProject Prompt:\n"${data.prompt}"\n\nAI Recommended Stack:\n${data.stack}\n\nEstimated Timeline:\n${data.timeline}`);
             window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
         }
 

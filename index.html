@@ -31,7 +31,7 @@
         .custom-banner-btn { background: #ffffff; color: #1e3a8a; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: background 0.15s; }
         .custom-banner-btn:hover { background: #f1f5f9; }
 
-        /* Clean 4-Tab Navigation Bar */
+        /* Unified 4-Tab Navigation Bar */
         .platform-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .platform-btn {
             flex: 1; min-width: 150px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
@@ -39,6 +39,7 @@
             text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
             transition: all 0.2s ease;
         }
+        .platform-btn:hover { background: #f9fafb; color: var(--text-main); border-color: #d1d5db; }
         .platform-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.25); }
 
         .top-nav {
@@ -55,14 +56,15 @@
         .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; }
 
         .categories-bar { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 24px; display: flex; gap: 32px; margin-bottom: 24px; overflow-x: auto; }
-        .cat-item { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; cursor: pointer; }
+        .cat-item { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; cursor: pointer; white-space: nowrap; }
+        .cat-item:hover { color: var(--text-main); }
         .cat-item.active { color: var(--accent); font-weight: 700; }
 
         .content-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 24px; }
         @media (max-width: 950px) { .content-layout { grid-template-columns: 1fr; } .custom-banner { flex-direction: column; text-align: center; gap: 10px; } }
 
         .section-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
         .section-header h2 { font-size: 1.15rem; font-weight: 700; }
 
         .product-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); gap: 20px; }
@@ -107,7 +109,7 @@
             <a href="contact.html" class="custom-banner-btn">Contact Developers</a>
         </div>
 
-        <!-- Clean 4-Tab Navigation Bar -->
+        <!-- Clean Unified 4-Tab Navigation Bar -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn active">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
@@ -120,15 +122,16 @@
             <div class="license-badge-header">🛡️ Verified Enterprise License: MT-LIC-2026-SECURE</div>
             <div class="search-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search PC solutions & ERPs...">
+                <input type="text" id="searchInput" placeholder="Search PC solutions & Web Portals...">
             </div>
         </div>
 
+        <!-- Secondary Categories Bar (Includes Web Portals) -->
         <div class="categories-bar">
-            <span class="cat-item active" onclick="filterCategory('all', this)">💻 All PC Software</span>
+            <span class="cat-item active" onclick="filterCategory('all', this)">💻 All Solutions</span>
             <span class="cat-item" onclick="filterCategory('desktop', this)">🖥️ Desktop Systems</span>
             <span class="cat-item" onclick="filterCategory('erp', this)">🧾 Enterprise ERPs</span>
-            <span class="cat-item" onclick="filterCategory('portal', this)">🌐 Full-Stack Portals</span>
+            <span class="cat-item" onclick="filterCategory('portal', this)">🌐 Web Portals</span>
         </div>
 
         <div class="content-layout">
@@ -171,10 +174,26 @@
                         </div>
                     </div>
 
-                    <div id="noResults" style="display:none; padding:20px; text-align:center; color: var(--text-muted);">No PC software found.</div>
+                    <div class="product-row" data-category="portal">
+                        <div class="product-info">
+                            <div class="product-thumb">🌐</div>
+                            <div class="product-details">
+                                <h3><a class="product-title-link" onclick="window.location.href='contact.html'">Full-Stack Business Web Portal</a></h3>
+                                <p>Cloud-backed React & Node.js web applications with custom database sync.</p>
+                                <div><span class="tag-badge">✔ Vercel Hosted</span></div>
+                            </div>
+                        </div>
+                        <div class="product-stats">
+                            <span class="size">Cloud App</span>
+                            <span>Live Deploy</span>
+                            <a href="contact.html" class="download-btn" style="background: var(--ai-accent, #7c3aed);">Request Web Spec</a>
+                        </div>
+                    </div>
+
+                    <div id="noResults" style="display:none; padding:20px; text-align:center; color: var(--text-muted);">No matching solutions found.</div>
                 </div>
 
-                <!-- Custom Full-Stack Web Applications Section -->
+                <!-- Custom Full-Stack Web Applications Showcase Section -->
                 <div class="section-box">
                     <div class="section-header">
                         <h2>🌐 Custom Full-Stack Web Applications</h2>
@@ -254,9 +273,9 @@
 
             <div>
                 <div class="section-box">
-                    <div class="section-header"><h2>Need Custom PC Software?</h2></div>
+                    <div class="section-header"><h2>Need Custom Software?</h2></div>
                     <div style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-                        <p style="margin-bottom: 12px;">We craft tailored offline desktop tools, cloud databases, and inventory ERPs designed specifically around your workflow.</p>
+                        <p style="margin-bottom: 12px;">We craft tailored offline desktop tools, mobile apps, and cloud web portals designed specifically around your workflow.</p>
                         <p><strong>Direct Developer Contact:</strong></p>
                         <ul style="list-style: none; margin-top: 8px;">
                             <li style="margin-bottom: 6px;">📧 <strong>Email:</strong> 6saddamhussain9@gmail.com</li>
@@ -265,7 +284,7 @@
                     </div>
                     <div class="license-box">
                         <h4 style="color: var(--text-main); margin-bottom: 4px;">📜 Certificate of Authenticity</h4>
-                        <p>All PC software packages are compiled and distributed under <strong>Mashal Tech Enterprise</strong>.</p>
+                        <p>All software solutions are compiled and deployed under <strong>Mashal Tech Enterprise</strong>.</p>
                     </div>
                 </div>
             </div>

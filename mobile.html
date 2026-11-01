@@ -17,250 +17,66 @@
             --tag-text: #047857;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 16px 24px; }
+        
+        .container { width: 100%; max-width: 1550px; margin: 0 auto; }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.5;
-            padding: 16px 24px;
-        }
-
-        /* Full-Width Dynamic Container */
-        .container {
-            width: 100%;
-            max-width: 1550px;
-            margin: 0 auto;
-        }
-
-        /* Announcement Banner */
         .custom-banner {
             background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
-            color: #ffffff;
-            padding: 14px 24px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+            color: #ffffff; padding: 14px 24px; border-radius: 8px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
         }
+        .custom-banner-text { font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .custom-banner-btn { background: #ffffff; color: #065f46; padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: background 0.15s; }
+        .custom-banner-btn:hover { background: #f1f5f9; }
 
-        .custom-banner-text {
-            font-size: 0.95rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .custom-banner-btn {
-            background: #ffffff;
-            color: #065f46;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: background 0.15s;
-        }
-
-        .custom-banner-btn:hover {
-            background: #f1f5f9;
-        }
-
-        /* Platform & Contact Switcher Tabs */
-        .platform-tabs {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
+        .platform-tabs { display: flex; gap: 12px; margin-bottom: 20px; }
         .platform-btn {
-            flex: 1;
-            padding: 14px 20px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-decoration: none;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            flex: 1; padding: 14px 20px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; font-size: 1rem; font-weight: 700; color: var(--text-muted);
+            text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
             transition: all 0.2s ease;
         }
+        .platform-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.25); }
 
-        .platform-btn.active {
-            background: var(--accent);
-            color: #ffffff;
-            border-color: var(--accent);
-            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.25);
-        }
-
-        /* Top Navigation Header */
         .top-nav {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 20px;
-            flex-wrap: wrap;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 20px; flex-wrap: wrap;
         }
+        .brand { font-size: 1.3rem; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .brand-icon { background: var(--accent); color: white; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; font-size: 1rem; }
 
-        .brand {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .search-box { flex: 1; max-width: 500px; position: relative; }
+        .search-box input { width: 100%; padding: 10px 14px 10px 38px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; outline: none; background: #f9fafb; }
+        .search-box input:focus { background: #fff; border-color: var(--accent); }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; }
 
-        .brand-icon {
-            background: var(--accent);
-            color: white;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 1rem;
-        }
+        .content-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 24px; }
+        @media (max-width: 950px) { .content-layout { grid-template-columns: 1fr; } .custom-banner { flex-direction: column; text-align: center; gap: 10px; } }
 
-        .search-box {
-            flex: 1;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 10px 14px 10px 38px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.9rem;
-            outline: none;
-            background: #f9fafb;
-        }
-
-        .search-box input:focus {
-            background: #fff;
-            border-color: var(--accent);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Content Layout */
-        .content-layout {
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 24px;
-        }
-
-        @media (max-width: 950px) {
-            .content-layout { grid-template-columns: 1fr; }
-            .custom-banner { flex-direction: column; text-align: center; gap: 10px; }
-        }
-
-        .section-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
-        }
-
+        .section-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; }
         .section-header h2 { font-size: 1.15rem; font-weight: 700; }
 
-        /* Product List Items */
-        .product-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-            gap: 20px;
-        }
-
+        .product-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); gap: 20px; }
         .product-row:last-child { border-bottom: none; }
-
         .product-info { display: flex; align-items: flex-start; gap: 16px; flex: 1; }
-
-        .product-thumb {
-            width: 48px;
-            height: 48px;
-            background: #d1fae5;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
+        .product-thumb { width: 48px; height: 48px; background: #d1fae5; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
         .product-details h3 { font-size: 1rem; font-weight: 600; }
         .product-details p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
-
-        .tag-badge {
-            background: var(--tag-bg);
-            color: var(--tag-text);
-            padding: 2px 10px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.78rem;
-            border: 1px solid #a7f3d0;
-        }
-
+        .tag-badge { background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 4px; font-weight: 600; font-size: 0.78rem; border: 1px solid #a7f3d0; }
         .product-stats { text-align: right; font-size: 0.85rem; color: var(--text-muted); min-width: 120px; }
         .product-stats .size { font-weight: 600; color: var(--text-main); display: block; }
 
-        .download-btn {
-            display: inline-block;
-            margin-top: 6px;
-            background: var(--accent);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
+        .download-btn { display: inline-block; margin-top: 6px; background: var(--accent); color: white; padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }
         .download-btn:hover { background: var(--accent-hover); }
 
         .license-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-top: 15px; font-size: 0.85rem; color: var(--text-muted); }
+
+        /* Floating WhatsApp Button */
+        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); text-decoration: none; font-weight: 700; font-size: 0.9rem; z-index: 9999; transition: transform 0.2s ease, background-color 0.2s ease; }
+        .floating-whatsapp:hover { background: #1ebe5d; transform: translateY(-3px); }
 
         footer { text-align: center; padding: 24px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
     </style>
@@ -268,46 +84,29 @@
 <body>
 
     <div class="container">
-
-        <!-- Top Announcement Banner -->
         <div class="custom-banner">
-            <div class="custom-banner-text">
-                📱 <strong>Need a custom mobile app or game?</strong> We build bespoke Android apps, field agent tools, and interactive Unity games for your business!
-            </div>
+            <div class="custom-banner-text">📱 <strong>Need a custom mobile app or game?</strong> Build bespoke Android utilities & Unity games with us!</div>
             <a href="contact.html" class="custom-banner-btn">Contact Mobile Team</a>
         </div>
 
-        <!-- Platform & Contact Switcher Tabs -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn active">📱 Mobile Apps</a>
-            <a href="contact.html" class="platform-btn">📞 Contact & Quote</a>
+            <a href="contact.html" class="platform-btn">📞 Solution Estimator & Contact</a>
         </div>
 
-        <!-- Top Header Navigation -->
         <div class="top-nav">
-            <a href="mobile.html" class="brand">
-                <div class="brand-icon">M</div>
-                Mashal Tech Mobile
-            </a>
-
+            <a href="mobile.html" class="brand"><div class="brand-icon">M</div>Mashal Tech Mobile</a>
             <div class="search-box">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="searchInput" placeholder="Search mobile apps & games...">
             </div>
         </div>
 
-        <!-- Main Content Area -->
         <div class="content-layout">
-            
-            <!-- Left Column: Android Apps & Games -->
             <div>
                 <div class="section-box">
-                    <div class="section-header">
-                        <h2>Authorized Android Apps & Games</h2>
-                    </div>
-
-                    <!-- Item 1 -->
+                    <div class="section-header"><h2>Authorized Android Apps & Games</h2></div>
                     <div class="product-row">
                         <div class="product-info">
                             <div class="product-thumb">🎮</div>
@@ -326,13 +125,9 @@
                 </div>
             </div>
 
-            <!-- Right Sidebar: Custom Mobile Development Info -->
             <div>
                 <div class="section-box">
-                    <div class="section-header">
-                        <h2>Need Custom Mobile Apps?</h2>
-                    </div>
-
+                    <div class="section-header"><h2>Need Custom Mobile Apps?</h2></div>
                     <div style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
                         <p style="margin-bottom: 12px;">We develop cross-platform mobile solutions, Android utilities, and interactive game prototypes tailored to your exact requirements.</p>
                         <p><strong>Direct Mobile Team Contact:</strong></p>
@@ -341,14 +136,12 @@
                             <li>📞 <strong>Phone/WhatsApp:</strong> 0370-0818276</li>
                         </ul>
                     </div>
-
                     <div class="license-box">
                         <h4 style="color: var(--text-main); margin-bottom: 4px;">📜 Certified Build</h4>
                         <p>All mobile packages are managed and deployed under <strong>Mashal Tech Mobile Infrastructure</strong>.</p>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <footer>
@@ -356,18 +149,25 @@
         </footer>
     </div>
 
-    <!-- Live Search Script -->
+    <!-- Floating WhatsApp Button -->
+    <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
+        <span>💬</span> <span>Chat with Us</span>
+    </a>
+
     <script>
         const searchInput = document.getElementById('searchInput');
         const rows = document.querySelectorAll('.product-row');
-
         searchInput.addEventListener('keyup', function(e) {
             const query = e.target.value.toLowerCase().trim();
             rows.forEach(row => {
-                const text = row.innerText.toLowerCase();
-                row.style.display = text.includes(query) ? 'flex' : 'none';
+                row.style.display = row.innerText.toLowerCase().includes(query) ? 'flex' : 'none';
             });
         });
+
+        function openQuickWhatsApp() {
+            const message = "Hi! I am visiting Mashal Tech Store and would like to inquire about a custom mobile app project.";
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
+        }
     </script>
 </body>
 </html>

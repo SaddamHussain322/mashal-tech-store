@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mashal Tech — ROI & Automation Savings Calculator</title>
+    <style>
+        :root {
+            --bg: #f3f4f6;
+            --surface: #ffffff;
+            --border: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #059669; /* Emerald Green for Financial / ROI theme */
+            --accent-hover: #047857;
+            --whatsapp-green: #25d366;
+            --whatsapp-hover: #1ebe5d;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 16px 24px; }
+        
+        .container { width: 100%; max-width: 1550px; margin: 0 auto; }
+
+        /* Navigation Switcher Tabs */
+        .platform-tabs { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .platform-btn {
+            flex: 1; min-width: 130px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; font-size: 0.9rem; font-weight: 700; color: var(--text-muted);
+            text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .platform-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); }
+
+        .top-nav {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
+        }
+        .brand { font-size: 1.3rem; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .brand-icon { background: var(--accent); color: white; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; }
+
+        .calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }
+        @media (max-width: 950px) { .calc-grid { grid-template-columns: 1fr; } }
+
+        .section-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 28px; margin-bottom: 24px; }
+        .section-header { border-bottom: 2px solid var(--accent); padding-bottom: 12px; margin-bottom: 20px; }
+        .section-header h2 { font-size: 1.2rem; font-weight: 700; }
+
+        .slider-group { margin-bottom: 22px; }
+        .slider-group label { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
+        .slider-group label span { color: var(--accent); font-weight: 700; }
+        .slider-group input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+        /* Results Card */
+        .results-card { background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: 8px; padding: 24px; text-align: center; }
+        .result-metric { font-size: 2.2rem; font-weight: 800; color: var(--accent); margin: 6px 0; }
+        .result-sub { font-size: 0.85rem; color: #166534; margin-bottom: 16px; }
+
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; text-align: left; }
+        .metric-box { background: #fff; padding: 12px; border-radius: 6px; border: 1px solid #dcfce7; }
+        .metric-box h4 { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 2px; }
+        .metric-box p { font-size: 1.05rem; font-weight: 700; color: var(--text-main); }
+
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+        .form-control { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; background: #f9fafb; outline: none; }
+        .form-control:focus { background: #fff; border-color: var(--accent); }
+
+        .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+        @media (max-width: 600px) { .action-buttons { grid-template-columns: 1fr; } }
+
+        .btn-whatsapp { background: var(--whatsapp-green); color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-align: center; }
+        .btn-whatsapp:hover { background: #1ebe5d; }
+        .btn-gmail { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-align: center; }
+        .btn-gmail:hover { background: var(--accent-hover); }
+
+        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); text-decoration: none; font-weight: 700; font-size: 0.9rem; z-index: 9999; transition: transform 0.2s ease; }
+        .floating-whatsapp:hover { transform: translateY(-3px); }
+
+        footer { text-align: center; padding: 24px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
+    </style>
+</head>
+<body onload="calculateROI()">
+
+    <div class="container">
+        
+        <!-- Navigation Switcher Tabs (Now 6 Tabs!) -->
+        <div class="platform-tabs">
+            <a href="index.html" class="platform-btn">💻 PC Software</a>
+            <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
+            <a href="contact.html" class="platform-btn">📞 Estimator</a>
+            <a href="track.html" class="platform-btn">🔍 Track Order</a>
+            <a href="ai-blueprint.html" class="platform-btn">🤖 AI Blueprint</a>
+            <a href="roi-calculator.html" class="platform-btn active">📈 ROI Calculator</a>
+        </div>
+
+        <!-- Top Header -->
+        <div class="top-nav">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">M</div>
+                Mashal Tech Financial Engine
+            </a>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                Interactive Automation & Savings Calculator
+            </div>
+        </div>
+
+        <div class="calc-grid">
+            
+            <!-- Left Column: Interactive Sliders -->
+            <div class="section-box">
+                <div class="section-header">
+                    <h2>⚙️ Configure Your Business Parameters</h2>
+                </div>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+                    Adjust the sliders below to match your current manual workflow overhead (e.g., spreadsheet data entry, paper invoices, multi-warehouse checks):
+                </p>
+
+                <div class="slider-group">
+                    <label>Number of Employees Handling Manual Tasks: <span id="valEmployees">5</span></label>
+                    <input type="range" id="rangeEmployees" min="1" max="50" value="5" oninput="calculateROI()">
+                </div>
+
+                <div class="slider-group">
+                    <label>Hours Spent per Employee Weekly on Manual Tasks: <span id="valHours">12</span> hrs</label>
+                    <input type="range" id="rangeHours" min="2" max="35" value="12" oninput="calculateROI()">
+                </div>
+
+                <div class="slider-group">
+                    <label>Average Hourly Cost / Wage ($ equivalent): $<span id="valWage">15</span> / hr</label>
+                    <input type="range" id="rangeWage" min="5" max="80" value="15" oninput="calculateROI()">
+                </div>
+
+                <div class="slider-group">
+                    <label>Estimated Manual Error / Correction Rate: <span id="valError">8</span>%</label>
+                    <input type="range" id="rangeError" min="1" max="25" value="8" oninput="calculateROI()">
+                </div>
+            </div>
+
+            <!-- Right Column: Live ROI & Savings Output -->
+            <div class="section-box">
+                <div class="section-header">
+                    <h2>📊 Projected Monthly Savings</h2>
+                </div>
+
+                <div class="results-card">
+                    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #166534;">Estimated Net Monthly Savings</p>
+                    <div class="result-metric" id="outTotalSavings">$3,600</div>
+                    <p class="result-sub">Saved through automated custom software workflows</p>
+
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <h4>Monthly Hours Saved</h4>
+                            <p id="outHoursSaved">240 hrs</p>
+                        </div>
+                        <div class="metric-box">
+                            <h4>Error Rate Reduction</h4>
+                            <p style="color: var(--accent);">95% Eliminated</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Consultation / Send Results Form -->
+                <div style="margin-top: 20px;">
+                    <h3 style="font-size: 0.95rem; margin-bottom: 10px;">Ready to automate these tasks?</h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" id="calcName" class="form-control" placeholder="Your Name / Company">
+                        <input type="text" id="calcContact" class="form-control" placeholder="WhatsApp / Phone">
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="button" onclick="sendRoiWhatsApp()" class="btn-whatsapp">
+                            💬 Send ROI Stats via WhatsApp
+                        </button>
+                        <button type="button" onclick="sendRoiGmail()" class="btn-gmail">
+                            📧 Send ROI Stats via Gmail
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Mashal Tech Enterprise. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
+        </footer>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
+        <span>💬</span> <span>Chat with Us</span>
+    </a>
+
+    <script>
+        function calculateROI() {
+            const employees = parseInt(document.getElementById('rangeEmployees').value);
+            const hoursPerWeek = parseInt(document.getElementById('rangeHours').value);
+            const wage = parseInt(document.getElementById('rangeWage').value);
+            const errorRate = parseInt(document.getElementById('rangeError').value);
+
+            // Update display spans
+            document.getElementById('valEmployees').innerText = employees;
+            document.getElementById('valHours').innerText = hoursPerWeek;
+            document.getElementById('valWage').innerText = wage;
+            document.getElementById('valError').innerText = errorRate;
+
+            // Calculations (Assuming custom software automates ~80% of repetitive manual tasks)
+            const totalWeeklyHours = employees * hoursPerWeek;
+            const savedWeeklyHours = totalWeeklyHours * 0.80;
+            const savedMonthlyHours = Math.round(savedWeeklyHours * 4.33);
+            const monthlySavings = Math.round(savedMonthlyHours * wage);
+
+            // Output updates
+            document.getElementById('outTotalSavings').innerText = `$${monthlySavings.toLocaleString()}`;
+            document.getElementById('outHoursSaved').innerText = `${savedMonthlyHours.toLocaleString()} hrs`;
+        }
+
+        function getRoiData() {
+            const name = document.getElementById('calcName').value.trim() || "Prospective Client";
+            const contact = document.getElementById('calcContact').value.trim() || "N/A";
+            const savings = document.getElementById('outTotalSavings').innerText;
+            const hours = document.getElementById('outHoursSaved').innerText;
+            const employees = document.getElementById('rangeEmployees').value;
+
+            return { name, contact, savings, hours, employees };
+        }
+
+        function sendRoiWhatsApp() {
+            const data = getRoiData();
+            const message = `📈 *ROI & Automation Savings Report — Mashal Tech*\n\n` +
+                            `👤 *Client:* ${data.name}\n` +
+                            `📞 *Contact:* ${data.contact}\n` +
+                            `👥 *Team Size:* ${data.employees} employees\n\n` +
+                            `💰 *Projected Monthly Savings:* ${data.savings}\n` +
+                            `⏱️ *Monthly Hours Saved:* ${data.hours}\n\n` +
+                            `I would like to discuss building custom software to achieve these savings!`;
+
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function sendRoiGmail() {
+            const data = getRoiData();
+            const subject = encodeURIComponent(`ROI Savings Inquiry from ${data.name}`);
+            const body = encodeURIComponent(
+                `Client Name: ${data.name}\n` +
+                `Contact No: ${data.contact}\n\n` +
+                `Calculator Results:\n` +
+                `- Team Size: ${data.employees} employees\n` +
+                `- Projected Monthly Savings: ${data.savings}\n` +
+                `- Monthly Hours Saved: ${data.hours}\n\n` +
+                `Please get in touch regarding custom software automation.`
+            );
+
+            window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
+        }
+
+        function openQuickWhatsApp() {
+            const message = "Hi! I tested the ROI Calculator on Mashal Tech Store and would like to discuss custom automation for my business.";
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
+</html>

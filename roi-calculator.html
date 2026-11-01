@@ -11,7 +11,7 @@
             --border: #e5e7eb;
             --text-main: #111827;
             --text-muted: #6b7280;
-            --accent: #059669; /* Emerald Green for Financial / ROI theme */
+            --accent: #059669;
             --accent-hover: #047857;
             --whatsapp-green: #25d366;
             --whatsapp-hover: #1ebe5d;
@@ -22,11 +22,10 @@
         
         .container { width: 100%; max-width: 1550px; margin: 0 auto; }
 
-        /* Navigation Switcher Tabs */
-        .platform-tabs { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .platform-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .platform-btn {
-            flex: 1; min-width: 130px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border);
-            border-radius: 8px; font-size: 0.9rem; font-weight: 700; color: var(--text-muted);
+            flex: 1; min-width: 130px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; font-size: 0.85rem; font-weight: 700; color: var(--text-muted);
             text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
             transition: all 0.2s ease;
         }
@@ -61,6 +60,12 @@
         .metric-box h4 { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 2px; }
         .metric-box p { font-size: 1.05rem; font-weight: 700; color: var(--text-main); }
 
+        /* Discount Progress Bar Styling */
+        .discount-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 16px; margin-top: 20px; }
+        .discount-header { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; color: #92400e; margin-bottom: 8px; }
+        .progress-bar-container { background: #fef3c7; border-radius: 20px; height: 14px; width: 100%; overflow: hidden; position: relative; }
+        .progress-bar-fill { background: linear-gradient(90deg, #f59e0b, #d97706); height: 100%; width: 0%; transition: width 0.4s ease; border-radius: 20px; }
+
         .form-group { margin-bottom: 14px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
         .form-control { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; background: #f9fafb; outline: none; }
@@ -84,85 +89,85 @@
 
     <div class="container">
         
-        <!-- Navigation Switcher Tabs (Now 6 Tabs!) -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
-            <a href="contact.html" class="platform-btn">📞 Estimator</a>
+            <a href="contact.html" class="platform-btn">📞 Estimator & AI</a>
             <a href="track.html" class="platform-btn">🔍 Track Order</a>
-            <a href="ai-blueprint.html" class="platform-btn">🤖 AI Blueprint</a>
+            <a href="contact.html" class="platform-btn">🤖 AI Blueprint</a>
             <a href="roi-calculator.html" class="platform-btn active">📈 ROI Calculator</a>
         </div>
 
-        <!-- Top Header -->
         <div class="top-nav">
             <a href="index.html" class="brand">
                 <div class="brand-icon">M</div>
                 Mashal Tech Financial Engine
             </a>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">
-                Interactive Automation & Savings Calculator
-            </div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Interactive Automation & Savings Calculator</div>
         </div>
 
         <div class="calc-grid">
             
-            <!-- Left Column: Interactive Sliders -->
             <div class="section-box">
                 <div class="section-header">
                     <h2>⚙️ Configure Your Business Parameters</h2>
                 </div>
                 <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
-                    Adjust the sliders below to match your current manual workflow overhead (e.g., spreadsheet data entry, paper invoices, multi-warehouse checks):
+                    Adjust sliders to match your current manual workflow overhead (spreadsheet records, paper ledgers, inventory tracking):
                 </p>
 
                 <div class="slider-group">
-                    <label>Number of Employees Handling Manual Tasks: <span id="valEmployees">5</span></label>
-                    <input type="range" id="rangeEmployees" min="1" max="50" value="5" oninput="calculateROI()">
+                    <label>Number of Employees Handling Manual Tasks: <span id="valEmployees">3</span></label>
+                    <input type="range" id="rangeEmployees" min="1" max="20" value="3" oninput="calculateROI()">
                 </div>
 
                 <div class="slider-group">
-                    <label>Hours Spent per Employee Weekly on Manual Tasks: <span id="valHours">12</span> hrs</label>
-                    <input type="range" id="rangeHours" min="2" max="35" value="12" oninput="calculateROI()">
+                    <label>Hours Spent per Employee Weekly: <span id="valHours">8</span> hrs</label>
+                    <input type="range" id="rangeHours" min="2" max="25" value="8" oninput="calculateROI()">
                 </div>
 
                 <div class="slider-group">
-                    <label>Average Hourly Cost / Wage ($ equivalent): $<span id="valWage">15</span> / hr</label>
-                    <input type="range" id="rangeWage" min="5" max="80" value="15" oninput="calculateROI()">
-                </div>
-
-                <div class="slider-group">
-                    <label>Estimated Manual Error / Correction Rate: <span id="valError">8</span>%</label>
-                    <input type="range" id="rangeError" min="1" max="25" value="8" oninput="calculateROI()">
+                    <label>Average Hourly Wage (PKR): Rs. <span id="valWage">350</span> / hr</label>
+                    <input type="range" id="rangeWage" min="150" max="1500" step="50" value="350" oninput="calculateROI()">
                 </div>
             </div>
 
-            <!-- Right Column: Live ROI & Savings Output -->
             <div class="section-box">
                 <div class="section-header">
-                    <h2>📊 Projected Monthly Savings</h2>
+                    <h2>📊 Projected Monthly Savings & Discount</h2>
                 </div>
 
                 <div class="results-card">
                     <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: #166534;">Estimated Net Monthly Savings</p>
-                    <div class="result-metric" id="outTotalSavings">$3,600</div>
+                    <div class="result-metric" id="outTotalSavings">Rs. 29,937</div>
                     <p class="result-sub">Saved through automated custom software workflows</p>
 
                     <div class="metrics-grid">
                         <div class="metric-box">
                             <h4>Monthly Hours Saved</h4>
-                            <p id="outHoursSaved">240 hrs</p>
+                            <p id="outHoursSaved">85 hrs</p>
                         </div>
                         <div class="metric-box">
-                            <h4>Error Rate Reduction</h4>
+                            <h4>Error Reduction</h4>
                             <p style="color: var(--accent);">95% Eliminated</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Quick Consultation / Send Results Form -->
+                <!-- Special Seasonal Discount Earned Bar -->
+                <div class="discount-box">
+                    <div class="discount-header">
+                        <span id="discountTitle">🎁 Earned Seasonal Discount: 15% OFF</span>
+                        <span id="discountAmount">Rs. 4,500 Saved</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="discountBarFill"></div>
+                    </div>
+                    <p style="font-size: 0.78rem; color: #b45309; margin-top: 6px;" id="discountHint">Based on your automation scale, you qualify for a special software discount!</p>
+                </div>
+
                 <div style="margin-top: 20px;">
-                    <h3 style="font-size: 0.95rem; margin-bottom: 10px;">Ready to automate these tasks?</h3>
+                    <h3 style="font-size: 0.95rem; margin-bottom: 10px;">Ready to claim your system & discount?</h3>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
                         <input type="text" id="calcName" class="form-control" placeholder="Your Name / Company">
@@ -171,10 +176,10 @@
 
                     <div class="action-buttons">
                         <button type="button" onclick="sendRoiWhatsApp()" class="btn-whatsapp">
-                            💬 Send ROI Stats via WhatsApp
+                            💬 Send Stats via WhatsApp
                         </button>
                         <button type="button" onclick="sendRoiGmail()" class="btn-gmail">
-                            📧 Send ROI Stats via Gmail
+                            📧 Send Stats via Gmail
                         </button>
                     </div>
                 </div>
@@ -187,7 +192,6 @@
         </footer>
     </div>
 
-    <!-- Floating WhatsApp Button -->
     <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
         <span>💬</span> <span>Chat with Us</span>
     </a>
@@ -197,23 +201,27 @@
             const employees = parseInt(document.getElementById('rangeEmployees').value);
             const hoursPerWeek = parseInt(document.getElementById('rangeHours').value);
             const wage = parseInt(document.getElementById('rangeWage').value);
-            const errorRate = parseInt(document.getElementById('rangeError').value);
 
-            // Update display spans
             document.getElementById('valEmployees').innerText = employees;
             document.getElementById('valHours').innerText = hoursPerWeek;
             document.getElementById('valWage').innerText = wage;
-            document.getElementById('valError').innerText = errorRate;
 
-            // Calculations (Assuming custom software automates ~80% of repetitive manual tasks)
+            // Monthly calculation in PKR
             const totalWeeklyHours = employees * hoursPerWeek;
             const savedWeeklyHours = totalWeeklyHours * 0.80;
             const savedMonthlyHours = Math.round(savedWeeklyHours * 4.33);
             const monthlySavings = Math.round(savedMonthlyHours * wage);
 
-            // Output updates
-            document.getElementById('outTotalSavings').innerText = `$${monthlySavings.toLocaleString()}`;
+            document.getElementById('outTotalSavings').innerText = `Rs. ${monthlySavings.toLocaleString()}`;
             document.getElementById('outHoursSaved').innerText = `${savedMonthlyHours.toLocaleString()} hrs`;
+
+            // Discount calculation logic (caps at max ~25% discount based on scale)
+            let discountPercent = Math.min(25, Math.max(5, Math.round((monthlySavings / 100000) * 20)));
+            let discountValue = Math.round(monthlySavings * (discountPercent / 100));
+
+            document.getElementById('discountTitle').innerText = `🎁 Earned Seasonal Discount: ${discountPercent}% OFF`;
+            document.getElementById('discountAmount').innerText = `Rs. ${discountValue.toLocaleString()} Value`;
+            document.getElementById('discountBarFill').style.width = `${Math.min(100, discountPercent * 4)}%`;
         }
 
         function getRoiData() {
@@ -234,7 +242,7 @@
                             `👥 *Team Size:* ${data.employees} employees\n\n` +
                             `💰 *Projected Monthly Savings:* ${data.savings}\n` +
                             `⏱️ *Monthly Hours Saved:* ${data.hours}\n\n` +
-                            `I would like to discuss building custom software to achieve these savings!`;
+                            `I would like to claim my custom software build and seasonal discount!`;
 
             window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
@@ -249,7 +257,7 @@
                 `- Team Size: ${data.employees} employees\n` +
                 `- Projected Monthly Savings: ${data.savings}\n` +
                 `- Monthly Hours Saved: ${data.hours}\n\n` +
-                `Please get in touch regarding custom software automation.`
+                `Please get in touch regarding custom software automation and discounts.`
             );
 
             window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;

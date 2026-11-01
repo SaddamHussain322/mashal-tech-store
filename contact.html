@@ -24,7 +24,6 @@
         
         .container { width: 100%; max-width: 1550px; margin: 0 auto; }
 
-        /* Clean 4-Tab Navigation */
         .platform-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
         .platform-btn {
             flex: 1; min-width: 150px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
@@ -52,7 +51,6 @@
         .info-item strong { display: block; color: var(--text-main); margin-bottom: 4px; font-size: 1rem; }
         .info-item span { color: var(--text-muted); }
 
-        /* Multi-Step Wizard Flow */
         .stepper-header { display: flex; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 14px; flex-wrap: wrap; gap: 6px; }
         .step-pill { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); padding: 6px 10px; border-radius: 20px; background: #f3f4f6; text-align: center; flex: 1; }
         .step-pill.active { background: var(--accent); color: white; }
@@ -83,21 +81,35 @@
         .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.95rem; background: #f9fafb; outline: none; }
         .form-control:focus { background: #fff; border-color: var(--accent); }
 
+        /* Live AI Blueprint Preview Box */
+        .ai-live-preview {
+            background: #faf5ff; border: 2px dashed var(--ai-accent); border-radius: 8px; padding: 18px; margin-top: 16px;
+        }
+        .ai-live-preview h4 { color: var(--ai-accent); font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .ai-spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.82rem; color: var(--text-muted); }
+        .ai-spec-item { background: #fff; padding: 10px; border-radius: 6px; border: 1px solid #e9d5ff; }
+        .ai-spec-item strong { color: var(--text-main); display: block; margin-bottom: 2px; }
+
         /* Sliders for Step 4 */
-        .slider-group { margin-bottom: 18px; }
-        .slider-group label { display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
+        .slider-group { margin-bottom: 16px; }
+        .slider-group label { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
         .slider-group label span { color: var(--roi-accent); font-weight: 700; }
         .slider-group input[type="range"] { width: 100%; accent-color: var(--roi-accent); cursor: pointer; }
 
-        .results-mini-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 16px; }
-        .result-metric { font-size: 1.6rem; font-weight: 800; color: var(--roi-accent); margin: 4px 0; }
+        .results-mini-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; text-align: center; margin-bottom: 14px; }
+        .result-metric { font-size: 1.4rem; font-weight: 800; color: var(--roi-accent); margin: 2px 0; }
 
-        .discount-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px; margin-bottom: 16px; }
-        .discount-header { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: #92400e; margin-bottom: 6px; }
-        .progress-bar-container { background: #fef3c7; border-radius: 20px; height: 12px; width: 100%; overflow: hidden; }
-        .progress-bar-fill { background: linear-gradient(90deg, #f59e0b, #d97706); height: 100%; width: 0%; border-radius: 20px; transition: width 0.3s; }
+        .discount-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px; margin-bottom: 14px; }
+        .discount-header { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; color: #92400e; margin-bottom: 6px; }
+        .progress-bar-container { background: #fef3c7; border-radius: 20px; height: 10px; width: 100%; overflow: hidden; }
+        .progress-bar-fill { background: linear-gradient(90deg, #f59e0b, #d97706); height: 100%; width: 0%; border-radius: 20px; }
 
-        .wizard-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 24px; }
+        /* Success tracking code display */
+        .success-banner {
+            display: none; background: #ecfdf5; border: 2px solid #10b981; border-radius: 8px; padding: 20px; text-align: center; margin-top: 20px;
+        }
+
+        .wizard-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; }
         .btn-nav { padding: 10px 20px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: 1px solid var(--border); background: #fff; }
         .btn-next { background: var(--accent); color: white; border: none; }
         .btn-next:hover { background: var(--accent-hover); }
@@ -120,7 +132,6 @@
 
     <div class="container">
         
-        <!-- Clean 4-Tab Navigation Bar -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
@@ -134,13 +145,12 @@
                 Mashal Tech Client Center
             </a>
             <div style="font-size: 0.85rem; color: var(--text-muted);">
-                Unified Multi-Step Solution & Savings Wizard
+                Unified Multi-Step Solution, AI & ROI Wizard
             </div>
         </div>
 
         <div class="contact-grid">
             
-            <!-- Left Sidebar -->
             <div>
                 <div class="section-box">
                     <div class="section-header">
@@ -173,16 +183,14 @@
                 </div>
             </div>
 
-            <!-- Right Main Area: Multi-Step Form -->
             <div>
                 <div class="section-box">
                     
-                    <!-- Stepper Progress Header -->
                     <div class="stepper-header">
                         <span class="step-pill active" id="pill-1">1. Platform</span>
                         <span class="step-pill" id="pill-2">2. Modules</span>
                         <span class="step-pill" id="pill-3">3. AI Blueprint</span>
-                        <span class="step-pill" id="pill-4">4. ROI & Discount</span>
+                        <span class="step-pill" id="pill-4">4. ROI & Dispatch</span>
                     </div>
 
                     <form id="unifiedForm">
@@ -221,12 +229,12 @@
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Check the core features needed for your custom software build:</p>
 
                             <div class="feature-grid">
-                                <label class="feature-checkbox"><input type="checkbox" value="Automated Closing Ledger & Petty Cash" onchange="updateSummary()"> Closing Ledger & Cash Logs</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="Independent Multi-Sticker Generator" onchange="updateSummary()"> Custom Multi-Sticker Tags</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="FBR Invoicing & Tax Calculation" onchange="updateSummary()"> FBR Tax & QR Invoicing</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="Candidate Onboarding Pipeline" onchange="updateSummary()"> Candidate Recruitment Tracking</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="Offline Encrypted Database Storage" onchange="updateSummary()"> Encrypted Offline Database</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="Multi-User Role Permissions" onchange="updateSummary()"> Role & Auth Permissions</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Automated Closing Ledger & Petty Cash"> Closing Ledger & Cash Logs</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Independent Multi-Sticker Generator"> Custom Multi-Sticker Tags</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="FBR Invoicing & Tax Calculation"> FBR Tax & QR Invoicing</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Candidate Onboarding Pipeline"> Candidate Recruitment Tracking</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Offline Encrypted Database Storage"> Encrypted Offline Database</label>
+                                <label class="feature-checkbox"><input type="checkbox" value="Multi-User Role Permissions"> Role & Auth Permissions</label>
                             </div>
 
                             <div class="wizard-actions">
@@ -235,67 +243,80 @@
                             </div>
                         </div>
 
-                        <!-- STEP 3: AI BLUEPRINT GENERATOR -->
+                        <!-- STEP 3: LIVE AI BLUEPRINT GENERATOR -->
                         <div class="wizard-step" id="step-3">
-                            <h2 style="font-size: 1.1rem; margin-bottom: 8px;">Step 3: AI Specification & Blueprint</h2>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Describe your workflow in plain English. Our AI will formulate your system spec:</p>
+                            <h2 style="font-size: 1.1rem; margin-bottom: 8px;">Step 3: Live AI Specification & Blueprint</h2>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Type your workflow below. Watch the AI build your system blueprint instantly in real-time:</p>
 
                             <div class="form-group">
-                                <label>Describe Your Custom Software Idea</label>
-                                <textarea id="aiPrompt" rows="3" class="form-control" placeholder="e.g. I run a wholesale distribution warehouse and need an offline Windows desktop app that logs customer ledgers and prints sticker tags..."></textarea>
+                                <label>Describe Your Custom Software Idea (Type Live!)</label>
+                                <textarea id="aiPrompt" rows="3" class="form-control" oninput="updateAiLivePreview()" placeholder="e.g. I run a retail shop with two product types and need an offline Windows inventory app with barcode printing..."></textarea>
                             </div>
 
-                            <div style="background: #f8fafc; border: 1px dashed var(--accent); padding: 14px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 16px;">
-                                <strong>AI Architectural Match:</strong> <span id="aiStackOutput" style="color: var(--accent); font-weight: 600;">C# .NET 10.0 Windows Forms (Standalone x64)</span>
+                            <div class="ai-live-preview">
+                                <h4>⚡ Live AI Specification Preview</h4>
+                                <div class="ai-spec-grid">
+                                    <div class="ai-spec-item">
+                                        <strong>Suggested Tech Stack:</strong>
+                                        <span id="liveStack">C# .NET 10.0 Windows Forms (Offline x64)</span>
+                                    </div>
+                                    <div class="ai-spec-item">
+                                        <strong>Estimated Build Timeline:</strong>
+                                        <span id="liveTimeline">3 to 5 Working Days</span>
+                                    </div>
+                                    <div class="ai-spec-item" style="grid-column: span 2;">
+                                        <strong>Parsed Core Modules:</strong>
+                                        <span id="liveModules">Standard System Core & Local Database</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="wizard-actions">
+                            <div class="wizard-actions" style="margin-top: 20px;">
                                 <button type="button" class="btn-nav" onclick="goToStep(2)">⬅ Back</button>
                                 <button type="button" class="btn-nav btn-next" onclick="goToStep(4)">Next: ROI & Discount ➔</button>
                             </div>
                         </div>
 
-                        <!-- STEP 4: ROI CALCULATOR & DISPATCH -->
+                        <!-- STEP 4: ROI CALCULATOR, ASSIGNED TRACKING ID & DISPATCH -->
                         <div class="wizard-step" id="step-4">
-                            <h2 style="font-size: 1.1rem; margin-bottom: 8px;">Step 4: ROI Savings, Discount & Dispatch</h2>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Configure your team parameters to see your PKR savings and seasonal discount:</p>
+                            <h2 style="font-size: 1.1rem; margin-bottom: 6px;">Step 4: ROI Savings, Discount & Order ID</h2>
+                            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">Adjust parameters to verify local PKR savings and get your tracking number:</p>
 
                             <div class="slider-group">
-                                <label>Employees Handling Manual Tasks: <span id="valEmployees">3</span></label>
-                                <input type="range" id="rangeEmployees" min="1" max="20" value="3" oninput="calculateROI()">
+                                <label>Employees Handling Manual Tasks: <span id="valEmployees">2</span></label>
+                                <input type="range" id="rangeEmployees" min="1" max="15" value="2" oninput="calculateROI()">
                             </div>
 
                             <div class="slider-group">
-                                <label>Hours Spent per Employee Weekly: <span id="valHours">8</span> hrs</label>
-                                <input type="range" id="rangeHours" min="2" max="25" value="8" oninput="calculateROI()">
+                                <label>Hours Spent Weekly: <span id="valHours">6</span> hrs</label>
+                                <input type="range" id="rangeHours" min="2" max="20" value="6" oninput="calculateROI()">
                             </div>
 
                             <div class="slider-group">
-                                <label>Average Hourly Wage (PKR): Rs. <span id="valWage">350</span> / hr</label>
-                                <input type="range" id="rangeWage" min="150" max="1500" step="50" value="350" oninput="calculateROI()">
+                                <label>Hourly Wage (PKR): Rs. <span id="valWage">300</span> / hr</label>
+                                <input type="range" id="rangeWage" min="150" max="1000" step="50" value="300" oninput="calculateROI()">
                             </div>
 
                             <div class="results-mini-card">
-                                <p style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #166534;">Projected Monthly Savings</p>
-                                <div class="result-metric" id="outTotalSavings">Rs. 29,937</div>
-                                <p style="font-size: 0.78rem; color: #166534;" id="outHoursSaved">Saved Across 85 Monthly Hours</p>
+                                <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #166534;">Projected Monthly Savings (Capped & Logical)</p>
+                                <div class="result-metric" id="outTotalSavings">Rs. 15,588</div>
+                                <p style="font-size: 0.75rem; color: #166534;" id="outHoursSaved">Saved Across 51 Monthly Hours</p>
                             </div>
 
-                            <!-- Special Seasonal Discount Bar -->
                             <div class="discount-box">
                                 <div class="discount-header">
-                                    <span id="discountTitle">🎁 Earned Seasonal Discount: 15% OFF</span>
-                                    <span id="discountAmount">Rs. 4,500 Value</span>
+                                    <span id="discountTitle">🎁 Earned Seasonal Discount: 10% OFF</span>
+                                    <span id="discountAmount">Rs. 1,558 Value</span>
                                 </div>
                                 <div class="progress-bar-container">
                                     <div class="progress-bar-fill" id="discountBarFill"></div>
                                 </div>
                             </div>
 
-                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 12px;">
+                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 10px;">
                                 <div class="form-group" style="margin-bottom:0;">
                                     <label>Client / Company Name</label>
-                                    <input type="text" id="cName" class="form-control" placeholder="e.g. Al-Madina Trading">
+                                    <input type="text" id="cName" class="form-control" placeholder="e.g. Al-Madina Shop">
                                 </div>
                                 <div class="form-group" style="margin-bottom:0;">
                                     <label>Country</label>
@@ -303,17 +324,25 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 12px;">
                                 <label>Phone / WhatsApp Number</label>
                                 <input type="text" id="cContact" class="form-control" placeholder="e.g. +92 370 0818276">
                             </div>
 
-                            <div class="action-buttons">
-                                <button type="button" onclick="sendViaWhatsApp()" class="btn-whatsapp">
-                                    💬 Submit via WhatsApp
+                            <!-- Success Assigned Order Number Banner -->
+                            <div class="success-banner" id="successBanner">
+                                <h3 style="color: #065f46; font-size: 1.05rem; margin-bottom: 4px;">🎉 Project Submitted & Order Assigned!</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Your unique tracking key for client portal lookup is:</p>
+                                <div style="font-size: 1.3rem; font-weight: 800; color: #047857; background: #fff; padding: 8px; border-radius: 6px; display: inline-block; border: 1px dashed #10b981;" id="assignedTrackingKey">MT-2026-9412</div>
+                                <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 8px;">Save this key to check real-time progress on the <strong>Track Order</strong> tab anytime!</p>
+                            </div>
+
+                            <div class="action-buttons" id="actionButtonsContainer">
+                                <button type="button" onclick="submitAndAssignOrder('whatsapp')" class="btn-whatsapp">
+                                    💬 Submit & Get Tracking ID via WhatsApp
                                 </button>
-                                <button type="button" onclick="sendViaGmail()" class="btn-gmail">
-                                    📧 Submit via Gmail
+                                <button type="button" onclick="submitAndAssignOrder('gmail')" class="btn-gmail">
+                                    📧 Submit & Get Tracking ID via Gmail
                                 </button>
                             </div>
 
@@ -333,19 +362,19 @@
         </footer>
     </div>
 
-    <!-- Floating WhatsApp Button -->
     <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
         <span>💬</span> <span>Chat with Us</span>
     </a>
 
     <script>
         let selectedPlatform = "Desktop App (.NET / Windows Forms / Python)";
+        let generatedTrackingId = "MT-" + Math.floor(1000 + Math.random() * 9000);
 
         function selectPlatform(platform, element) {
             selectedPlatform = platform;
             document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
             element.classList.add('selected');
-            document.getElementById('aiStackOutput').innerText = platform.includes('Mobile') ? 'Unity 2D Mobile / Cross-Platform Android APK' : (platform.includes('Web') ? 'Node.js Express + PostgreSQL' : 'C# .NET 10.0 Windows Forms (Standalone x64)');
+            updateAiLivePreview();
         }
 
         function goToStep(stepNum) {
@@ -356,10 +385,33 @@
             if (stepNum === 4) calculateROI();
         }
 
-        function updateSummary() {
-            // Function placeholder for module triggers
+        // Live AI Preview as user types
+        function updateAiLivePreview() {
+            const prompt = document.getElementById('aiPrompt').value.trim().toLowerCase();
+            let stack = "C# .NET 10.0 Windows Forms (Offline x64)";
+            let timeline = "3 to 5 Working Days";
+            let modules = "Standard System Core & Local Database";
+
+            if (prompt.includes('mobile') || prompt.includes('android') || prompt.includes('game')) {
+                stack = "Unity 2D Mobile / Android APK";
+                timeline = "7 to 10 Working Days";
+                modules = "Mobile HUD, Touch Controls & Asset Pipeline";
+            } else if (prompt.includes('web') || prompt.includes('portal') || prompt.includes('shop') || prompt.includes('product')) {
+                stack = "Node.js Express + PostgreSQL + Vercel";
+                timeline = "5 to 7 Working Days";
+                modules = "Multi-User Auth, Inventory Catalog & QR Billing";
+            } else if (prompt.includes('sticker') || prompt.includes('ledger') || prompt.includes('tax')) {
+                stack = "C# .NET Enterprise Desktop Utility";
+                timeline = "3 Working Days";
+                modules = "Multi-Sticker Unique Tag Generator & Petty Cash Ledger";
+            }
+
+            document.getElementById('liveStack').innerText = stack;
+            document.getElementById('liveTimeline').innerText = timeline;
+            document.getElementById('liveModules').innerText = modules;
         }
 
+        // Logical ROI Calculation capped properly
         function calculateROI() {
             const employees = parseInt(document.getElementById('rangeEmployees').value);
             const hoursPerWeek = parseInt(document.getElementById('rangeHours').value);
@@ -370,19 +422,22 @@
             document.getElementById('valWage').innerText = wage;
 
             const totalWeeklyHours = employees * hoursPerWeek;
-            const savedWeeklyHours = totalWeeklyHours * 0.80;
+            const savedWeeklyHours = totalWeeklyHours * 0.75;
             const savedMonthlyHours = Math.round(savedWeeklyHours * 4.33);
-            const monthlySavings = Math.round(savedMonthlyHours * wage);
+            
+            // Logical cap calculation so cost never goes wild
+            let monthlySavings = Math.round(savedMonthlyHours * wage);
+            if (monthlySavings > 95000) monthlySavings = 75000 + (monthlySavings % 20000); // Keeps total realistic under max bounds
 
             document.getElementById('outTotalSavings').innerText = `Rs. ${monthlySavings.toLocaleString()}`;
             document.getElementById('outHoursSaved').innerText = `Saved Across ${savedMonthlyHours.toLocaleString()} Monthly Hours`;
 
-            let discountPercent = Math.min(25, Math.max(5, Math.round((monthlySavings / 100000) * 20)));
+            let discountPercent = Math.min(20, Math.max(5, Math.round((monthlySavings / 50000) * 10)));
             let discountValue = Math.round(monthlySavings * (discountPercent / 100));
 
             document.getElementById('discountTitle').innerText = `🎁 Earned Seasonal Discount: ${discountPercent}% OFF`;
             document.getElementById('discountAmount').innerText = `Rs. ${discountValue.toLocaleString()} Value`;
-            document.getElementById('discountBarFill').style.width = `${Math.min(100, discountPercent * 4)}%`;
+            document.getElementById('discountBarFill').style.width = `${Math.min(100, discountPercent * 5)}%`;
         }
 
         function getFormData() {
@@ -399,42 +454,39 @@
             const features = checkedBoxes.length > 0 ? checkedBoxes.join(', ') : 'Standard System Core';
             const aiPrompt = document.getElementById('aiPrompt').value.trim() || 'N/A';
             const savings = document.getElementById('outTotalSavings').innerText;
+            const stack = document.getElementById('liveStack').innerText;
 
-            return { name, country, contact, features, aiPrompt, savings, platform: selectedPlatform };
+            return { name, country, contact, features, aiPrompt, savings, stack, platform: selectedPlatform };
         }
 
-        function sendViaWhatsApp() {
+        function submitAndAssignOrder(channel) {
             const data = getFormData();
             if (!data) return;
 
-            const message = `*Custom Software Unified Scope & ROI Report*\n\n` +
+            // Show assigned tracking key on screen
+            document.getElementById('assignedTrackingKey').innerText = generatedTrackingId;
+            document.getElementById('successBanner').style.display = 'block';
+            document.getElementById('actionButtonsContainer').style.display = 'none';
+
+            const message = `*Custom Software Project & ROI Order — Mashal Tech*\n\n` +
+                            `🔑 *Assigned Tracking Key:* ${generatedTrackingId}\n` +
                             `👤 *Client:* ${data.name}\n` +
                             `🌍 *Country:* ${data.country}\n` +
                             `📞 *Contact:* ${data.contact}\n` +
-                            `🛠️ *Platform:* ${data.platform}\n\n` +
+                            `🛠️ *Platform:* ${data.platform}\n` +
+                            `💻 *AI Architecture:* ${data.stack}\n\n` +
                             `📋 *Modules:* ${data.features}\n` +
                             `🤖 *AI Prompt:* "${data.aiPrompt}"\n` +
                             `📈 *Projected Savings:* ${data.savings}`;
 
-            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        function sendViaGmail() {
-            const data = getFormData();
-            if (!data) return;
-
-            const subject = encodeURIComponent(`Software Project & ROI Proposal from ${data.name}`);
-            const body = encodeURIComponent(
-                `Client Name: ${data.name}\n` +
-                `Country: ${data.country}\n` +
-                `Contact No: ${data.contact}\n\n` +
-                `Platform: ${data.platform}\n` +
-                `Selected Modules: ${data.features}\n\n` +
-                `AI Prompt Description:\n"${data.aiPrompt}"\n\n` +
-                `Projected Monthly Savings: ${data.savings}`
-            );
-
-            window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
+            setTimeout(() => {
+                if (channel === 'whatsapp') {
+                    window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
+                } else {
+                    const subject = encodeURIComponent(`New Order [${generatedTrackingId}] from ${data.name}`);
+                    window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${encodeURIComponent(message)}`;
+                }
+            }, 1000);
         }
 
         function openQuickWhatsApp() {

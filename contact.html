@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Interactive Solution Estimator & Contact</title>
+    <title>Mashal Tech — Solution Estimator & AI Blueprint Center</title>
     <style>
         :root {
             --bg: #f3f4f6;
@@ -13,6 +13,8 @@
             --text-muted: #6b7280;
             --accent: #2563eb;
             --accent-hover: #1d4ed8;
+            --ai-accent: #7c3aed;
+            --ai-hover: #6d28d9;
             --whatsapp-green: #25d366;
             --whatsapp-hover: #1ebe5d;
         }
@@ -22,21 +24,31 @@
         
         .container { width: 100%; max-width: 1550px; margin: 0 auto; }
 
+        /* Navigation Switcher Tabs (5 Tabs) */
         .platform-tabs { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
         .platform-btn {
-            flex: 1; min-width: 160px; padding: 14px 20px; background: var(--surface); border: 1px solid var(--border);
-            border-radius: 8px; font-size: 1rem; font-weight: 700; color: var(--text-muted);
-            text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+            flex: 1; min-width: 140px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; font-size: 0.95rem; font-weight: 700; color: var(--text-muted);
+            text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
             transition: all 0.2s ease;
         }
         .platform-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); }
 
         .top-nav {
             background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;
         }
         .brand { font-size: 1.3rem; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 10px; }
         .brand-icon { background: var(--accent); color: white; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: bold; }
+
+        /* Mode Switcher Buttons */
+        .mode-switcher { display: flex; gap: 12px; margin-bottom: 24px; }
+        .mode-btn {
+            flex: 1; padding: 12px; background: #e5e7eb; border: none; border-radius: 6px;
+            font-weight: 700; font-size: 0.95rem; cursor: pointer; color: var(--text-muted); transition: all 0.2s;
+        }
+        .mode-btn.active-mode-wizard { background: var(--accent); color: white; }
+        .mode-btn.active-mode-ai { background: var(--ai-accent); color: white; }
 
         .contact-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: 24px; }
         @media (max-width: 950px) { .contact-grid { grid-template-columns: 1fr; } }
@@ -49,6 +61,10 @@
         .info-item strong { display: block; color: var(--text-main); margin-bottom: 4px; font-size: 1rem; }
         .info-item span { color: var(--text-muted); }
 
+        /* Wizard Mode Styling */
+        .interactive-mode-section { display: none; }
+        .interactive-mode-section.active { display: block; }
+
         .stepper-header { display: flex; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 14px; flex-wrap: wrap; gap: 8px; }
         .step-pill { font-size: 0.88rem; font-weight: 600; color: var(--text-muted); padding: 6px 12px; border-radius: 20px; background: #f3f4f6; }
         .step-pill.active { background: var(--accent); color: white; }
@@ -56,7 +72,7 @@
         .wizard-step { display: none; }
         .wizard-step.active { display: block; }
 
-        .option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px; }
+        .option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 20px; }
         .option-card {
             border: 2px solid var(--border); border-radius: 8px; padding: 16px; cursor: pointer; text-align: center;
             transition: all 0.2s ease; background: #fafafa;
@@ -87,6 +103,23 @@
         .btn-next { background: var(--accent); color: white; border: none; }
         .btn-next:hover { background: var(--accent-hover); }
 
+        /* AI Blueprint Styling */
+        .btn-ai {
+            background: var(--ai-accent); color: white; border: none; padding: 14px 24px;
+            border-radius: 6px; font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%;
+            transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-ai:hover { background: var(--ai-hover); }
+
+        .blueprint-output {
+            display: none; background: #f8fafc; border: 2px dashed var(--ai-accent); border-radius: 8px; padding: 24px; margin-top: 24px;
+        }
+        .blueprint-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+        .blueprint-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .blueprint-card { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
+        .blueprint-card h4 { font-size: 0.9rem; color: var(--ai-accent); margin-bottom: 6px; }
+        .blueprint-card p, .blueprint-card ul { font-size: 0.85rem; color: var(--text-muted); list-style-position: inside; }
+
         .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
         @media (max-width: 600px) { .action-buttons { grid-template-columns: 1fr; } }
 
@@ -94,6 +127,8 @@
         .btn-whatsapp:hover { background: var(--whatsapp-hover); }
         .btn-gmail { background: var(--accent); color: white; border: none; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; }
         .btn-gmail:hover { background: var(--accent-hover); }
+        .btn-gmail-ai { background: var(--ai-accent); color: white; border: none; padding: 14px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-align: center; }
+        .btn-gmail-ai:hover { background: var(--ai-hover); }
 
         .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); text-decoration: none; font-weight: 700; font-size: 0.9rem; z-index: 9999; transition: transform 0.2s ease, background-color 0.2s ease; }
         .floating-whatsapp:hover { background: #1ebe5d; transform: translateY(-3px); }
@@ -104,125 +139,246 @@
 <body>
 
     <div class="container">
+        
+        <!-- Navigation Switcher Tabs (5 Tabs) -->
         <div class="platform-tabs">
             <a href="index.html" class="platform-btn">💻 PC Software</a>
             <a href="mobile.html" class="platform-btn">📱 Mobile Apps</a>
-            <a href="contact.html" class="platform-btn active">📞 Solution Estimator</a>
-            <a href="track.html" class="platform-btn">🔍 Track My Order</a>
+            <a href="contact.html" class="platform-btn active">📞 Estimator & AI</a>
+            <a href="track.html" class="platform-btn">🔍 Track Order</a>
+            <a href="ai-blueprint.html" class="platform-btn">🤖 AI Standalone</a>
         </div>
 
+        <!-- Top Header -->
         <div class="top-nav">
-            <a href="index.html" class="brand"><div class="brand-icon">M</div>Mashal Tech Software House</a>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Interactive Scope Builder • Response: <strong>Within 24 Hours</strong></div>
+            <a href="index.html" class="brand">
+                <div class="brand-icon">M</div>
+                Mashal Tech Solution Center
+            </a>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                Interactive Wizard & AI Blueprint Generator
+            </div>
         </div>
 
         <div class="contact-grid">
+            
+            <!-- Sidebar Info -->
             <div>
                 <div class="section-box">
-                    <div class="section-header"><h2>Direct Developer Contact</h2></div>
-                    <div class="info-item"><span>📧</span><strong>Official Email</strong><span>6saddamhussain9@gmail.com</span></div>
-                    <div class="info-item"><span>💬</span><strong>WhatsApp Direct</strong><span>Encrypted Dispatch Active</span></div>
-                    <div class="info-item"><span>🏢</span><strong>Operational Headquarters</strong><span>Mardan & Peshawar, Pakistan</span></div>
-                    <div class="info-item"><span>🛡️</span><strong>Licensing Authority</strong><span>MT-LIC-2026-SECURE</span></div>
+                    <div class="section-header">
+                        <h2>Direct Developer Contact</h2>
+                    </div>
+
+                    <div class="info-item">
+                        <span>📧</span>
+                        <strong>Official Email</strong>
+                        <span>6saddamhussain9@gmail.com</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span>💬</span>
+                        <strong>WhatsApp Direct</strong>
+                        <span>Encrypted Dispatch Active</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span>🏢</span>
+                        <strong>Operational Headquarters</strong>
+                        <span>Mardan & Peshawar, Pakistan</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span>🛡️</span>
+                        <strong>Licensing Authority</strong>
+                        <span>MT-LIC-2026-SECURE</span>
+                    </div>
                 </div>
             </div>
 
+            <!-- Main Interactive Hub -->
             <div>
                 <div class="section-box">
-                    <div class="stepper-header">
-                        <span class="step-pill active" id="pill-1">1. Choose Platform</span>
-                        <span class="step-pill" id="pill-2">2. Select Features</span>
-                        <span class="step-pill" id="pill-3">3. Deliverable Draft</span>
+                    
+                    <!-- Mode Switcher Tabs -->
+                    <div class="mode-switcher">
+                        <button type="button" id="btnModeWizard" class="mode-btn active-mode-wizard" onclick="switchMode('wizard')">🛠️ Interactive Solution Wizard</button>
+                        <button type="button" id="btnModeAi" class="mode-btn" onclick="switchMode('ai')">🤖 AI Instant Blueprint</button>
                     </div>
 
-                    <form id="wizardForm">
-                        <div class="wizard-step active" id="step-1">
-                            <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 1: Select Software Platform</h2>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">What core architecture does your enterprise require?</p>
-                            
-                            <div class="option-grid">
-                                <div class="option-card selected" onclick="selectPlatform('Desktop App (.NET / Windows Forms / Python)', this)">
-                                    <div class="icon">🖥️</div>
-                                    <h4>Desktop App</h4>
-                                    <p>Offline C# .NET / Python tools, multi-sticker tags, ledgers.</p>
-                                </div>
-                                <div class="option-card" onclick="selectPlatform('Mobile App (Android / Unity Game)', this)">
-                                    <div class="icon">📱</div>
-                                    <h4>Mobile App / Game</h4>
-                                    <p>Android utilities, field agent tools, interactive 2D builds.</p>
-                                </div>
-                                <div class="option-card" onclick="selectPlatform('Full-Stack Web Portal (Node/Express/PostgreSQL)', this)">
-                                    <div class="icon">🌐</div>
-                                    <h4>Full-Stack Web Portal</h4>
-                                    <p>Recruitment ERPs, cloud dashboards, multi-user portals.</p>
-                                </div>
-                            </div>
-
-                            <div class="wizard-actions" style="justify-content: flex-end;">
-                                <button type="button" class="btn-nav btn-next" onclick="goToStep(2)">Next: Select Features ➔</button>
-                            </div>
+                    <!-- MODE 1: SOLUTION ESTIMATOR WIZARD -->
+                    <div id="modeWizardSection" class="interactive-mode-section active">
+                        <div class="stepper-header">
+                            <span class="step-pill active" id="pill-1">1. Choose Platform</span>
+                            <span class="step-pill" id="pill-2">2. Select Features</span>
+                            <span class="step-pill" id="pill-3">3. Deliverable Draft</span>
                         </div>
 
-                        <div class="wizard-step" id="step-2">
-                            <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 2: Choose Functional Modules</h2>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Check the core features needed for your custom software build:</p>
+                        <form id="wizardForm">
+                            <!-- STEP 1 -->
+                            <div class="wizard-step active" id="step-1">
+                                <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 1: Select Software Platform</h2>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">What core architecture does your enterprise require?</p>
+                                
+                                <div class="option-grid">
+                                    <div class="option-card selected" onclick="selectPlatform('Desktop App (.NET / Windows Forms / Python)', this)">
+                                        <div class="icon">🖥️</div>
+                                        <h4>Desktop App</h4>
+                                        <p>Offline C# .NET / Python tools, multi-sticker tags, ledgers.</p>
+                                    </div>
+                                    <div class="option-card" onclick="selectPlatform('Mobile App (Android / Unity Game)', this)">
+                                        <div class="icon">📱</div>
+                                        <h4>Mobile App / Game</h4>
+                                        <p>Android utilities, field agent tools, interactive 2D builds.</p>
+                                    </div>
+                                    <div class="option-card" onclick="selectPlatform('Full-Stack Web Portal (Node/Express/PostgreSQL)', this)">
+                                        <div class="icon">🌐</div>
+                                        <h4>Web Portal</h4>
+                                        <p>Recruitment ERPs, cloud dashboards, multi-user portals.</p>
+                                    </div>
+                                </div>
 
-                            <div class="feature-grid">
-                                <label class="feature-checkbox"><input type="checkbox" value="Automated Closing Ledger & Petty Cash" onchange="updateScope()"> Closing Ledger & Cash Logs</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="Independent Multi-Sticker Generator" onchange="updateScope()"> Custom Multi-Sticker Tags</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="FBR Invoicing & Tax Calculation" onchange="updateScope()"> FBR Tax & QR Invoicing</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="Candidate Onboarding Pipeline" onchange="updateScope()"> Candidate Recruitment Tracking</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="Offline Encrypted Database Storage" onchange="updateScope()"> Encrypted Offline Database</label>
-                                <label class="feature-checkbox"><input type="checkbox" value="Multi-User Role Permissions" onchange="updateScope()"> Role & Auth Permissions</label>
+                                <div class="wizard-actions" style="justify-content: flex-end;">
+                                    <button type="button" class="btn-nav btn-next" onclick="goToStep(2)">Next: Select Features ➔</button>
+                                </div>
                             </div>
 
-                            <div class="wizard-actions">
-                                <button type="button" class="btn-nav" onclick="goToStep(1)">⬅ Back</button>
-                                <button type="button" class="btn-nav btn-next" onclick="goToStep(3)">Next: Final Scope Draft ➔</button>
+                            <!-- STEP 2 -->
+                            <div class="wizard-step" id="step-2">
+                                <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 2: Choose Functional Modules</h2>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Check the core features needed for your custom software build:</p>
+
+                                <div class="feature-grid">
+                                    <label class="feature-checkbox"><input type="checkbox" value="Automated Closing Ledger & Petty Cash" onchange="updateScope()"> Closing Ledger & Cash Logs</label>
+                                    <label class="feature-checkbox"><input type="checkbox" value="Independent Multi-Sticker Generator" onchange="updateScope()"> Custom Multi-Sticker Tags</label>
+                                    <label class="feature-checkbox"><input type="checkbox" value="FBR Invoicing & Tax Calculation" onchange="updateScope()"> FBR Tax & QR Invoicing</label>
+                                    <label class="feature-checkbox"><input type="checkbox" value="Candidate Onboarding Pipeline" onchange="updateScope()"> Candidate Recruitment Tracking</label>
+                                    <label class="feature-checkbox"><input type="checkbox" value="Offline Encrypted Database Storage" onchange="updateScope()"> Encrypted Offline Database</label>
+                                    <label class="feature-checkbox"><input type="checkbox" value="Multi-User Role Permissions" onchange="updateScope()"> Role & Auth Permissions</label>
+                                </div>
+
+                                <div class="wizard-actions">
+                                    <button type="button" class="btn-nav" onclick="goToStep(1)">⬅ Back</button>
+                                    <button type="button" class="btn-nav btn-next" onclick="goToStep(3)">Next: Final Scope Draft ➔</button>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="wizard-step" id="step-3">
-                            <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 3: Client Details & Instant Dispatch</h2>
+                            <!-- STEP 3 -->
+                            <div class="wizard-step" id="step-3">
+                                <h2 style="font-size: 1.1rem; margin-bottom: 12px;">Step 3: Client Details & Instant Dispatch</h2>
 
+                                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+                                    <div class="form-group">
+                                        <label>Client / Company Name</label>
+                                        <input type="text" id="cName" class="form-control" placeholder="e.g. Al-Madina Trading / John Doe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        <input type="text" id="cCountry" class="form-control" placeholder="e.g. Pakistan">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone / WhatsApp Number</label>
+                                    <input type="text" id="cContact" class="form-control" placeholder="e.g. +92 370 0818276">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Additional Specific Requirements</label>
+                                    <textarea id="cDetails" rows="3" class="form-control" placeholder="Mention any extra layout specs or business workflows..."></textarea>
+                                </div>
+
+                                <div class="scope-preview">
+                                    <h4>⚡ Generated Scope Preview</h4>
+                                    <div id="scopeSummaryText">Select options in Step 1 & 2 to generate project scope.</div>
+                                </div>
+
+                                <div class="action-buttons">
+                                    <button type="button" onclick="sendWizardWhatsApp()" class="btn-whatsapp">💬 Submit via WhatsApp</button>
+                                    <button type="button" onclick="sendWizardGmail()" class="btn-gmail">📧 Submit via Gmail</button>
+                                </div>
+
+                                <div class="wizard-actions" style="margin-top: 15px;">
+                                    <button type="button" class="btn-nav" onclick="goToStep(2)">⬅ Edit Features</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- MODE 2: AI BLUEPRINT GENERATOR -->
+                    <div id="modeAiSection" class="interactive-mode-section">
+                        <h2 style="font-size: 1.1rem; margin-bottom: 8px;">🤖 AI Software Blueprint Generator</h2>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">
+                            Type your requirements in plain English. Our AI engine will instantly build an architectural blueprint, tech stack recommendation, and timeline.
+                        </p>
+
+                        <form id="aiForm">
                             <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
                                 <div class="form-group">
-                                    <label>Client / Company Name</label>
-                                    <input type="text" id="cName" required class="form-control" placeholder="e.g. Al-Madina Trading / John Doe">
+                                    <label>Your Name / Company Name</label>
+                                    <input type="text" id="aiName" class="form-control" placeholder="e.g. Al-Madina Tyre Depot">
                                 </div>
                                 <div class="form-group">
-                                    <label>Country</label>
-                                    <input type="text" id="cCountry" required class="form-control" placeholder="e.g. Pakistan">
+                                    <label>WhatsApp / Contact Number</label>
+                                    <input type="text" id="aiContact" class="form-control" placeholder="e.g. +92 370 0818276">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Phone / WhatsApp Number</label>
-                                <input type="text" id="cContact" required class="form-control" placeholder="e.g. +92 370 0818276">
+                                <label>Describe Your Custom Software Idea</label>
+                                <textarea id="aiPrompt" rows="4" class="form-control" placeholder="e.g. I run a wholesale distribution warehouse and need an offline Windows desktop app that logs customer ledgers, prints 3 independent sticker tags, and records petty cash daily..."></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label>Additional Specific Requirements</label>
-                                <textarea id="cDetails" rows="3" class="form-control" placeholder="Mention any extra layout specs or business workflows..."></textarea>
+                            <button type="button" onclick="generateBlueprint()" class="btn-ai">
+                                ⚡ Generate Instant AI Architectural Blueprint
+                            </button>
+                        </form>
+
+                        <div class="blueprint-output" id="blueprintResult">
+                            <div class="blueprint-header">
+                                <div>
+                                    <h3 style="font-size: 1.05rem; color: var(--ai-accent);">📊 AI-Generated System Specification</h3>
+                                    <p style="font-size: 0.78rem; color: var(--text-muted);">Parsed for: <strong id="outClient">Client</strong></p>
+                                </div>
+                                <span style="background: #ede9fe; color: #6d28d9; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Verified Blueprint v1.0</span>
                             </div>
 
-                            <div class="scope-preview">
-                                <h4>⚡ Generated Scope Preview</h4>
-                                <div id="scopeSummaryText">Select options in Step 1 & 2 to generate project scope.</div>
+                            <div class="blueprint-grid">
+                                <div class="blueprint-card">
+                                    <h4>🛠️ Recommended Tech Stack</h4>
+                                    <p id="outStack">C# .NET 10.0 / Windows Forms (Standalone x64) with SQLite Encrypted Local Database.</p>
+                                </div>
+                                <div class="blueprint-card">
+                                    <h4>📦 Core Modules</h4>
+                                    <ul id="outModules">
+                                        <li>Multi-Sticker Unique Tag Generator</li>
+                                        <li>Double-Entry Petty Cash Ledger</li>
+                                        <li>Offline USB Portability Architecture</li>
+                                    </ul>
+                                </div>
+                                <div class="blueprint-card">
+                                    <h4>⏱️ Estimated Timeline</h4>
+                                    <p id="outTimeline">3 to 5 Working Days (Includes QA Audit & Trial Testing)</p>
+                                </div>
+                                <div class="blueprint-card">
+                                    <h4>🔒 Security & Compliance</h4>
+                                    <p id="outSecurity">Zero cloud dependency, local AES encryption, automated FBR audit logs.</p>
+                                </div>
+                            </div>
+
+                            <div style="background: #fff; border: 1px solid var(--border); padding: 12px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 16px;">
+                                <strong>Original Client Request:</strong> <span id="outPromptEcho" style="color: var(--text-muted);">...</span>
                             </div>
 
                             <div class="action-buttons">
-                                <button type="button" onclick="sendViaWhatsApp()" class="btn-whatsapp">💬 Submit Scope via WhatsApp</button>
-                                <button type="button" onclick="sendViaGmail()" class="btn-gmail">📧 Submit Scope via Gmail</button>
-                            </div>
-
-                            <div class="wizard-actions" style="margin-top: 15px;">
-                                <button type="button" class="btn-nav" onclick="goToStep(2)">⬅ Edit Features</button>
+                                <button type="button" onclick="sendAiWhatsApp()" class="btn-whatsapp">💬 Send Blueprint to WhatsApp</button>
+                                <button type="button" onclick="sendAiGmail()" class="btn-gmail-ai">📧 Send Blueprint via Gmail</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
+
                 </div>
             </div>
+
         </div>
 
         <footer>
@@ -230,11 +386,33 @@
         </footer>
     </div>
 
+    <!-- Floating WhatsApp Button -->
     <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
         <span>💬</span> <span>Chat with Us</span>
     </a>
 
     <script>
+        // Mode Switcher Logic
+        function switchMode(mode) {
+            const wizardSec = document.getElementById('modeWizardSection');
+            const aiSec = document.getElementById('modeAiSection');
+            const btnWiz = document.getElementById('btnModeWizard');
+            const btnAi = document.getElementById('btnModeAi');
+
+            if (mode === 'wizard') {
+                wizardSec.classList.add('active');
+                aiSec.classList.remove('active');
+                btnWiz.className = 'mode-btn active-mode-wizard';
+                btnAi.className = 'mode-btn';
+            } else {
+                aiSec.classList.add('active');
+                wizardSec.classList.remove('active');
+                btnAi.className = 'mode-btn active-mode-ai';
+                btnWiz.className = 'mode-btn';
+            }
+        }
+
+        // Wizard Logic
         let selectedPlatform = "Desktop App (.NET / Windows Forms / Python)";
 
         function selectPlatform(platform, element) {
@@ -258,7 +436,7 @@
             document.getElementById('scopeSummaryText').innerHTML = `<strong>Target Platform:</strong> ${selectedPlatform}<br><strong>Included Deliverables:</strong> ${featuresText}`;
         }
 
-        function getScopeData() {
+        function getWizardData() {
             const name = document.getElementById('cName').value.trim();
             const country = document.getElementById('cCountry').value.trim();
             const contact = document.getElementById('cContact').value.trim();
@@ -274,23 +452,75 @@
             return { name, country, contact, extraDetails, features, platform: selectedPlatform };
         }
 
-        function sendViaWhatsApp() {
-            const data = getScopeData();
+        function sendWizardWhatsApp() {
+            const data = getWizardData();
             if (!data) return;
             const message = `*Custom Software Scope Inquiry — Mashal Tech*\n\n👤 *Client/Company:* ${data.name}\n🌍 *Country:* ${data.country}\n📞 *Contact No:* ${data.contact}\n🛠️ *Platform Choice:* ${data.platform}\n\n📋 *Selected Modules:*\n - ${data.features}\n\n📝 *Additional Details:* ${data.extraDetails || 'N/A'}`;
             window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        function sendViaGmail() {
-            const data = getScopeData();
+        function sendWizardGmail() {
+            const data = getWizardData();
             if (!data) return;
             const subject = encodeURIComponent(`Software Scope Proposal: ${data.platform} for ${data.name}`);
             const body = encodeURIComponent(`Client Name/Company: ${data.name}\nCountry: ${data.country}\nContact No: ${data.contact}\n\nPlatform Architecture: ${data.platform}\n\nSelected Modules:\n - ${data.features}\n\nExtra Specifications:\n${data.extraDetails || 'None provided'}`);
             window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
         }
 
+        // AI Blueprint Logic
+        function generateBlueprint() {
+            const name = document.getElementById('aiName').value.trim();
+            const contact = document.getElementById('aiContact').value.trim();
+            const prompt = document.getElementById('aiPrompt').value.trim();
+
+            if (!name || !contact || !prompt) {
+                alert('Please fill out your Name, Contact Number, and Software Description!');
+                return;
+            }
+
+            document.getElementById('outClient').innerText = name;
+            document.getElementById('outPromptEcho').innerText = prompt;
+
+            const lowerPrompt = prompt.toLowerCase();
+            let stack = "C# .NET 10.0 Windows Forms (Standalone x64) with SQLite Encrypted Local Database.";
+            if (lowerPrompt.includes('mobile') || lowerPrompt.includes('android') || lowerPrompt.includes('game')) {
+                stack = "Unity 2D Mobile / Cross-Platform Android APK";
+            } else if (lowerPrompt.includes('web') || lowerPrompt.includes('portal') || lowerPrompt.includes('cloud')) {
+                stack = "Node.js Express Backend + PostgreSQL + Vercel Hosting";
+            }
+
+            document.getElementById('outStack').innerText = stack;
+            document.getElementById('blueprintResult').style.display = 'block';
+            document.getElementById('blueprintResult').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getAiData() {
+            return {
+                name: document.getElementById('aiName').value.trim(),
+                contact: document.getElementById('aiContact').value.trim(),
+                prompt: document.getElementById('aiPrompt').value.trim(),
+                stack: document.getElementById('outStack').innerText,
+                timeline: document.getElementById('outTimeline').innerText
+            };
+        }
+
+        function sendAiWhatsApp() {
+            const data = getAiData();
+            if (!data.name) return;
+            const message = `🤖 *AI Software Blueprint Proposal — Mashal Tech*\n\n👤 *Client:* ${data.name}\n📞 *Contact:* ${data.contact}\n\n📝 *User Request:* "${data.prompt}"\n\n🛠️ *AI Architecture:* ${data.stack}\n⏱️ *Timeline:* ${data.timeline}`;
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function sendAiGmail() {
+            const data = getAiData();
+            if (!data.name) return;
+            const subject = encodeURIComponent(`AI Software Blueprint: ${data.name}`);
+            const body = encodeURIComponent(`Client Name: ${data.name}\nContact No: ${data.contact}\n\nProject Prompt:\n"${data.prompt}"\n\nAI Recommended Stack:\n${data.stack}\n\nEstimated Timeline:\n${data.timeline}`);
+            window.location.href = `mailto:6saddamhussain9@gmail.com?subject=${subject}&body=${body}`;
+        }
+
         function openQuickWhatsApp() {
-            const message = "Hi! I am visiting Mashal Tech Store and would like to inquire about a custom software project.";
+            const message = "Hi! I am visiting Mashal Tech Store and would like to discuss a custom project.";
             window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>

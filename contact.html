@@ -3,109 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Mobile Apps & Games Engineering</title>
-    <!-- Linked to shared stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <title>Mashal Tech — Project Estimator, AI Blueprint & ROI Hub</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --ai-accent: #7c3aed;
+            --roi-accent: #059669;
+            --radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg); color: var(--text-main); line-height: 1.6; padding: 24px 16px; font-size: 14px; antialiased: true; }
+        
+        .container { max-width: 1280px; margin: 0 auto; }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: #ffffff; padding: 16px 24px; border-radius: var(--radius);
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.25); flex-wrap: wrap; gap: 12px;
+        }
+        .hero-banner-title { font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 8px; letter-spacing: -0.01em; }
+        .hero-btn { background: #ffffff; color: #1e3a8a; padding: 8px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.85rem; transition: all 0.2s ease; box-shadow: var(--shadow-sm); }
+        .hero-btn:hover { background: #f8fafc; transform: translateY(-1px); }
+
+        /* Unified 4-Tab Navigation Bar */
+        .nav-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+        .nav-tab {
+            flex: 1; min-width: 140px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius); font-size: 0.88rem; font-weight: 700; color: var(--text-muted);
+            text-decoration: none; text-align: center; transition: all 0.2s ease; box-shadow: var(--shadow-sm);
+        }
+        .nav-tab:hover { color: var(--text-main); border-color: #cbd5e1; background: #ffffff; }
+        .nav-tab.active { background: var(--primary); color: #ffffff; border-color: var(--primary); box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); }
+
+        /* Site Header */
+        .site-header {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
+            box-shadow: var(--shadow-sm); flex-wrap: wrap; gap: 16px;
+        }
+        .brand { font-size: 1.25rem; font-weight: 800; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 12px; letter-spacing: -0.02em; }
+        .brand-badge { background: var(--primary); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 800; font-size: 1.1rem; }
+
+        /* Layout Grid */
+        .layout-grid { display: grid; grid-template-columns: 2.8fr 1.2fr; gap: 24px; }
+        @media (max-width: 900px) { .layout-grid { grid-template-columns: 1fr; } }
+
+        /* Card Sections */
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+        .card-header { border-bottom: 2px solid #f1f5f9; padding-bottom: 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .card-header h2 { font-size: 1.05rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.01em; }
+
+        /* Wizard Step Elements */
+        .wizard-step { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .wizard-step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); }
+        .form-control { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; outline: none; background: #ffffff; color: var(--text-main); margin-bottom: 14px; transition: all 0.2s; }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+
+        .btn-action { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.88rem; border: none; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm); display: inline-block; }
+        .btn-action:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+        /* Progress Bar Styles */
+        .progress-container { background: #e2e8f0; border-radius: 20px; height: 10px; width: 100%; overflow: hidden; margin: 10px 0 16px 0; }
+        .progress-bar { background: var(--roi-accent); height: 100%; width: 75%; border-radius: 20px; transition: width 0.4s ease; }
+
+        /* Sidebar Contact Box */
+        .contact-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 16px; font-size: 0.85rem; }
+        .contact-box p { margin-bottom: 10px; line-height: 1.5; color: var(--text-main); }
+        .contact-box p:last-child { margin-bottom: 0; }
+
+        /* Footer */
+        footer { text-align: center; padding: 28px 0; font-size: 0.82rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
+
+        /* Floating WhatsApp */
+        .floating-whatsapp { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; border-radius: 50px; padding: 12px 22px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 20px -3px rgba(37, 211, 102, 0.4); text-decoration: none; font-weight: 700; font-size: 0.88rem; z-index: 99; transition: transform 0.2s ease; }
+        .floating-whatsapp:hover { transform: translateY(-3px); }
+    </style>
 </head>
 <body>
 
     <div class="container">
         
-        <!-- Top Announcement Strip -->
-        <div class="announcement-strip">
-            <span>📱 Mobile engineering division active. Custom Android utilities & Unity builds available.</span>
-            <a href="contact.html" class="announcement-link">Request Build &rarr;</a>
+        <!-- Hero Announcement Strip -->
+        <div class="hero-banner">
+            <div class="hero-banner-title">🚀 <strong>Project & ROI Hub:</strong> Configure custom specifications & calculate savings instantly.</div>
+            <a href="index.html" class="hero-btn">Explore Catalog</a>
         </div>
 
-        <!-- Unified Platform Navigation -->
-        <nav class="platform-nav">
+        <!-- Clean 4-Tab Navigation Bar -->
+        <div class="nav-tabs">
             <a href="index.html" class="nav-tab">💻 PC Software</a>
-            <a href="mobile.html" class="nav-tab active">📱 Mobile Apps</a>
-            <a href="contact.html" class="nav-tab">🚀 Project & ROI Hub</a>
+            <a href="mobile.html" class="nav-tab">📱 Mobile Apps</a>
+            <a href="contact.html" class="nav-tab active">🚀 Project & ROI Hub</a>
             <a href="track.html" class="nav-tab">🔍 Track Order</a>
-        </nav>
+        </div>
 
-        <!-- Header -->
-        <header class="site-header">
-            <a href="mobile.html" class="brand-group">
-                <div class="brand-logo" style="background: #059669;">M</div>
-                <span class="brand-title">Mashal Tech Mobile</span>
+        <!-- Site Header -->
+        <div class="site-header">
+            <a href="contact.html" class="brand">
+                <div class="brand-badge">M</div> Mashal Tech Enterprise Hub
             </a>
-            <div class="security-badge" style="color: #059669; background: #ecfdf5; border-color: #a7f3d0;">UNITY-MOBILE-SECURE</div>
-            <div class="search-container">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search mobile packages...">
+            <div style="font-size: 0.82rem; font-weight: 600; color: #1e40af; background: #eff6ff; padding: 6px 14px; border-radius: 20px; border: 1px solid #bfdbfe;">
+                🔒 PKR Cost Caps Strictly Under 100,000 PKR
             </div>
-        </header>
+        </div>
 
-        <div class="workspace-grid">
+        <!-- Layout Grid -->
+        <div class="layout-grid">
             
-            <!-- Main Content Area -->
             <div>
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Authorized Android Apps & Games</span>
+                <!-- Unified 4-Step Wizard & Estimator Hub -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Unified Project Wizard & ROI Estimator</h2>
+                        <span style="font-size: 0.78rem; font-weight: 600; color: var(--roi-accent); background: #ecfdf5; padding: 4px 10px; border-radius: 20px; border: 1px solid #a7f3d0;">Live Calculator</span>
                     </div>
 
-                    <div class="item-row">
-                        <div class="item-meta">
-                            <div class="item-icon">🎮</div>
-                            <div>
-                                <a class="item-title">Tactical 2D Shooter</a>
-                                <p class="item-desc">Top-down tactical battle royale & dynamic lobby simulation build.</p>
-                                <span class="tag">Unity Mobile Alpha</span>
-                            </div>
-                        </div>
-                        <div class="item-stats">
-                            <span class="item-size">120 MB</span>
-                            <span style="display:block; margin-top:2px;">Android x86/ARM</span>
-                            <a href="#" onclick="alert('Mobile APK build package link coming soon!')" class="btn" style="background: #059669; margin-top:6px;">Get APK</a>
-                        </div>
-                    </div>
-                </div>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
+                        Complete your specifications below to generate an automated tracking key, view your live AI architecture preview, and calculate projected business savings under local PKR budget constraints.
+                    </p>
 
-                <!-- Custom Mobile Development Section -->
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Custom Mobile App Development</span>
-                        <span class="tag" style="background: #ecfdf5; color: #047857; border-color: #a7f3d0;">Cross-Platform</span>
+                    <!-- Wizard Step 1: Solution Architecture -->
+                    <div class="wizard-step">
+                        <h3>Step 1: Select Solution Architecture</h3>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button type="button" class="btn-action" style="background: var(--primary);" onclick="selectArch(this, 'Desktop ERP')">Desktop ERP (.NET)</button>
+                            <button type="button" class="btn-action" style="background: #e2e8f0; color: var(--text-main);" onclick="selectArch(this, 'Mobile Unity')">Mobile App (Unity)</button>
+                            <button type="button" class="btn-action" style="background: #e2e8f0; color: var(--text-main);" onclick="selectArch(this, 'Web Portal')">Full-Stack Web Portal</button>
+                        </div>
                     </div>
 
-                    <div style="padding: 18px 18px 0 18px;">
-                        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-                            We develop cross-platform mobile solutions, Android utilities, and interactive game prototypes tailored precisely to your exact operational requirements.
-                        </p>
+                    <!-- Wizard Step 2: Scope & Budget (PKR) -->
+                    <div class="wizard-step">
+                        <h3>Step 2: Project Scope & PKR Budget Cap</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">Maximum cap strictly enforced under 100,000 PKR.</p>
+                        <input type="text" id="clientName" class="form-control" placeholder="Company / Client Name">
+                        <input type="number" id="budgetCap" class="form-control" placeholder="Proposed Budget (PKR, Max 100,000)" max="100000">
                     </div>
 
-                    <div class="cta-banner" style="background: #065f46;">
-                        <div>
-                            <div class="cta-title">Need a bespoke mobile app or game prototype?</div>
-                            <div class="cta-subtitle">Connect with our mobile development team for custom scoping.</div>
+                    <!-- Wizard Step 3: Seasonal Discount & ROI Savings -->
+                    <div class="wizard-step" style="background: #ecfdf5; border-color: #a7f3d0;">
+                        <h3 style="color: #065f46;">Step 3: Seasonal Discount & Efficiency Progress</h3>
+                        <p style="font-size: 0.82rem; color: #047857; margin-bottom: 6px;">Seasonal deployment discount tier active (75% Operational Savings Efficiency).</p>
+                        <div class="progress-container">
+                            <div class="progress-bar"></div>
                         </div>
-                        <div style="display: flex; gap: 8px;">
-                            <a href="contact.html" class="btn-light">Open Wizard</a>
-                            <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20would%20like%20to%20discuss%20a%20custom%20mobile%20app." target="_blank" class="btn-whatsapp-sub">WhatsApp</a>
+                        <span style="font-size: 0.8rem; font-weight: 700; color: #047857;">Estimated Annual Workflow Savings: PKR 85,000 — Fully within local budget bounds.</span>
+                    </div>
+
+                    <!-- Wizard Step 4: Tracking Key Generation & Dispatch -->
+                    <div class="wizard-step">
+                        <h3>Step 4: Generate Tracking Key & Direct Dispatch</h3>
+                        <input type="text" id="generatedKey" class="form-control" readonly placeholder="Click button below to generate unique order tracking key..." style="background: #f1f5f9; font-weight: 700; color: #1e293b;">
+                        
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+                            <button type="button" class="btn-action" onclick="generateTrackingKey()" style="background: var(--ai-accent);">⚡ Generate Tracking Key</button>
+                            <button type="button" class="btn-action" onclick="dispatchWhatsApp()" style="background: #25d366;">💬 Dispatch to WhatsApp (+923700818276)</button>
                         </div>
                     </div>
+
                 </div>
             </div>
 
-            <!-- Sidebar -->
             <div>
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title">Mobile Directives</span>
+                <!-- Direct Dispatch Sidebar -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Direct Support</h2>
                     </div>
-                    <div class="sidebar-content">
-                        <p class="sidebar-text">All mobile packages are managed, compiled, and deployed under Mashal Tech Mobile Infrastructure.</p>
-                        
-                        <div style="border-top: 1px solid var(--border); padding-top: 12px; margin-top: 12px;">
-                            <p style="font-size: 0.8rem; font-weight: 600; margin-bottom: 6px;">Direct Mobile Team Contact</p>
-                            <ul class="contact-list">
-                                <li>📧 6saddamhussain9@gmail.com</li>
-                                <li>📞 0370-0818276</li>
-                            </ul>
-                        </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">Need immediate technical consultation or custom enterprise integration?</p>
+                    
+                    <div class="contact-box">
+                        <p style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Direct Developer Contact</p>
+                        <p>📧 <strong>Email:</strong><br><a href="mailto:6saddamhussain9@gmail.com" style="color: var(--text-main); text-decoration: none; font-weight: 600;">6saddamhussain9@gmail.com</a></p>
+                        <p>📞 <strong>Phone / WhatsApp:</strong><br><a href="https://api.whatsapp.com/send?phone=923700818276" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">0370-0818276</a></p>
+                        <p>🏢 <strong>Location:</strong><br>Mardan & Peshawar, PK</p>
                     </div>
                 </div>
             </div>
@@ -113,27 +196,43 @@
         </div>
 
         <footer>
-            <p>&copy; 2026 Mashal Tech Mobile. All builds verified under secure infrastructure guidelines.</p>
+            <p>&copy; 2026 Mashal Tech Enterprise. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
         </footer>
     </div>
 
-    <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp" style="background: #059669;">
-        <span>💬</span> <span>Direct Support</span>
+    <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20am%20submitting%20a%20project%20spec%20via%20Mashal%20Tech%20Hub." target="_blank" class="floating-whatsapp">
+        <span>💬</span> <span>Chat with Us</span>
     </a>
 
     <script>
-        const searchInput = document.getElementById('searchInput');
-        const rows = document.querySelectorAll('.item-row');
+        let selectedArchitecture = 'Desktop ERP';
 
-        searchInput.addEventListener('keyup', function(e) {
-            const query = e.target.value.toLowerCase().trim();
-            rows.forEach(row => {
-                row.style.display = row.innerText.toLowerCase().includes(query) ? 'flex' : 'none';
+        function selectArch(button, archType) {
+            selectedArchitecture = archType;
+            const parent = button.parentElement;
+            parent.querySelectorAll('button').forEach(btn => {
+                btn.style.background = '#e2e8f0';
+                btn.style.color = 'var(--text-main)';
             });
-        });
+            button.style.background = 'var(--primary)';
+            button.style.color = '#ffffff';
+        }
 
-        function openQuickWhatsApp() {
-            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent('Hi! I am reviewing Mashal Tech mobile apps and have an inquiry.')}`, '_blank');
+        function generateTrackingKey() {
+            const client = document.getElementById('clientName').value.trim() || 'MT-CLIENT';
+            const randomNum = Math.floor(100000 + Math.random() * 900000);
+            const trackingKey = `MT-TRK-2026-${randomNum}`;
+            document.getElementById('generatedKey').value = trackingKey;
+            alert(`Tracking Key Generated: ${trackingKey}\nArchitecture: ${selectedArchitecture}\nReady for developer dispatch!`);
+        }
+
+        function dispatchWhatsApp() {
+            const client = document.getElementById('clientName').value.trim() || 'Valued Client';
+            const budget = document.getElementById('budgetCap').value.trim() || 'Under 100,000';
+            const trackingKey = document.getElementById('generatedKey').value || 'Pending Generation';
+            
+            const message = `Hi Mashal Tech! I am ${client}. Selected Architecture: ${selectedArchitecture}. Proposed Budget: PKR ${budget}. Tracking Key: ${trackingKey}. Let's proceed with development.`;
+            window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
 </body>

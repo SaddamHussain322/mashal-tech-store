@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mashal Tech — Unified Project Wizard, AI Blueprint & ROI Hub</title>
+    <title>Mashal Tech — PC Enterprise Software & Web Store</title>
     <style>
         :root {
             --bg: #f8fafc;
@@ -13,8 +13,6 @@
             --text-muted: #64748b;
             --primary: #2563eb;
             --primary-hover: #1d4ed8;
-            --ai-accent: #7c3aed;
-            --roi-accent: #059669;
             --radius: 12px;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
@@ -56,6 +54,17 @@
         .brand { font-size: 1.25rem; font-weight: 800; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 12px; letter-spacing: -0.02em; }
         .brand-badge { background: var(--primary); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 800; font-size: 1.1rem; }
 
+        .search-box { flex: 1; max-width: 420px; position: relative; }
+        .search-box input { width: 100%; padding: 10px 16px 10px 38px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; outline: none; background: #f8fafc; transition: all 0.2s; }
+        .search-box input:focus { background: #fff; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.85rem; }
+
+        /* Category Filter Bar */
+        .categories-bar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; display: flex; gap: 24px; margin-bottom: 24px; overflow-x: auto; box-shadow: var(--shadow-sm); }
+        .cat-item { color: var(--text-muted); font-size: 0.88rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: color 0.2s; }
+        .cat-item:hover { color: var(--text-main); }
+        .cat-item.active { color: var(--primary); font-weight: 700; }
+
         /* Layout Grid */
         .layout-grid { display: grid; grid-template-columns: 2.8fr 1.2fr; gap: 24px; }
         @media (max-width: 900px) { .layout-grid { grid-template-columns: 1fr; } }
@@ -65,28 +74,37 @@
         .card-header { border-bottom: 2px solid #f1f5f9; padding-bottom: 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
         .card-header h2 { font-size: 1.05rem; font-weight: 700; color: var(--text-main); letter-spacing: -0.01em; }
 
-        /* Wizard Step Elements */
-        .wizard-step { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
-        .wizard-step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
-        .form-control { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.88rem; outline: none; background: #ffffff; color: var(--text-main); margin-bottom: 12px; transition: all 0.2s; }
-        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+        /* Product Rows */
+        .product-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #f1f5f9; gap: 16px; }
+        .product-row:last-child { border-bottom: none; }
+        .product-thumb { width: 54px; height: 54px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; cursor: pointer; flex-shrink: 0; box-shadow: inset 0 2px 4px rgba(255,255,255,0.8); }
+        .product-info h3 { font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .product-title-link { color: var(--text-main); text-decoration: none; cursor: pointer; }
+        .product-title-link:hover { color: var(--primary); text-decoration: underline; }
+        .product-info p { font-size: 0.84rem; color: var(--text-muted); margin-top: 2px; }
+        
+        .tag-pill { display: inline-flex; align-items: center; gap: 4px; background: #f0fdf4; color: #16a34a; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 6px; border: 1px solid #bbf7d0; }
 
-        /* Exactly 3 Thumbnails Selector */
-        .thumbnail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
-        @media (max-width: 600px) { .thumbnail-grid { grid-template-columns: 1fr; } }
-        .thumb-option { background: #ffffff; border: 2px solid var(--border); border-radius: 8px; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
-        .thumb-option:hover { border-color: #94a3b8; color: var(--text-main); }
-        .thumb-option.selected { border-color: var(--primary); background: #eff6ff; color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); }
+        .download-btn { background: var(--primary); color: white; padding: 8px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem; transition: all 0.2s ease; display: inline-block; box-shadow: var(--shadow-sm); }
+        .download-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
 
-        /* AI Blueprint Preview Box */
-        .ai-preview-box { background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 8px; padding: 14px; font-size: 0.85rem; color: #4c1d95; margin-top: 8px; display: none; }
-        .ai-suggestion-box { background: #fef3c7; border: 1px solid #fde68a; border-radius: 8px; padding: 12px; font-size: 0.82rem; color: #78350f; margin-top: 10px; display: none; }
+        /* Web Feature Grid */
+        .web-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .web-feature-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .web-feature-box h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; color: var(--text-main); }
+        .web-feature-box p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
 
-        /* Calculator Results Box */
-        .calculator-box { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 8px; padding: 16px; margin-top: 10px; font-size: 0.88rem; color: #065f46; display: none; }
-
-        .btn-action { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.88rem; border: none; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm); display: inline-block; }
-        .btn-action:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-card { background: #fff; border-radius: var(--radius); max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 32px; position: relative; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.4rem; color: var(--text-muted); cursor: pointer; border: none; background: none; font-weight: bold; }
+        
+        .screenshot-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+        .screenshot-box { background: #0f172a; color: #f8fafc; border-radius: 8px; padding: 25px 12px; text-align: center; font-size: 0.82rem; }
+        .feature-list { list-style: none; margin: 14px 0; }
+        .feature-list li { font-size: 0.88rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .feature-list li::before { content: "✔"; color: #16a34a; font-weight: bold; }
+        .value-box { background: #eff6ff; border-left: 4px solid var(--primary); padding: 12px 16px; border-radius: 4px; margin: 16px 0; font-size: 0.85rem; color: #1e40af; }
 
         /* Sidebar Contact Box */
         .contact-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 16px; font-size: 0.85rem; }
@@ -107,124 +125,161 @@
         
         <!-- Hero Announcement Strip -->
         <div class="hero-banner">
-            <div class="hero-banner-title">🚀 <strong>Project & ROI Hub:</strong> Client Spec, Live AI Blueprints, Cost Estimator & Tracking Keys.</div>
-            <a href="index.html" class="hero-btn">Explore Catalog</a>
+            <div class="hero-banner-title">📢 <strong>Looking for tailored software?</strong> Build custom desktop ERPs & enterprise databases with us!</div>
+            <a href="contact.html" class="hero-btn">Contact Developers</a>
         </div>
 
         <!-- Clean 4-Tab Navigation Bar -->
         <div class="nav-tabs">
-            <a href="index.html" class="nav-tab">💻 PC Software</a>
+            <a href="index.html" class="nav-tab active">💻 PC Software</a>
             <a href="mobile.html" class="nav-tab">📱 Mobile Apps</a>
-            <a href="contact.html" class="nav-tab active">🚀 Project & ROI Hub</a>
+            <a href="contact.html" class="nav-tab">🚀 Project & ROI Hub</a>
             <a href="track.html" class="nav-tab">🔍 Track Order</a>
         </div>
 
         <!-- Site Header -->
         <div class="site-header">
-            <a href="contact.html" class="brand">
-                <div class="brand-badge">M</div> Mashal Tech Enterprise Hub
+            <a href="index.html" class="brand">
+                <div class="brand-badge">M</div> Mashal Tech Enterprise
             </a>
-            <div style="font-size: 0.82rem; font-weight: 600; color: #1e40af; background: #eff6ff; padding: 6px 14px; border-radius: 20px; border: 1px solid #bfdbfe;">
-                🔒 PKR Cost Caps Strictly Under 100,000 PKR
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search PC solutions & Web Portals...">
             </div>
+        </div>
+
+        <!-- Secondary Categories Bar -->
+        <div class="categories-bar">
+            <span class="cat-item active" onclick="filterCategory('all', this)">💻 All Solutions</span>
+            <span class="cat-item" onclick="filterCategory('desktop', this)">🖥️ Desktop Systems</span>
+            <span class="cat-item" onclick="filterCategory('erp', this)">🧾 Enterprise ERPs</span>
+            <span class="cat-item" onclick="filterCategory('portal', this)">🌐 Web Portals</span>
         </div>
 
         <!-- Layout Grid -->
         <div class="layout-grid">
             
             <div>
-                <!-- Unified Project Wizard Hub -->
+                <!-- PC Software Catalog Section -->
                 <div class="card">
                     <div class="card-header">
-                        <h2>Unified Client Specification & AI Estimator</h2>
-                        <span style="font-size: 0.78rem; font-weight: 600; color: var(--roi-accent); background: #ecfdf5; padding: 4px 10px; border-radius: 20px; border: 1px solid #a7f3d0;">Fully Interactive</span>
+                        <h2>Authorized PC Software Solutions</h2>
+                        <span style="font-size: 0.82rem; color: var(--primary); cursor: pointer; font-weight: 600;" onclick="resetSearch()">Show All</span>
+                    </div>
+
+                    <div class="product-row" data-category="desktop">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb" onclick="openModal('utility-modal')">📊</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="openModal('utility-modal')">MashalTechUtility</a></h3>
+                                <p>Enterprise desktop utility tool and system capture release package.</p>
+                                <div><span class="tag-pill">✔ Verified Build v1.0.1</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; min-width: 130px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">28 KB</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Windows x64</span>
+                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe" class="download-btn">Download .exe</a>
+                        </div>
+                    </div>
+
+                    <div class="product-row" data-category="erp">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb">🧾</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="alert('Enterprise ERP details coming soon!')">Custom Inventory & Invoicing ERP</a></h3>
+                                <p>Automated sales invoicing infrastructure compliant with regulatory guidelines.</p>
+                                <div><span class="tag-pill">✔ Audit Ready</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; min-width: 130px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">28.5 MB</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">Database Linked</span>
+                        </div>
+                    </div>
+
+                    <div class="product-row" data-category="portal">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb">🌐</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="window.location.href='contact.html'">Full-Stack Business Web Portal</a></h3>
+                                <p>Cloud-backed React & Node.js web applications with custom database sync.</p>
+                                <div><span class="tag-pill">✔ Vercel Hosted</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; min-width: 130px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">Cloud App</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Live Deploy</span>
+                            <a href="contact.html" class="download-btn" style="background: #0f172a;">Request Spec</a>
+                        </div>
+                    </div>
+
+                    <div id="noResults" style="display:none; padding:20px; text-align:center; color: var(--text-muted);">No matching solutions found.</div>
+                </div>
+
+                <!-- Custom Full-Stack Web Applications Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🌐 Custom Full-Stack Web Applications</h2>
+                        <span style="font-size: 0.78rem; font-weight: 600; color: #1d4ed8; background: #eff6ff; padding: 4px 10px; border-radius: 20px; border: 1px solid #bfdbfe;">Audit Ready</span>
                     </div>
 
                     <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">
-                        Provide your details, pick your target solution thumbnail among our 3 core architectures, type your prompt for live AI blueprints and recommendations, calculate your automated cost, and assign your unique tracking key.
+                        From high-converting brand landing pages to scalable, database-driven enterprise web portals—we design, build, and deploy custom web solutions tailored to your business operations.
                     </p>
 
-                    <!-- Step 1: Client Details & 3 Thumbnails -->
-                    <div class="wizard-step">
-                        <h3>👤 Step 1: Client Details & Solution Architecture</h3>
-                        <input type="text" id="clientName" class="form-control" placeholder="Name of Client (e.g., Saddam Hussain)">
-                        <input type="text" id="companyName" class="form-control" placeholder="Company Name (e.g., Baadshah Tyre Corp / Mashal Tech)">
-                        <input type="text" id="mobileNumber" class="form-control" placeholder="Mobile Number (e.g., 0370-0818276)">
-                        
-                        <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 6px;">Select Solution Thumbnail (Choose 1 of 3):</label>
-                        <div class="thumbnail-grid">
-                            <div class="thumb-option selected" onclick="selectThumb(this, 'Desktop App')">🖥️ Desktop App</div>
-                            <div class="thumb-option" onclick="selectThumb(this, 'Mobile App')">📱 Mobile App</div>
-                            <div class="thumb-option" onclick="selectThumb(this, 'Web App / Website')">🌐 Web App / Website</div>
+                    <div class="web-grid">
+                        <div class="web-feature-box">
+                            <h4>🌐 Full-Stack Performance</h4>
+                            <p>React, Node.js, and Express architectures for lightning-fast speeds.</p>
+                        </div>
+                        <div class="web-feature-box">
+                            <h4>🗄️ PostgreSQL Database</h4>
+                            <p>Robust data storage for secure lead forms, inventory, and ledgers.</p>
+                        </div>
+                        <div class="web-feature-box">
+                            <h4>📱 Responsive Layouts</h4>
+                            <p>Pixel-perfect UI optimized across mobile, tablet, and desktop screens.</p>
+                        </div>
+                        <div class="web-feature-box">
+                            <h4>🔒 Custom Domain Hosting</h4>
+                            <p>SSL security and fast global delivery via Vercel / cloud hosts.</p>
                         </div>
                     </div>
 
-                    <!-- Step 2: AI Blueprint & Smart Suggestions -->
-                    <div class="wizard-step" style="border-color: #ddd6fe; background: #faf5ff;">
-                        <h3 style="color: #6d28d9;">🤖 Step 2: AI Blueprint Generator & Smart Suggestions</h3>
-                        <p style="font-size: 0.82rem; color: #5b21b6; margin-bottom: 8px;">Describe your project requirements below to instantly generate a structured system layout and recommendations tailored for you:</p>
-                        <textarea id="userPrompt" class="form-control" rows="3" placeholder="Type prompt here (e.g., I need a secure inventory ledger system with closing reports...)" oninput="generateAIBlueprint()"></textarea>
-                        
-                        <div id="aiPreviewBox" class="ai-preview-box">
-                            <strong>📐 Live AI Architecture Blueprint:</strong><br>
-                            <span id="blueprintText">Awaiting prompt input...</span>
+                    <!-- CTA Banner inside card -->
+                    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 20px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                        <div>
+                            <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: white;">Need a custom web portal or brand website?</h3>
+                            <p style="font-size: 0.82rem; color: #94a3b8;">Get a dedicated quote or request a live consultation with our engineering team.</p>
                         </div>
-
-                        <div id="aiSuggestionBox" class="ai-suggestion-box">
-                            <strong>💡 Expert Recommendation for Your Case:</strong><br>
-                            <span id="suggestionText">Enter your workflow scope to receive optimized architecture advice.</span>
+                        <div style="display: flex; gap: 8px;">
+                            <a href="contact.html" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem;">Open Wizard</a>
+                            <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20am%20interested%20in%20building%20a%20custom%20web%20application." target="_blank" style="background: #059669; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem;">WhatsApp</a>
                         </div>
                     </div>
-
-                    <!-- Step 3: Automated Cost Calculator -->
-                    <div class="wizard-step" style="border-color: #a7f3d0; background: #f0fdf4;">
-                        <h3 style="color: #065f46;">💰 Step 3: Automated Cost Calculator (PKR)</h3>
-                        <p style="font-size: 0.82rem; color: #047857; margin-bottom: 10px;">Automatically computes your payable development fee strictly capped under 100,000 PKR.</p>
-                        
-                        <button type="button" class="btn-action" onclick="calculateCost()" style="background: var(--roi-accent);">🧮 Run Automated Cost Calculation</button>
-                        
-                        <div id="calculatorResultBox" class="calculator-box">
-                            <strong>📊 Cost Evaluation Report:</strong><br>
-                            <span id="calcOutputText">Click the button above to evaluate your investment.</span>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: Unique Tracking Key & Dispatch -->
-                    <div class="wizard-step">
-                        <h3>🔍 Step 4: Assign Unique Tracking Key & Dispatch</h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">Generates a permanent tracking identifier so you can check live order progress anytime on the Track Order tab.</p>
-                        <input type="text" id="generatedKey" class="form-control" readonly placeholder="Click button below to generate tracking key..." style="background: #f1f5f9; font-weight: 700; color: #1e293b;">
-                        
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
-                            <button type="button" class="btn-action" onclick="generateTrackingKey()" style="background: var(--ai-accent);">⚡ Generate Unique Tracking Key</button>
-                            <button type="button" class="btn-action" onclick="dispatchWhatsApp()" style="background: #25d366;">💬 Dispatch Spec to WhatsApp (+923700818276)</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 5: Client Feedback & Review Box -->
-                    <div class="wizard-step" style="border-color: #cbd5e1; background: #ffffff;">
-                        <h3 style="color: var(--text-main);">💬 Client Feedback & Review Box</h3>
-                        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">Share your feedback, custom adjustments, or review notes with our engineering team:</p>
-                        <textarea id="clientFeedback" class="form-control" rows="2" placeholder="Type your feedback or notes here..."></textarea>
-                        <button type="button" class="btn-action" onclick="submitFeedback()" style="background: var(--text-main);">Submit Feedback Note</button>
-                    </div>
-
                 </div>
+
             </div>
 
             <div>
-                <!-- Direct Support Sidebar -->
+                <!-- Sidebar -->
                 <div class="card">
                     <div class="card-header">
-                        <h2>Direct Support</h2>
+                        <h2>Need Custom Software?</h2>
                     </div>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">Need immediate technical consultation or custom enterprise integration?</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">We craft tailored offline desktop tools, mobile apps, and cloud web portals designed specifically around your workflow.</p>
                     
                     <div class="contact-box">
                         <p style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Direct Developer Contact</p>
                         <p>📧 <strong>Email:</strong><br><a href="mailto:6saddamhussain9@gmail.com" style="color: var(--text-main); text-decoration: none; font-weight: 600;">6saddamhussain9@gmail.com</a></p>
                         <p>📞 <strong>Phone / WhatsApp:</strong><br><a href="https://api.whatsapp.com/send?phone=923700818276" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">0370-0818276</a></p>
                         <p>🏢 <strong>Location:</strong><br>Mardan & Peshawar, PK</p>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-top: 16px; font-size: 0.82rem; color: var(--text-muted);">
+                        <strong style="color: var(--text-main); display: block; margin-bottom: 2px;">📜 Certificate of Authenticity</strong>
+                        All software packages are compiled and distributed under <strong>Mashal Tech Enterprise</strong>.
                     </div>
                 </div>
             </div>
@@ -236,84 +291,77 @@
         </footer>
     </div>
 
-    <a href="https://api.whatsapp.com/send?phone=923700818276&text=Hi!%20I%20am%20submitting%20a%20project%20spec%20via%20Mashal%20Tech%20Hub." target="_blank" class="floating-whatsapp">
+    <!-- Utility Modal -->
+    <div id="utility-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="close-modal" onclick="closeModal('utility-modal')">&times;</button>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border);">
+                <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📊</div>
+                <div>
+                    <h2 style="font-size: 1.15rem; font-weight: 700;">MashalTechUtility — Desktop Utility & Screen Capture</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted);">Official PC Build v1.0.1 • Standalone Offline Deployment</p>
+                </div>
+            </div>
+            <div class="value-box">
+                💡 <strong>Why You Need This System:</strong> Provides a lightweight, high-performance desktop workflow toolbar with seamless execution and instant utility access.
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 14px;">📸 System Screenshots & UI Walkthrough</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot-box"><span>🖥️ Floating Toolbar</span><small style="color:#94a3b8; display:block; margin-top:2px;">Tubelight Interface</small></div>
+                <div class="screenshot-box"><span>⚡ Quick Capture</span><small style="color:#94a3b8; display:block; margin-top:2px;">Instant Execution</small></div>
+                <div class="screenshot-box"><span>⚙️ Standalone Core</span><small style="color:#94a3b8; display:block; margin-top:2px;">Zero Dependency</small></div>
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 16px;">⚡ Core Capabilities</h3>
+            <ul class="feature-list">
+                <li><strong>Lightweight Design:</strong> Optimized executable footprint running smoothly on Windows.</li>
+                <li><strong>100% Offline Desktop Utility:</strong> Zero cloud dependency—runs directly from local drives or USB.</li>
+            </ul>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+                <span style="font-size: 0.82rem; color: var(--text-muted);">File Size: <strong>28 KB</strong> | OS: <strong>Windows (x64)</strong></span>
+                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe" class="download-btn" style="padding: 10px 20px;">⬇ Download Official Package (.exe)</a>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" onclick="openQuickWhatsApp(); return false;" class="floating-whatsapp">
         <span>💬</span> <span>Chat with Us</span>
     </a>
 
     <script>
-        let selectedThumbnail = 'Desktop App';
+        const searchInput = document.getElementById('searchInput');
+        const rows = document.querySelectorAll('.product-row');
+        const noResults = document.getElementById('noResults');
 
-        function selectThumb(element, thumbName) {
-            selectedThumbnail = thumbName;
-            document.querySelectorAll('.thumb-option').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
+        searchInput.addEventListener('keyup', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            let visibleCount = 0;
+            rows.forEach(row => {
+                if (row.innerText.toLowerCase().includes(query)) { row.style.display = 'flex'; visibleCount++; }
+                else { row.style.display = 'none'; }
+            });
+            noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+        });
+
+        function filterCategory(category, element) {
+            document.querySelectorAll('.cat-item').forEach(el => el.classList.remove('active'));
+            if (element) element.classList.add('active');
+            searchInput.value = '';
+            let visibleCount = 0;
+            rows.forEach(row => {
+                const cat = row.getAttribute('data-category');
+                if (category === 'all' || cat === category) { row.style.display = 'flex'; visibleCount++; }
+                else { row.style.display = 'none'; }
+            });
+            noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        function generateAIBlueprint() {
-            const promptVal = document.getElementById('userPrompt').value.trim();
-            const previewBox = document.getElementById('aiPreviewBox');
-            const blueprintText = document.getElementById('blueprintText');
-            const suggestionBox = document.getElementById('aiSuggestionBox');
-            const suggestionText = document.getElementById('suggestionText');
+        function resetSearch() { searchInput.value = ''; filterCategory('all', document.querySelector('.cat-item')); }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = function(e) { if (e.target.classList.contains('modal-overlay')) e.target.style.display = 'none'; }
 
-            if (promptVal.length > 3) {
-                previewBox.style.display = 'block';
-                suggestionBox.style.display = 'block';
-                
-                blueprintText.innerText = `[${selectedThumbnail.toUpperCase()} ARCHITECTURE]: Modular component layout initialized. Core pipeline: Secure Frontend UI -> Local/Cloud Database Sync -> Automated Report Export.`;
-                
-                if (selectedThumbnail === 'Desktop App') {
-                    suggestionText.innerText = `For your desktop enterprise workflow, implementing C# .NET Windows Forms with an offline SQLite ledger layer guarantees zero latency, robust security, and reliable multi-sticker printing.`;
-                } else if (selectedThumbnail === 'Mobile App') {
-                    suggestionText.innerText = `For optimal mobile performance, building a cross-platform or Unity 2D framework ensures smooth frame rates, lightweight package size, and rapid offline deployment.`;
-                } else {
-                    suggestionText.innerText = `For your web application/website, a React frontend paired with an Express and PostgreSQL backend hosted on Vercel delivers lightning-fast global load speeds and secure database records.`;
-                }
-            } else {
-                previewBox.style.display = 'none';
-                suggestionBox.style.display = 'none';
-            }
-        }
-
-        function calculateCost() {
-            const resultBox = document.getElementById('calculatorResultBox');
-            const outputText = document.getElementById('calcOutputText');
-            resultBox.style.display = 'block';
-
-            let baseCost = 45000;
-            if (selectedThumbnail === 'Mobile App') baseCost = 65000;
-            if (selectedThumbnail === 'Web App / Website') baseCost = 55000;
-
-            const finalCap = Math.min(baseCost, 100000);
-            outputText.innerHTML = `Selected Solution: <strong>${selectedThumbnail}</strong><br>Base Evaluation Cost: <strong>PKR ${finalCap.toLocaleString()}</strong><br><em>Status: Strictly verified under the 100,000 PKR local budgetary cap with full seasonal operational savings applied.</em>`;
-        }
-
-        function generateTrackingKey() {
-            const client = document.getElementById('clientName').value.trim() || 'MT-CLIENT';
-            const randomNum = Math.floor(100000 + Math.random() * 900000);
-            const trackingKey = `MT-TRK-2026-${randomNum}`;
-            document.getElementById('generatedKey').value = trackingKey;
-            alert(`Success! Tracking Key Assigned: ${trackingKey}\nClient: ${client}\nSolution: ${selectedThumbnail}`);
-        }
-
-        function submitFeedback() {
-            const feedback = document.getElementById('clientFeedback').value.trim();
-            if (feedback) {
-                alert("Thank you! Your feedback note has been recorded and attached to your project session.");
-            } else {
-                alert("Please type some feedback notes before submitting.");
-            }
-        }
-
-        function dispatchWhatsApp() {
-            const client = document.getElementById('clientName').value.trim() || 'Valued Client';
-            const company = document.getElementById('companyName').value.trim() || 'Mashal Tech Partner';
-            const mobile = document.getElementById('mobileNumber').value.trim() || '0370-0818276';
-            const trackingKey = document.getElementById('generatedKey').value || 'Pending Generation';
-            const promptText = document.getElementById('userPrompt').value.trim() || 'Standard Enterprise Build';
-            const feedbackText = document.getElementById('clientFeedback').value.trim() || 'None';
-
-            const message = `Hi Mashal Tech! New Project Spec:\n- Client: ${client}\n- Company: ${company}\n- Mobile: ${mobile}\n- Architecture: ${selectedThumbnail}\n- Tracking Key: ${trackingKey}\n- Scope Prompt: ${promptText}\n- Feedback: ${feedbackText}`;
+        function openQuickWhatsApp() {
+            const message = "Hi! I am visiting Mashal Tech Store and would like to inquire about a custom software project.";
             window.open(`https://api.whatsapp.com/send?phone=923700818276&text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>

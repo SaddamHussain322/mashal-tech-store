@@ -167,6 +167,24 @@
                         <span style="font-size: 0.82rem; color: var(--primary); cursor: pointer; font-weight: 600;" onclick="resetSearch()">Show All</span>
                     </div>
 
+                    <!-- App 1: CustomerBookGUI -->
+                    <div class="product-row" data-category="desktop">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb" onclick="openModal('customerbook-modal')">📖</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="openModal('customerbook-modal')">CustomerBookGUI Enterprise</a></h3>
+                                <p>C# Windows Forms enterprise desktop software with interactive sticker generator, petty cash ledger, and billing panels.</p>
+                                <div><span class="tag-pill">✔ Verified Desktop App</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; min-width: 130px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">Desktop App</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Windows x64</span>
+                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe" class="download-btn">Download .exe</a>
+                        </div>
+                    </div>
+
+                    <!-- App 2: MashalTechUtility -->
                     <div class="product-row" data-category="desktop">
                         <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
                             <div class="product-thumb" onclick="openModal('utility-modal')">📊</div>
@@ -195,22 +213,6 @@
                         <div style="text-align: right; min-width: 130px;">
                             <span style="font-weight: 700; font-size: 0.88rem; display: block;">28.5 MB</span>
                             <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">Database Linked</span>
-                        </div>
-                    </div>
-
-                    <div class="product-row" data-category="portal">
-                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
-                            <div class="product-thumb">🌐</div>
-                            <div class="product-info">
-                                <h3><a class="product-title-link" onclick="window.location.href='contact.html'">Full-Stack Business Web Portal</a></h3>
-                                <p>Cloud-backed React & Node.js web applications with custom database sync.</p>
-                                <div><span class="tag-pill">✔ Vercel Hosted</span></div>
-                            </div>
-                        </div>
-                        <div style="text-align: right; min-width: 130px;">
-                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">Cloud App</span>
-                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Live Deploy</span>
-                            <a href="contact.html" class="download-btn" style="background: #0f172a;">Request Spec</a>
                         </div>
                     </div>
 
@@ -291,7 +293,39 @@
         </footer>
     </div>
 
-    <!-- Utility Modal -->
+    <!-- CustomerBookGUI Modal -->
+    <div id="customerbook-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="close-modal" onclick="closeModal('customerbook-modal')">&times;</button>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border);">
+                <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📖</div>
+                <div>
+                    <h2 style="font-size: 1.15rem; font-weight: 700;">CustomerBookGUI Enterprise — Windows Forms Desktop App</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted);">Official C# .NET Desktop Build • Standalone Offline Deployment</p>
+                </div>
+            </div>
+            <div class="value-box">
+                💡 <strong>Why You Need This System:</strong> Features an interactive sticker generator, sequential unique file numbering, dual-entry Petty Cash journal ledger, and automated billing panels.
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 14px;">📸 System Screenshots & UI Walkthrough</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot-box"><span>🏷️ Unique Stickers</span><small style="color:#94a3b8; display:block; margin-top:2px;">3 Independent Panels</small></div>
+                <div class="screenshot-box"><span>🧾 Petty Cash Ledger</span><small style="color:#94a3b8; display:block; margin-top:2px;">Dual-Entry Tracking</small></div>
+                <div class="screenshot-box"><span>⚙️ Billing Engine</span><small style="color:#94a3b8; display:block; margin-top:2px;">Automated Invoicing</small></div>
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 16px;">⚡ Core Capabilities</h3>
+            <ul class="feature-list">
+                <li><strong>Unique Sequential Numbering:</strong> Guarantees unique identifiers across all active customer sticker cards.</li>
+                <li><strong>Independent Selection & Editing:</strong> Multi-panel architecture allows separate customer name and serial adjustments.</li>
+            </ul>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+                <span style="font-size: 0.82rem; color: var(--text-muted);">Platform: <strong>Windows (C# .NET)</strong></span>
+                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe" class="download-btn" style="padding: 10px 20px;">⬇ Download Package</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MashalTechUtility Modal -->
     <div id="utility-modal" class="modal-overlay">
         <div class="modal-card">
             <button class="close-modal" onclick="closeModal('utility-modal')">&times;</button>

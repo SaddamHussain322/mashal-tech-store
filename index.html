@@ -167,7 +167,24 @@
                         <span style="font-size: 0.82rem; color: var(--primary); cursor: pointer; font-weight: 600;" onclick="resetSearch()">Show All</span>
                     </div>
 
-                    <!-- CustomerBookGUI Product Row (publish.rar link restored) -->
+                    <!-- Salary Slip Generator Enterprise Product Row (NEW) -->
+                    <div class="product-row" data-category="desktop">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb" onclick="openModal('salaryslip-modal')">💵</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="openModal('salaryslip-modal')">Salary Slip Generator Enterprise</a></h3>
+                                <p>Automated desktop payroll calculations, customizable deductions, and printable payslip exports.</p>
+                                <div><span class="tag-pill">✔ Verified v1.0.1 Package</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; min-width: 130px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">Desktop Archive</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Windows x64</span>
+                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Salary.slip.rar" class="download-btn">Download .rar</a>
+                        </div>
+                    </div>
+
+                    <!-- CustomerBookGUI Product Row -->
                     <div class="product-row" data-category="desktop">
                         <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
                             <div class="product-thumb" onclick="openModal('customerbook-modal')">📖</div>
@@ -292,6 +309,40 @@
         <footer>
             <p>&copy; 2026 Mashal Tech Enterprise. Contact: 6saddamhussain9@gmail.com | Phone: 0370-0818276</p>
         </footer>
+    </div>
+
+    <!-- Salary Slip Generator Modal (NEW) -->
+    <div id="salaryslip-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="close-modal" onclick="closeModal('salaryslip-modal')">&times;</button>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border);">
+                <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">💵</div>
+                <div>
+                    <h2 style="font-size: 1.15rem; font-weight: 700;">Salary Slip Generator Enterprise</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted);">Official Desktop Payroll Tool • Standalone Offline Deployment</p>
+                </div>
+            </div>
+            <div class="value-box">
+                💡 <strong>Why You Need This System:</strong> Streamlines staff payroll by calculating gross pay, custom allowances, tax/advance deductions, and generating printable payslips in seconds.
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 14px;">📸 System Screenshots & UI Walkthrough</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot-box"><span>📝 Data Entry</span><small style="color:#94a3b8; display:block; margin-top:2px;">Fast Input Form</small></div>
+                <div class="screenshot-box"><span>🧮 Auto Calculation</span><small style="color:#94a3b8; display:block; margin-top:2px;">Net Salary Engine</small></div>
+                <div class="screenshot-box"><span>🖨️ PDF / Direct Print</span><small style="color:#94a3b8; display:block; margin-top:2px;">Professional Vouchers</small></div>
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 16px;">⚡ Key Features</h3>
+            <ul class="feature-list">
+                <li><strong>Automated Net Pay Computation:</strong> Calculates allowances, bonuses, advances, and tax deductions dynamically.</li>
+                <li><strong>Customizable Voucher Layout:</strong> Formats clean company headers, employee IDs, and itemized salary structure.</li>
+                <li><strong>One-Click Export & Printing:</strong> Generates print-ready payslips formatted for direct thermal or A4 printing.</li>
+                <li><strong>100% Offline & Secure:</strong> Runs locally on your Windows PC without requiring cloud database connections.</li>
+            </ul>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+                <span style="font-size: 0.82rem; color: var(--text-muted);">Format: <strong>RAR Archive (.rar)</strong> | OS: <strong>Windows (x64)</strong></span>
+                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Salary.slip.rar" class="download-btn" style="padding: 10px 20px;">⬇ Download Package (.rar)</a>
+            </div>
+        </div>
     </div>
 
     <!-- CustomerBookGUI Modal -->

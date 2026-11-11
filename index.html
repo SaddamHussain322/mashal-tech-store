@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mashal Tech — PC Enterprise Software & Web Store</title>
+    <!-- QRCode.js Library CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --bg: #f8fafc;
@@ -85,8 +87,11 @@
         
         .tag-pill { display: inline-flex; align-items: center; gap: 4px; background: #f0fdf4; color: #16a34a; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 6px; border: 1px solid #bbf7d0; }
 
-        .download-btn { background: var(--primary); color: white; padding: 8px 18px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem; transition: all 0.2s ease; display: inline-block; box-shadow: var(--shadow-sm); }
+        .btn-group { display: flex; gap: 6px; align-items: center; justify-content: flex-end; }
+        .download-btn { background: var(--primary); color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem; transition: all 0.2s ease; display: inline-block; box-shadow: var(--shadow-sm); }
         .download-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        .qr-trigger-btn { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.82rem; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 4px; }
+        .qr-trigger-btn:hover { background: #e2e8f0; }
 
         /* Web Feature Grid */
         .web-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
@@ -110,6 +115,13 @@
         .contact-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 16px; font-size: 0.85rem; }
         .contact-box p { margin-bottom: 10px; line-height: 1.5; color: var(--text-main); }
         .contact-box p:last-child { margin-bottom: 0; }
+
+        /* Sidebar Store QR Box */
+        .store-qr-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-top: 16px; text-align: center; }
+        .store-qr-box h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
+        .store-qr-box p { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px; }
+        #homeStoreQrCode { display: flex; justify-content: center; margin: 0 auto 10px auto; }
+        #homeStoreQrCode img { border-radius: 8px; border: 1px solid var(--border); padding: 6px; background: white; }
 
         /* Footer */
         footer { text-align: center; padding: 28px 0; font-size: 0.82rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 40px; }
@@ -167,24 +179,7 @@
                         <span style="font-size: 0.82rem; color: var(--primary); cursor: pointer; font-weight: 600;" onclick="resetSearch()">Show All</span>
                     </div>
 
-                    <!-- Baadshah Tyres ERP Setup Product Row (CORRECTED TO v101) -->
-                    <div class="product-row" data-category="erp">
-                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
-                            <div class="product-thumb" onclick="openModal('baadshah-modal')">🛞</div>
-                            <div class="product-info">
-                                <h3><a class="product-title-link" onclick="openModal('baadshah-modal')">Baadshah Tyres ERP Enterprise Setup v1.0.0</a></h3>
-                                <p>Comprehensive inventory, import tracking, and point-of-sale management system for tyre enterprises.</p>
-                                <div><span class="tag-pill">✔ Verified v1.0.0 Setup</span></div>
-                            </div>
-                        </div>
-                        <div style="text-align: right; min-width: 130px;">
-                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">73.6 MB</span>
-                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Windows x64</span>
-                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Baadshah.Tyres.ERP.Setup.1.0.0.exe" class="download-btn">Download .exe</a>
-                        </div>
-                    </div>
-
-                    <!-- Record Books Setup Product Row (CORRECTED TO v101) -->
+                    <!-- Record Books Setup Product Row -->
                     <div class="product-row" data-category="desktop">
                         <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
                             <div class="product-thumb" onclick="openModal('recordbooks-modal')">📖</div>
@@ -194,10 +189,13 @@
                                 <div><span class="tag-pill">✔ Verified v1.0.0 Setup</span></div>
                             </div>
                         </div>
-                        <div style="text-align: right; min-width: 130px;">
+                        <div style="text-align: right; min-width: 170px;">
                             <span style="font-weight: 700; font-size: 0.88rem; display: block;">Desktop Installer</span>
                             <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Windows x64</span>
-                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Record.Books.Setup.1.0.0.exe" class="download-btn">Download .exe</a>
+                            <div class="btn-group">
+                                <button class="qr-trigger-btn" onclick="generateAppQr('Record Books Setup v1.0.0', 'https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Record.Books.Setup.1.0.0.exe')">📱 QR</button>
+                                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Record.Books.Setup.1.0.0.exe" class="download-btn">Download .exe</a>
+                            </div>
                         </div>
                     </div>
 
@@ -211,10 +209,13 @@
                                 <div><span class="tag-pill">✔ Verified Build v1.0.1</span></div>
                             </div>
                         </div>
-                        <div style="text-align: right; min-width: 130px;">
+                        <div style="text-align: right; min-width: 170px;">
                             <span style="font-weight: 700; font-size: 0.88rem; display: block;">28 KB</span>
                             <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Windows x64</span>
-                            <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe" class="download-btn">Download .exe</a>
+                            <div class="btn-group">
+                                <button class="qr-trigger-btn" onclick="generateAppQr('MashalTechUtility v1.0.1', 'https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe')">📱 QR</button>
+                                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe" class="download-btn">Download .exe</a>
+                            </div>
                         </div>
                     </div>
 
@@ -228,9 +229,13 @@
                                 <div><span class="tag-pill">✔ Audit Ready</span></div>
                             </div>
                         </div>
-                        <div style="text-align: right; min-width: 130px;">
+                        <div style="text-align: right; min-width: 170px;">
                             <span style="font-weight: 700; font-size: 0.88rem; display: block;">28.5 MB</span>
-                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">Database Linked</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Database Linked</span>
+                            <div class="btn-group">
+                                <button class="qr-trigger-btn" onclick="generateAppQr('Custom Inventory & Invoicing ERP', 'https://mashal-tech-store.vercel.app')">📱 QR</button>
+                                <span class="download-btn" style="background:#94a3b8; cursor:not-allowed;">Coming Soon</span>
+                            </div>
                         </div>
                     </div>
 
@@ -297,6 +302,14 @@
                         <p>🏢 <strong>Location:</strong><br>Mardan & Peshawar, PK</p>
                     </div>
 
+                    <!-- Home Page Store QR Code Box -->
+                    <div class="store-qr-box">
+                        <h4>📱 Mashal Tech Store QR Code</h4>
+                        <p>Scan with your phone camera to open and share our digital storefront on mobile devices.</p>
+                        <div id="homeStoreQrCode"></div>
+                        <span style="font-size:0.75rem; color:var(--primary); font-weight:700;">mashal-tech-store.vercel.app</span>
+                    </div>
+
                     <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-top: 16px; font-size: 0.82rem; color: var(--text-muted);">
                         <strong style="color: var(--text-main); display: block; margin-bottom: 2px;">📜 Certificate of Authenticity</strong>
                         All software packages are compiled and distributed under <strong>Mashal Tech Enterprise</strong>.
@@ -311,41 +324,24 @@
         </footer>
     </div>
 
-    <!-- Baadshah Tyres ERP Modal (CORRECTED TO v101) -->
-    <div id="baadshah-modal" class="modal-overlay">
-        <div class="modal-card">
-            <button class="close-modal" onclick="closeModal('baadshah-modal')">&times;</button>
-            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border);">
-                <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">🛞</div>
-                <div>
-                    <h2 style="font-size: 1.15rem; font-weight: 700;">Baadshah Tyres ERP Enterprise Setup v1.0.0</h2>
-                    <p style="font-size: 0.82rem; color: var(--text-muted);">Official Enterprise Tyre Import & Inventory Management Suite</p>
-                </div>
-            </div>
-            <div class="value-box">
-                💡 <strong>Why You Need This System:</strong> Streamlines heavy commercial tyre imports, warehouse tracking, automated invoicing, and stock auditing in one unified desktop setup.
-            </div>
-            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 14px;">📸 System Screenshots & UI Walkthrough</h3>
-            <div class="screenshot-gallery">
-                <div class="screenshot-box"><span>📦 Warehouse Stocks</span><small style="color:#94a3b8; display:block; margin-top:2px;">Live Inventory Grid</small></div>
-                <div class="screenshot-box"><span>🧾 Import & Invoicing</span><small style="color:#94a3b8; display:block; margin-top:2px;">Automated Billing</small></div>
-                <div class="screenshot-box"><span>⚙️ Setup Package</span><small style="color:#94a3b8; display:block; margin-top:2px;">Standard Windows Installer</small></div>
-            </div>
-            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 16px;">⚡ Key Features</h3>
-            <ul class="feature-list">
-                <li><strong>Advanced Tyre Inventory Control:</strong> Track diverse tyre categories, sizes, and brand specifications seamlessly.</li>
-                <li><strong>Automated Import & Sales Invoicing:</strong> Generate professional multi-item commercial invoices and receipts instantly.</li>
-                <li><strong>Secure Local Database:</strong> Maintains high-speed data persistence tailored for heavy commercial operations.</li>
-                <li><strong>Standard Windows Installer:</strong> Clean, straightforward `.exe` setup package for fast deployment across workstations.</li>
-            </ul>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
-                <span style="font-size: 0.82rem; color: var(--text-muted);">Size: <strong>73.6 MB</strong> | OS: <strong>Windows (x64)</strong></span>
-                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Baadshah.Tyres.ERP.Setup.1.0.0.exe" class="download-btn" style="padding: 10px 20px;">⬇ Download Installer (.exe)</a>
+    <!-- Dynamic Download QR Code Modal -->
+    <div id="qr-modal" class="modal-overlay">
+        <div class="modal-card" style="max-width: 440px; text-align: center;">
+            <button class="close-modal" onclick="closeModal('qr-modal')">&times;</button>
+            <div style="font-size:2.5rem; margin-bottom:8px;">📱</div>
+            <h2 id="qrModalTitle" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">Scan to Download</h2>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">Scan this QR code with any mobile camera or QR scanner to download the `.exe` package directly onto your device.</p>
+            
+            <div id="appQrContainer" style="display: flex; justify-content: center; margin: 20px 0; padding: 16px; background: #f8fafc; border: 1px solid var(--border); border-radius: 12px;"></div>
+            
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button onclick="copyQrLink()" style="background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.82rem;">🔗 Copy Link</button>
+                <a id="qrDownloadBtn" download="QR_Code.png" href="#" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem;">⬇ Download QR</a>
             </div>
         </div>
     </div>
 
-    <!-- Record Books Setup Modal (CORRECTED TO v101) -->
+    <!-- Record Books Setup Modal -->
     <div id="recordbooks-modal" class="modal-overlay">
         <div class="modal-card">
             <button class="close-modal" onclick="closeModal('recordbooks-modal')">&times;</button>
@@ -373,7 +369,10 @@
             </ul>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
                 <span style="font-size: 0.82rem; color: var(--text-muted);">Platform: <strong>Windows (x64) .NET Installer</strong></span>
-                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Record.Books.Setup.1.0.0.exe" class="download-btn" style="padding: 10px 20px;">⬇ Download Installer (.exe)</a>
+                <div style="display:flex; gap:8px;">
+                    <button class="qr-trigger-btn" onclick="generateAppQr('Record Books Setup v1.0.0', 'https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Record.Books.Setup.1.0.0.exe')">📱 Generate QR</button>
+                    <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v101/Record.Books.Setup.1.0.0.exe" class="download-btn" style="padding: 10px 20px;">⬇ Download Installer (.exe)</a>
+                </div>
             </div>
         </div>
     </div>
@@ -405,7 +404,10 @@
             </ul>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
                 <span style="font-size: 0.82rem; color: var(--text-muted);">File Size: <strong>28 KB</strong> | OS: <strong>Windows (x64)</strong></span>
-                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe" class="download-btn" style="padding: 10px 20px;">⬇ Download Official Package (.exe)</a>
+                <div style="display:flex; gap:8px;">
+                    <button class="qr-trigger-btn" onclick="generateAppQr('MashalTechUtility v1.0.1', 'https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe')">📱 Generate QR</button>
+                    <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/v1.0.1/MashalTechUtility.exe" class="download-btn" style="padding: 10px 20px;">⬇ Download Official Package (.exe)</a>
+                </div>
             </div>
         </div>
     </div>
@@ -415,6 +417,54 @@
     </a>
 
     <script>
+        let currentActiveDownloadUrl = '';
+
+        // Generate Home Page Store QR Code
+        window.addEventListener('DOMContentLoaded', () => {
+            const storeUrl = window.location.href.split('#')[0];
+            new QRCode(document.getElementById("homeStoreQrCode"), {
+                text: storeUrl,
+                width: 130,
+                height: 130,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+
+        // Dynamic QR Generator for App Download Links
+        function generateAppQr(appName, downloadUrl) {
+            currentActiveDownloadUrl = downloadUrl;
+            document.getElementById('qrModalTitle').innerText = appName;
+            const container = document.getElementById('appQrContainer');
+            container.innerHTML = ''; 
+
+            new QRCode(container, {
+                text: downloadUrl,
+                width: 180,
+                height: 180,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            setTimeout(() => {
+                const img = container.querySelector('img');
+                if (img) {
+                    document.getElementById('qrDownloadBtn').href = img.src;
+                }
+            }, 100);
+
+            openModal('qr-modal');
+        }
+
+        function copyQrLink() {
+            if (currentActiveDownloadUrl) {
+                navigator.clipboard.writeText(currentActiveDownloadUrl);
+                alert('Direct download link copied to clipboard!');
+            }
+        }
+
         const searchInput = document.getElementById('searchInput');
         const rows = document.querySelectorAll('.product-row');
         const noResults = document.getElementById('noResults');

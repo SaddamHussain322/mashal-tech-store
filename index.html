@@ -186,6 +186,26 @@
                         <span style="font-size: 0.82rem; color: var(--primary); cursor: pointer; font-weight: 600;" onclick="resetSearch()">Show All</span>
                     </div>
 
+                    <!-- M-Cloud Setup Product Row -->
+                    <div class="product-row" data-category="desktop">
+                        <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
+                            <div class="product-thumb" onclick="openModal('mcloud-modal')">☁️</div>
+                            <div class="product-info">
+                                <h3><a class="product-title-link" onclick="openModal('mcloud-modal')">M-Cloud Setup v1.0.0</a></h3>
+                                <p>Cloud synchronization, automated backup, and enterprise file management utility for Windows.</p>
+                                <div><span class="tag-pill">✔ Verified v1.0.0 Setup</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; min-width: 170px;">
+                            <span style="font-weight: 700; font-size: 0.88rem; display: block;">Desktop Installer</span>
+                            <span style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 6px;">Windows x64</span>
+                            <div class="btn-group">
+                                <button class="qr-trigger-btn" onclick="generateAppQr('M-Cloud Setup v1.0.0', 'https://github.com/SaddamHussain322/mashal-tech-store/releases/download/m.01/M-Cloud.Setup.1.0.0.exe')">📱 QR</button>
+                                <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/m.01/M-Cloud.Setup.1.0.0.exe" class="download-btn">Download .exe</a>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Record Books Setup Product Row -->
                     <div class="product-row" data-category="desktop">
                         <div style="display: flex; gap: 16px; align-items: flex-start; flex: 1;">
@@ -351,7 +371,7 @@
                 </div>
             </div>
 
-            <div style="background: #eff6ml; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px; font-size: 0.8rem; color: #1e40af; margin-top: 14px;">
+            <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px; font-size: 0.8rem; color: #1e40af; margin-top: 14px;">
                 💡 Unique client visitors are tracked automatically per calendar day on this device/browser session.
             </div>
 
@@ -372,6 +392,42 @@
             <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
                 <button onclick="copyQrLink()" style="background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.82rem;">🔗 Copy Link</button>
                 <a id="qrDownloadBtn" download="QR_Code.png" href="#" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 0.82rem;">⬇ Download QR</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- M-Cloud Setup Modal -->
+    <div id="mcloud-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="close-modal" onclick="closeModal('mcloud-modal')">&times;</button>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border);">
+                <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">☁️</div>
+                <div>
+                    <h2 style="font-size: 1.15rem; font-weight: 700;">M-Cloud Setup v1.0.0 — Windows Desktop App</h2>
+                    <p style="font-size: 0.82rem; color: var(--text-muted);">Official Enterprise Desktop Installer • Release m.01</p>
+                </div>
+            </div>
+            <div class="value-box">
+                💡 <strong>Why You Need This System:</strong> Streamlines desktop cloud storage access, automated data backups, and secure workspace synchronization across enterprise terminals.
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 14px;">📸 System Screenshots & UI Walkthrough</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot-box"><span>☁️ Cloud Sync</span><small style="color:#94a3b8; display:block; margin-top:2px;">Real-Time Folder Sync</small></div>
+                <div class="screenshot-box"><span>🔒 Secure Vault</span><small style="color:#94a3b8; display:block; margin-top:2px;">Encrypted Transfers</small></div>
+                <div class="screenshot-box"><span>⚙️ Setup Wizard</span><small style="color:#94a3b8; display:block; margin-top:2px;">Standard Windows Installer</small></div>
+            </div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; margin-top: 16px;">⚡ Core Capabilities</h3>
+            <ul class="feature-list">
+                <li><strong>Seamless Desktop Integration:</strong> Direct access to M-Cloud storage and workspace directories from Windows.</li>
+                <li><strong>Automated Data Backups:</strong> Protects critical business records and ledgers against local hardware failure.</li>
+                <li><strong>Clean Windows Installer:</strong> Streamlined <code>.exe</code> setup package for rapid workstation deployment.</li>
+            </ul>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+                <span style="font-size: 0.82rem; color: var(--text-muted);">Platform: <strong>Windows (x64) Installer</strong></span>
+                <div style="display:flex; gap:8px;">
+                    <button class="qr-trigger-btn" onclick="generateAppQr('M-Cloud Setup v1.0.0', 'https://github.com/SaddamHussain322/mashal-tech-store/releases/download/m.01/M-Cloud.Setup.1.0.0.exe')">📱 Generate QR</button>
+                    <a href="https://github.com/SaddamHussain322/mashal-tech-store/releases/download/m.01/M-Cloud.Setup.1.0.0.exe" class="download-btn" style="padding: 10px 20px;">⬇ Download Installer (.exe)</a>
+                </div>
             </div>
         </div>
     </div>

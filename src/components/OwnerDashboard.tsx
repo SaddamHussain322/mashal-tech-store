@@ -101,6 +101,8 @@ const ALL_CATEGORIES: Array<Exclude<ProductCategory, 'All'>> = [
   'Templates & Design',
 ];
 
+const FALLBACK_ADMIN_PIN = '4820';
+
 export function OwnerDashboard({
   apps,
   inquiries,
@@ -121,7 +123,8 @@ export function OwnerDashboard({
   onRefreshVisitors,
   onClearVisitors,
 }: OwnerDashboardProps) {
-  const [unlocked, setUnlocked] = useState(!settings.adminPin);
+  const effectivePin = (settings.adminPin || FALLBACK_ADMIN_PIN).trim();
+  const [unlocked, setUnlocked] = useState(false);
   const [pinAttempt, setPinAttempt] = useState('');
   const [pinError, setPinError] = useState(false);
 
@@ -180,7 +183,10 @@ export function OwnerDashboard({
   const [replyError, setReplyError] = useState<string | null>(null);
 
   // Store Settings & Live DNS Check State
-  const [settingsForm, setSettingsForm] = useState<StoreSettings>(settings);
+  const [settingsForm, setSettingsForm] = useState<StoreSettings>({
+    ...settings,
+    adminPin: settings.adminPin || FALLBACK_ADMIN_PIN,
+  });
   const [savingSettings, setSavingSettings] = useState(false);
   const [settingsSavedMsg, setSettingsSavedMsg] = useState<string | null>(null);
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
@@ -194,10 +200,10 @@ export function OwnerDashboard({
   } | null>(null);
 
   useEffect(() => {
-    setSettingsForm(settings);
-    if (!settings.adminPin) {
-      setUnlocked(true);
-    }
+    setSettingsForm({
+      ...settings,
+      adminPin: settings.adminPin || FALLBACK_ADMIN_PIN,
+    });
   }, [settings]);
 
   const handleCheckDomainDns = async (domainToTest?: string) => {
@@ -254,7 +260,7 @@ export function OwnerDashboard({
 
   const handleUnlock = (e: FormEvent) => {
     e.preventDefault();
-    if (pinAttempt.trim() === settings.adminPin) {
+    if (pinAttempt.trim() === effectivePin) {
       setUnlocked(true);
       setPinError(false);
       setPinAttempt('');
@@ -530,11 +536,15 @@ export function OwnerDashboard({
     e.preventDefault();
     setSavingSettings(true);
     setSettingsSavedMsg(null);
+    const payload: StoreSettings = {
+      ...settingsForm,
+      adminPin: settingsForm.adminPin.trim() || FALLBACK_ADMIN_PIN,
+    };
     try {
       const res = await fetch('/api/settings', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(settingsForm),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (res.ok && data.settings) {
@@ -566,7 +576,7 @@ export function OwnerDashboard({
           </div>
           <h1 className="font-display text-xl font-bold text-stone-950">Admin Console Locked</h1>
           <p className="mt-1 text-xs text-stone-500">
-            Enter your Admin PIN configured in Store Settings to manage apps, visitors, and orders.
+            Owner access only. Enter your Admin PIN to manage apps, visitors, and orders.
           </p>
           <label htmlFor="admin-pin-input" className="sr-only">
             Admin PIN
@@ -596,9 +606,19 @@ export function OwnerDashboard({
       {/* Admin Header + Clean 5-Tab Bar */}
       <div className="flex flex-col justify-between gap-4 border-b border-stone-200 pb-6 lg:flex-row lg:items-end">
         <div>
-          <p className="font-mono text-xs font-medium text-[#0284C7]">
-            {displayHostLabel} · Full Store Maintenance &amp; Analytics
-          </p>
+          <div className="flex items-center gap-2.5">
+            <p className="font-mono text-xs font-medium text-[#0284C7]">
+              {displayHostLabel} · Full Store Maintenance &amp; Analytics
+            </p>
+            <button
+              type="button"
+              onClick={() => setUnlocked(false)}
+              className="inline-flex items-center gap-1 rounded-md border border-stone-200 bg-white px-2 py-0.5 text-[11px] font-semibold text-stone-700 hover:border-stone-950 hover:text-stone-950"
+            >
+              <Lock className="h-3 w-3" aria-hidden="true" />
+              <span>Lock Console</span>
+            </button>
+          </div>
           <h1 className="mt-1.5 font-display text-3xl font-bold tracking-tight text-stone-950">
             Mashal Tech Admin Studio
           </h1>
@@ -706,7 +726,6 @@ export function OwnerDashboard({
               </div>
             </div>
 
-            {/* Auto-Generated App Share QR Card immediately upon publish */}
             {publishedBanner && (
               <div
                 data-testid="published-qr-banner"
@@ -946,7 +965,7 @@ export function OwnerDashboard({
             </button>
           </form>
 
-          {/* Right: Full Store Inventory Maintenance (Edit / Attach Binary / QR / Delete) */}
+          {/* Right: Full Store Inventory Maintenance */}
           <div className="space-y-3 rounded-2xl border border-stone-200 bg-white p-6 lg:col-span-5">
             <h2 className="font-display text-lg font-bold text-stone-950">
               Manage All Store Apps ({apps.length})
@@ -1577,14 +1596,15 @@ export function OwnerDashboard({
               </div>
               <div>
                 <label htmlFor="set-pin" className="block text-xs font-semibold text-stone-700">
-                  Admin Lock PIN (leave blank = open)
+                  Admin Lock PIN (Required)
                 </label>
                 <input
                   id="set-pin"
                   type="text"
+                  required
                   value={settingsForm.adminPin}
                   onChange={(e) => setSettingsForm({ ...settingsForm, adminPin: e.target.value })}
-                  placeholder="Optional e.g. 4820"
+                  placeholder="e.g. 4820"
                   className="mt-1 h-10 w-full rounded-lg border border-stone-300 px-3 font-mono text-xs text-stone-950"
                 />
               </div>
@@ -1633,7 +1653,6 @@ export function OwnerDashboard({
               </div>
             </div>
 
-            {/* Working Live Store URL Right Now */}
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3.5 text-xs">
               <div className="flex items-center justify-between gap-2">
                 <span className="font-bold text-emerald-900">Working Storefront Link (Active Now)</span>
@@ -1652,7 +1671,6 @@ export function OwnerDashboard({
               </p>
             </div>
 
-            {/* Real-Time DNS Check Box */}
             <div className="rounded-xl border border-stone-200 bg-stone-50 p-3.5 text-xs">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="font-semibold text-stone-900">

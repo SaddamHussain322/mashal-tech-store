@@ -79,6 +79,19 @@ const RATING_OPTIONS: Array<{ value: number; label: string }> = [
   { value: 3.5, label: '3.5★ & up' },
 ];
 
+function isValidDownloadUrl(url?: string): url is string {
+  if (!url) return false;
+  const trimmed = url.trim();
+  if (!trimmed) return false;
+  if (trimmed.startsWith('/')) return true;
+  try {
+    const parsed = new URL(trimmed);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:';
+  } catch {
+    return false;
+  }
+}
+
 export function CatalogSection({
   apps,
   settings,
@@ -103,6 +116,7 @@ export function CatalogSection({
   const [qrModalApp, setQrModalApp] = useState<Product | null>(null);
   const [addedId, setAddedId] = useState<string | null>(null);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
+  const [downloadNotice, setDownloadNotice] = useState<string | null>(null);
 
   useEffect(() => {
     if (!deepLinkedAppId) return;
@@ -142,18 +156,38 @@ export function CatalogSection({
     setSortBy('featured');
   };
 
-  const triggerDownload = (app: Product) => {
+  const triggerDownload = (app: Product): boolean => {
+    const directUrl = app.downloadUrl?.trim();
+    if (!isValidDownloadUrl(directUrl)) {
+      setDownloadNotice(
+        `No download link is configured yet for "${app.name}". Add a valid release URL in catalog.ts or contact Mashal Tech.`
+      );
+      window.setTimeout(() => {
+        setDownloadNotice(null);
+      }, 4500);
+      return false;
+    }
+
+    setDownloadNotice(null);
     setDownloadingId(app.id);
     onAppDownloaded(app.id);
+
     const link = document.createElement('a');
-    link.href = `/api/apps/${encodeURIComponent(app.id)}/download`;
-    link.setAttribute('download', app.originalFileName || `${app.name}${app.fileFormat}`);
+    link.href = directUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    if (app.originalFileName) {
+      link.setAttribute('download', app.originalFileName);
+    }
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
     window.setTimeout(() => {
       setDownloadingId((cur) => (cur === app.id ? null : cur));
     }, 1800);
+
+    return true;
   };
 
   const handleCardPrimaryAction = (app: Product) => {
@@ -171,9 +205,10 @@ export function CatalogSection({
   const getDownloadButtonText = (app: Product) => {
     if (app.price === 0) {
       if (downloadingId === app.id) return 'Downloading...';
+      if (!isValidDownloadUrl(app.downloadUrl)) return 'Link Pending';
       if (app.fileFormat.toLowerCase().includes('apk')) return 'Download .apk';
       if (app.fileFormat.toLowerCase().includes('exe')) return 'Download .exe';
-      return 'Download Free';
+      return 'Download';
     }
     return addedId === app.id ? 'Added to Bag' : `Buy $${app.price}`;
   };
@@ -198,6 +233,24 @@ export function CatalogSection({
           >
             <span>Commission Custom App</span>
             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </button>
+        </div>
+      )}
+
+      {/* Download Notice Banner When a Free App Lacks a Configured Link */}
+      {downloadNotice && (
+        <div
+          role="status"
+          className="mb-6 flex items-center justify-between gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-xs font-medium text-amber-950"
+        >
+          <span>{downloadNotice}</span>
+          <button
+            type="button"
+            onClick={() => setDownloadNotice(null)}
+            className="text-amber-800 hover:text-amber-950"
+            aria-label="Dismiss download notice"
+          >
+            <X className="h-4 w-4" />
           </button>
         </div>
       )}
@@ -468,7 +521,9 @@ export function CatalogSection({
                       : 'bg-stone-950 hover:bg-[#E85D22]'
                   }`}
                 >
-                  {app.price === 0 && <Download className="h-3.5 w-3.5" aria-hidden="true" />}
+                  {app.price === 0 && (
+                    <Download className="h-3.5 w-3.5" aria-hidden="true" />
+                  )}
                   <span>{getDownloadButtonText(app)}</span>
                 </button>
               </div>
@@ -599,12 +654,16 @@ export function CatalogSection({
               <button
                 type="button"
                 onClick={() => {
-                  handleCardPrimaryAction(selectedApp);
-                  setSelectedApp(null);
+                  const shouldClose = selectedApp.price !== 0 || triggerDownload(selectedApp);
+                  if (shouldClose) {
+                    setSelectedApp(null);
+                  }
                 }}
                 className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-[#E85D22] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#cf4e18]"
               >
-                <Download className="h-4 w-4" aria-hidden="true" />
+                {selectedApp.price === 0 && (
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                )}
                 <span>{getDownloadButtonText(selectedApp)}</span>
               </button>
             </div>
@@ -649,8 +708,9 @@ export function CatalogSection({
             <button
               type="button"
               onClick={() => {
-                triggerDownload(qrModalApp);
-                setQrModalApp(null);
+                if (triggerDownload(qrModalApp)) {
+                  setQrModalApp(null);
+                }
               }}
               className="inline-flex min-h-[40px] w-full items-center justify-center gap-2 rounded-lg bg-[#009FE3] px-4 py-2 text-xs font-semibold text-white hover:bg-[#0284C7]"
             >

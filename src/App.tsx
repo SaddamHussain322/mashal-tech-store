@@ -38,7 +38,7 @@ const DEFAULT_SETTINGS: StoreSettings = {
   easypaisaAccountName: 'Saddam Hussain',
   location: 'Mardan & Peshawar, PK',
   usdToPkrRate: 278,
-  adminPin: '',
+  adminPin: '4820', // Fallback PIN so dashboard never opens unlocked before API loads
   maintenanceMode: false,
 };
 
@@ -52,7 +52,14 @@ function getOrCreateVisitorKey(): string {
 }
 
 export default function App() {
-  const [activeView, setActiveView] = useState<AppView>('store');
+  // Automatically switch to dashboard (which opens the PIN lock screen) when ?admin=1 is in URL
+  const [activeView, setActiveView] = useState<AppView>(() => {
+    if (typeof window === 'undefined') return 'store';
+    const params = new URLSearchParams(window.location.search);
+    return params.get('admin') === '1' ? 'dashboard' : 'store';
+  });
+
+  const [secretTapCount, setSecretTapCount] = useState(0);
   const [platformFilter, setPlatformFilter] = useState<AppPlatformFilter>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeTrackKey, setActiveTrackKey] = useState<string>('');
@@ -132,7 +139,12 @@ export default function App() {
       .then((res) => res.json())
       .then((data) => {
         if (active && data.settings) {
-          setSettings(data.settings);
+          setSettings({
+            ...DEFAULT_SETTINGS,
+            ...data.settings,
+            // Ensure PIN is never accidentally blank if DB returns empty string
+            adminPin: data.settings.adminPin || DEFAULT_SETTINGS.adminPin,
+          });
         }
       })
       .catch(() => {});
@@ -281,6 +293,17 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Secret 5-tap trigger on the footer logo so you can open Admin on mobile without typing ?admin=1
+  const handleSecretLogoTap = () => {
+    const next = secretTapCount + 1;
+    if (next >= 5) {
+      setSecretTapCount(0);
+      navigateAndScroll('dashboard');
+    } else {
+      setSecretTapCount(next);
+    }
+  };
+
   const handleTrackKeyNavigation = (key: string) => {
     setActiveTrackKey(key);
     navigateAndScroll('track');
@@ -399,7 +422,10 @@ export default function App() {
 
       <footer className="border-t border-stone-200 bg-white">
         <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 px-4 py-8 sm:flex-row sm:items-center sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
+          <div
+            onClick={handleSecretLogoTap}
+            className="flex cursor-pointer select-none items-center gap-3"
+          >
             <img
               src="/assets/aistudio/Mashal_Tech_45a4d83b.png"
               alt="Mashal Tech mark"
@@ -448,9 +474,7 @@ export default function App() {
             <button type="button" onClick={() => navigateAndScroll('contact')} className="hover:text-stone-950">
               Contact
             </button>
-            <button type="button" onClick={() => navigateAndScroll('dashboard')} className="hover:text-stone-950">
-              Admin
-            </button>
+            {/* Public Admin link intentionally hidden from regular users. Access via ?admin=1 or 5 logo taps */}
           </div>
         </div>
       </footer>

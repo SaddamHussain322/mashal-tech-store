@@ -1,0 +1,6 @@
+{
+  "name": "Mashal Tech Store",
+  "description": "Enterprise PC solutions, M Cloud infrastructure, AI-assisted custom software architecture, and bespoke design asset studio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

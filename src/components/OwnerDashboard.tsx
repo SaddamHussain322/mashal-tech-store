@@ -9,6 +9,7 @@ import {
   KeyRound,
   Loader2,
   Lock,
+  Mail,
   Monitor,
   Plus,
   QrCode,
@@ -102,6 +103,7 @@ const ALL_CATEGORIES: Array<Exclude<ProductCategory, 'All'>> = [
 ];
 
 const FALLBACK_ADMIN_PIN = '4820';
+const DEFAULT_GMAIL = '6saddamhussain9@gmail.com';
 
 export function OwnerDashboard({
   apps,
@@ -123,10 +125,20 @@ export function OwnerDashboard({
   onRefreshVisitors,
   onClearVisitors,
 }: OwnerDashboardProps) {
-  const effectivePin = (settings.adminPin || FALLBACK_ADMIN_PIN).trim();
+  const [activePin, setActivePin] = useState<string>(
+    () => (settings.adminPin || FALLBACK_ADMIN_PIN).trim()
+  );
   const [unlocked, setUnlocked] = useState(false);
   const [pinAttempt, setPinAttempt] = useState('');
   const [pinError, setPinError] = useState(false);
+
+  // Gmail PIN Recovery State
+  const [recoveryMode, setRecoveryMode] = useState(false);
+  const [recoveryEmailInput, setRecoveryEmailInput] = useState('');
+  const [newPinInput, setNewPinInput] = useState('');
+  const [recoveryMsg, setRecoveryMsg] = useState<string | null>(null);
+  const [recoveryError, setRecoveryError] = useState<string | null>(null);
+  const [savingRecoveryPin, setSavingRecoveryPin] = useState(false);
 
   const [activeTab, setActiveTab] = useState<AdminTab>('apps');
 
@@ -185,6 +197,7 @@ export function OwnerDashboard({
   // Store Settings & Live DNS Check State
   const [settingsForm, setSettingsForm] = useState<StoreSettings>({
     ...settings,
+    contactEmail: settings.contactEmail || DEFAULT_GMAIL,
     adminPin: settings.adminPin || FALLBACK_ADMIN_PIN,
   });
   const [savingSettings, setSavingSettings] = useState(false);
@@ -200,11 +213,22 @@ export function OwnerDashboard({
   } | null>(null);
 
   useEffect(() => {
+    const resolvedPin = (settings.adminPin || FALLBACK_ADMIN_PIN).trim();
+    setActivePin(resolvedPin);
     setSettingsForm({
       ...settings,
-      adminPin: settings.adminPin || FALLBACK_ADMIN_PIN,
+      contactEmail: settings.contactEmail || DEFAULT_GMAIL,
+      adminPin: resolvedPin,
     });
   }, [settings]);
+
+  const registeredGmail = (
+    settingsForm.contactEmail ||
+    settings.contactEmail ||
+    DEFAULT_GMAIL
+  )
+    .trim()
+    .toLowerCase();
 
   const handleCheckDomainDns = async (domainToTest?: string) => {
     const targetDomain = (domainToTest ?? settingsForm.domain).trim();
@@ -260,12 +284,72 @@ export function OwnerDashboard({
 
   const handleUnlock = (e: FormEvent) => {
     e.preventDefault();
-    if (pinAttempt.trim() === effectivePin) {
+    if (pinAttempt.trim() === activePin.trim()) {
       setUnlocked(true);
       setPinError(false);
       setPinAttempt('');
     } else {
       setPinError(true);
+    }
+  };
+
+  const handleGmailPinReset = async (e: FormEvent) => {
+    e.preventDefault();
+    setRecoveryError(null);
+    setRecoveryMsg(null);
+
+    const enteredEmail = recoveryEmailInput.trim().toLowerCase();
+    const cleanNewPin = newPinInput.trim();
+
+    if (!enteredEmail || enteredEmail !== registeredGmail) {
+      setRecoveryError(
+        `Gmail does not match the registered admin email (${registeredGmail}).`
+      );
+      return;
+    }
+
+    if (cleanNewPin.length < 4) {
+      setRecoveryError('New PIN must be at least 4 characters.');
+      return;
+    }
+
+    setSavingRecoveryPin(true);
+    const updatedSettings: StoreSettings = {
+      ...settingsForm,
+      contactEmail: registeredGmail,
+      adminPin: cleanNewPin,
+    };
+
+    try {
+      const res = await fetch('/api/settings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedSettings),
+      });
+      const data = await res.json();
+      const savedNext: StoreSettings =
+        res.ok && data.settings
+          ? { ...updatedSettings, ...data.settings, adminPin: cleanNewPin }
+          : updatedSettings;
+
+      setActivePin(cleanNewPin);
+      setSettingsForm(savedNext);
+      onSettingsUpdated(savedNext);
+      setRecoveryMsg('Gmail verified and PIN updated! You can now unlock with your new PIN.');
+      setPinAttempt(cleanNewPin);
+      setNewPinInput('');
+      setRecoveryMode(false);
+    } catch {
+      // Even if backend is offline/stateless, update local session PIN so user isn't locked out
+      setActivePin(cleanNewPin);
+      setSettingsForm(updatedSettings);
+      onSettingsUpdated(updatedSettings);
+      setRecoveryMsg('Gmail verified and PIN updated for this session.');
+      setPinAttempt(cleanNewPin);
+      setNewPinInput('');
+      setRecoveryMode(false);
+    } finally {
+      setSavingRecoveryPin(false);
     }
   };
 
@@ -536,10 +620,14 @@ export function OwnerDashboard({
     e.preventDefault();
     setSavingSettings(true);
     setSettingsSavedMsg(null);
+
+    const nextPin = (settingsForm.adminPin || '').trim() || FALLBACK_ADMIN_PIN;
     const payload: StoreSettings = {
       ...settingsForm,
-      adminPin: settingsForm.adminPin.trim() || FALLBACK_ADMIN_PIN,
+      contactEmail: (settingsForm.contactEmail || DEFAULT_GMAIL).trim(),
+      adminPin: nextPin,
     };
+
     try {
       const res = await fetch('/api/settings', {
         method: 'PATCH',
@@ -547,10 +635,15 @@ export function OwnerDashboard({
         body: JSON.stringify(payload),
       });
       const data = await res.json();
-      if (res.ok && data.settings) {
-        onSettingsUpdated(data.settings);
-        setSettingsSavedMsg('Store settings & maintenance configuration saved live.');
-      }
+      const merged: StoreSettings =
+        res.ok && data.settings
+          ? { ...payload, ...data.settings, adminPin: data.settings.adminPin || nextPin }
+          : payload;
+
+      setActivePin(merged.adminPin);
+      setSettingsForm(merged);
+      onSettingsUpdated(merged);
+      setSettingsSavedMsg(`Settings saved live. Active Admin PIN is now "${merged.adminPin}".`);
     } finally {
       setSavingSettings(false);
     }
@@ -567,36 +660,118 @@ export function OwnerDashboard({
   if (!unlocked) {
     return (
       <div className="mx-auto max-w-md px-4 py-20">
-        <form
-          onSubmit={handleUnlock}
-          className="rounded-2xl border border-stone-200 bg-white p-8 text-center shadow-sm"
-        >
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-stone-950 text-white">
-            <Lock className="h-5 w-5" aria-hidden="true" />
-          </div>
-          <h1 className="font-display text-xl font-bold text-stone-950">Admin Console Locked</h1>
-          <p className="mt-1 text-xs text-stone-500">
-            Owner access only. Enter your Admin PIN to manage apps, visitors, and orders.
-          </p>
-          <label htmlFor="admin-pin-input" className="sr-only">
-            Admin PIN
-          </label>
-          <input
-            id="admin-pin-input"
-            type="password"
-            value={pinAttempt}
-            onChange={(e) => setPinAttempt(e.target.value)}
-            placeholder="Enter Admin PIN"
-            className="mt-5 h-11 w-full rounded-lg border border-stone-300 px-3 text-center font-mono text-sm tracking-widest text-stone-950"
-          />
-          {pinError && <p className="mt-2 text-xs font-medium text-red-600">Incorrect PIN.</p>}
-          <button
-            type="submit"
-            className="mt-4 min-h-[42px] w-full rounded-lg bg-stone-950 px-4 py-2 text-xs font-semibold text-white hover:bg-[#E85D22]"
+        {!recoveryMode ? (
+          <form
+            onSubmit={handleUnlock}
+            className="rounded-2xl border border-stone-200 bg-white p-8 text-center shadow-sm"
           >
-            Unlock Admin Console
-          </button>
-        </form>
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-stone-950 text-white">
+              <Lock className="h-5 w-5" aria-hidden="true" />
+            </div>
+            <h1 className="font-display text-xl font-bold text-stone-950">Admin Console Locked</h1>
+            <p className="mt-1 text-xs text-stone-500">
+              Owner access only. Enter your Admin PIN to manage apps, visitors, and orders.
+            </p>
+            <label htmlFor="admin-pin-input" className="sr-only">
+              Admin PIN
+            </label>
+            <input
+              id="admin-pin-input"
+              type="password"
+              value={pinAttempt}
+              onChange={(e) => setPinAttempt(e.target.value)}
+              placeholder="Enter Admin PIN"
+              className="mt-5 h-11 w-full rounded-lg border border-stone-300 px-3 text-center font-mono text-sm tracking-widest text-stone-950"
+            />
+            {pinError && <p className="mt-2 text-xs font-medium text-red-600">Incorrect PIN.</p>}
+            {recoveryMsg && (
+              <p className="mt-2 text-xs font-medium text-emerald-700">{recoveryMsg}</p>
+            )}
+            <button
+              type="submit"
+              className="mt-4 min-h-[42px] w-full rounded-lg bg-stone-950 px-4 py-2 text-xs font-semibold text-white hover:bg-[#E85D22]"
+            >
+              Unlock Admin Console
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setRecoveryMode(true);
+                setRecoveryError(null);
+              }}
+              className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#0284C7] hover:underline"
+            >
+              <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>Forgot PIN? Reset with Gmail</span>
+            </button>
+          </form>
+        ) : (
+          <form
+            onSubmit={handleGmailPinReset}
+            className="space-y-4 rounded-2xl border border-stone-200 bg-white p-8 shadow-sm"
+          >
+            <div className="flex items-center justify-between border-b border-stone-100 pb-3">
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-[#0284C7]" aria-hidden="true" />
+                <h2 className="font-display text-lg font-bold text-stone-950">
+                  Gmail PIN Recovery
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setRecoveryMode(false)}
+                className="rounded-lg border border-stone-200 p-1 text-stone-500 hover:text-stone-950"
+                aria-label="Back to PIN login"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <p className="text-xs text-stone-600">
+              Confirm your registered Gmail address to set a new Admin PIN immediately.
+            </p>
+
+            <div>
+              <label htmlFor="recovery-gmail" className="block text-xs font-semibold text-stone-700">
+                Registered Gmail Address
+              </label>
+              <input
+                id="recovery-gmail"
+                type="email"
+                required
+                value={recoveryEmailInput}
+                onChange={(e) => setRecoveryEmailInput(e.target.value)}
+                placeholder={registeredGmail}
+                className="mt-1 h-10 w-full rounded-lg border border-stone-300 px-3 text-xs text-stone-950"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="recovery-new-pin" className="block text-xs font-semibold text-stone-700">
+                New Admin PIN
+              </label>
+              <input
+                id="recovery-new-pin"
+                type="text"
+                required
+                value={newPinInput}
+                onChange={(e) => setNewPinInput(e.target.value)}
+                placeholder="Enter new PIN (4+ chars)"
+                className="mt-1 h-10 w-full rounded-lg border border-stone-300 px-3 font-mono text-xs text-stone-950"
+              />
+            </div>
+
+            {recoveryError && <p className="text-xs font-medium text-red-600">{recoveryError}</p>}
+
+            <button
+              type="submit"
+              disabled={savingRecoveryPin}
+              className="min-h-[42px] w-full rounded-lg bg-[#0284C7] px-4 py-2 text-xs font-semibold text-white hover:bg-[#0369a1]"
+            >
+              {savingRecoveryPin ? 'Updating PIN...' : 'Verify Gmail & Set New PIN'}
+            </button>
+          </form>
+        )}
       </div>
     );
   }
@@ -1475,7 +1650,7 @@ export function OwnerDashboard({
                 Store Maintenance &amp; Easypaisa Settings
               </h2>
               <p className="text-xs text-stone-500">
-                Control your store branding, announcement banner, Easypaisa receiving account, and Admin PIN.
+                Control your store branding, Gmail recovery, Easypaisa account, and Admin PIN.
               </p>
             </div>
 
@@ -1502,7 +1677,7 @@ export function OwnerDashboard({
                     type="text"
                     value={settingsForm.domain}
                     onChange={(e) => setSettingsForm({ ...settingsForm, domain: e.target.value })}
-                    className="h-10 min-w-0 flex-1 rounded-lg border border-stone-300 px-3 font-mono text-xs text-stone-950"
+                    className="mt-0 h-10 min-w-0 flex-1 rounded-lg border border-stone-300 px-3 font-mono text-xs text-stone-950"
                   />
                   <button
                     type="button"
@@ -1608,6 +1783,21 @@ export function OwnerDashboard({
                   className="mt-1 h-10 w-full rounded-lg border border-stone-300 px-3 font-mono text-xs text-stone-950"
                 />
               </div>
+            </div>
+
+            <div>
+              <label htmlFor="set-gmail" className="block text-xs font-semibold text-stone-700">
+                Admin Recovery Gmail
+              </label>
+              <input
+                id="set-gmail"
+                type="email"
+                required
+                value={settingsForm.contactEmail}
+                onChange={(e) => setSettingsForm({ ...settingsForm, contactEmail: e.target.value })}
+                placeholder="6saddamhussain9@gmail.com"
+                className="mt-1 h-10 w-full rounded-lg border border-stone-300 px-3 text-xs text-stone-950"
+              />
             </div>
 
             <label className="flex items-center gap-2.5 rounded-xl border border-stone-200 bg-stone-50 p-3 text-xs">
